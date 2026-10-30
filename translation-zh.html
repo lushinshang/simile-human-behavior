@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20fill%3D%22%23f3f1e9%22/%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2224%22%20fill%3D%22none%22%20stroke%3D%22%2340582b%22%20stroke-width%3D%222%22/%3E%3Cpath%20d%3D%22M15%2049A24%2024%200%200%200%2049%2015Z%22%20fill%3D%22%2340582b%22/%3E%3C/svg%3E">
+<title>Simile 如何模擬人類行為？完整繁中譯文</title>
+<meta name="description" content="Sourcery 訪問 Simile 執行長 Joon Sung Park：完整非官方繁體中文譯文，與雙語播放器共用定稿字幕。">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:title" content="Simile 如何模擬人類行為？完整繁中譯文">
+<meta property="og:description" content="Sourcery 訪問 Simile 執行長 Joon Sung Park：完整非官方繁體中文譯文，與雙語播放器共用定稿字幕。">
+<meta property="og:image" content="images/og-editorial.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="行為觀測：AI能預演你的選擇嗎？以點群呈現真人與模擬對照的概念肖像，非個體資料">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Simile 如何模擬人類行為？完整繁中譯文">
+<meta name="twitter:description" content="Sourcery 訪問 Simile 執行長 Joon Sung Park：完整非官方繁體中文譯文，與雙語播放器共用定稿字幕。">
+<meta name="twitter:image" content="images/og-editorial.png">
+<style>
+:root{
+  --bg:#f9f7f4; --surface:#fffdf9; --ink:#1a1a1a; --muted:#5f5b54; --line:#e4dfd6;
+  --accent:#0f7b6c; --accent-ink:#0b5c51; --note:#f0ebe1; --code:#ece6d8; --link:#1f5f99;
+  --card:#fff6e8; --card-line:#e8c99a; --shadow:0 6px 24px rgba(40,30,10,.08);
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#1b1a18; --surface:#26241f; --ink:#ece8de; --muted:#aaa497; --line:#3a3730;
+    --accent:#4fc1ad; --accent-ink:#7fd6c6; --note:#2f2c25; --code:#33302a; --link:#8fbde8;
+    --card:#2d2820; --card-line:#5b4a30; --shadow:0 6px 24px rgba(0,0,0,.35);}
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);overflow-x:hidden;
+  font:17px/1.7 "Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;letter-spacing:0}
+.skip{position:absolute;left:-999px;top:0;background:var(--accent);color:#fff;padding:8px 14px;z-index:300}
+.skip:focus{left:8px;top:8px}
+nav.toc{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 92%,transparent);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav.toc ul{list-style:none;margin:0 auto;padding:0 16px;max-width:1120px;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;
+  white-space:nowrap;-webkit-overflow-scrolling:touch;min-height:52px;align-items:center}
+nav.toc ul::-webkit-scrollbar{display:none}
+nav.toc a{display:inline-block;padding:8px 12px;border-radius:999px;color:var(--muted);text-decoration:none;font-size:14px;min-height:36px}
+nav.toc a:hover,nav.toc a:focus-visible{background:var(--note);color:var(--ink)}
+a{color:var(--link);overflow-wrap:anywhere}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.page{max-width:1120px;margin:0 auto;padding:0 20px 80px}
+header.hero{padding:56px 0 8px;text-align:center}
+.eyebrow{margin:0 0 8px;color:var(--accent-ink);font-weight:700;letter-spacing:0;font-size:14px}
+h1{margin:0 auto 14px;max-width:820px;font-size:clamp(1.7rem,1.2rem + 2vw,2.6rem);line-height:1.3;text-wrap:balance}
+.byline{margin:0 0 6px;color:var(--muted);font-size:14px}
+.video-link{margin:0 0 28px;font-size:14px}
+figure{margin:32px 0}
+figure img{display:block;width:100%;height:auto;aspect-ratio:var(--ar-d,16/9);object-fit:contain;border-radius:12px;
+  box-shadow:var(--shadow);background:var(--surface);cursor:zoom-in}
+@media (max-width:640px){figure picture img{aspect-ratio:var(--ar-m,9/16)}}
+@media (max-width:640px){figure.hero-figure picture img{max-width:300px;margin:0 auto}}
+figure.hero-figure{max-width:720px;margin-left:auto;margin-right:auto}
+hr{border:0;border-top:1px solid var(--line);margin:40px 0}
+p.figcap{margin:-18px auto 1.4em;text-align:center;font-size:14px;color:var(--muted)}
+figcaption{margin:10px auto 0;max-width:720px;font-size:14px;line-height:1.55;color:var(--muted);text-align:center}
+article{max-width:720px;margin:0 auto}
+article figure.section-figure{margin-left:50%;transform:translateX(-50%);width:min(860px,calc(100vw - 32px))}
+h2{margin:56px 0 12px;font-size:1.55rem;line-height:1.4;scroll-margin-top:72px;text-wrap:balance;
+  border-left:5px solid var(--accent);padding-left:14px;margin-left:-19px}
+h3{margin:36px 0 8px;font-size:1.2rem;line-height:1.45}
+p{margin:0 0 1.1em}
+ul,ol{margin:0 0 1.2em;padding-left:1.4em}
+li{margin:.35em 0}
+strong{font-weight:700}
+code{background:var(--code);padding:.1em .4em;border-radius:5px;font:0.9em ui-monospace,SFMono-Regular,Menlo,monospace;word-break:break-word}
+section.summary-card{background:var(--card);border:1px solid var(--card-line);border-radius:14px;padding:6px 22px 10px;margin:24px 0 8px;box-shadow:var(--shadow)}
+section.summary-card h2{margin:14px 0 8px;font-size:1.2rem;border-left:0;padding-left:0;margin-left:0}
+section.summary-card p{margin:0 0 .8em;font-size:16.5px}
+ol.takeaways{padding-left:1.6em}
+ol.takeaways li{margin:.8em 0;padding-left:.2em}
+ol.takeaways li::marker{color:var(--accent-ink);font-weight:700}
+ul.sources li{overflow-wrap:anywhere}
+aside.note{background:var(--note);border-left:4px solid var(--accent);border-radius:8px;padding:12px 16px;margin:0 0 1.6em;font-size:15px;color:var(--ink)}
+aside.note p,aside.note ul{margin:0 0 .6em}
+aside.note ul{padding-left:1.3em}
+figure.diagram{margin:28px 0}
+.mermaid-scroll{overflow-x:auto;max-width:100%;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px;-webkit-overflow-scrolling:touch}
+.mermaid-scroll pre{margin:0;font:14px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre;color:var(--ink)}
+.mermaid-scroll svg{display:block;margin:0 auto;height:auto;max-width:100%}
+.table-scroll{overflow-x:auto;margin:0 0 1.6em;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.table-scroll table{border-collapse:collapse;width:100%;min-width:560px;font-size:15px;line-height:1.55}
+.table-scroll th,.table-scroll td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.table-scroll th{background:var(--note);font-weight:700}
+.table-scroll tr:last-child td{border-bottom:0}
+.table-scroll td.k{font-weight:600;white-space:nowrap}
+.table-scroll td.nw{white-space:nowrap}
+.table-scroll.wide{margin-left:50%;transform:translateX(-50%);width:min(1040px,calc(100vw - 32px))}
+@media (max-width:640px){.table-scroll.wide{margin-left:0;transform:none;width:auto}}
+@media (max-width:640px){
+  .table-scroll{overflow-x:visible}
+  .table-scroll table{min-width:0}
+  .table-scroll thead{position:absolute;left:-9999px}
+  .table-scroll tr,.table-scroll td{display:block}
+  .table-scroll tr{padding:10px 12px;border-bottom:1px solid var(--line)}
+  .table-scroll tr:last-child{border-bottom:0}
+  .table-scroll td{padding:2px 0;border:0}
+  .table-scroll td.k{color:var(--accent-ink);white-space:normal}
+  .table-scroll td.nw{white-space:normal}
+  .table-scroll td::before{content:attr(data-label) "：";font-weight:700;color:var(--muted);font-size:13px}
+}
+
+p.lede{margin:0 auto 10px;max-width:760px;color:var(--muted);font-size:16px;line-height:1.65}
+footer{max-width:720px;margin:64px auto 0;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+.lightbox{display:none;position:fixed;inset:0;z-index:200;background:rgba(20,18,14,.9);align-items:center;justify-content:center;padding:24px}
+.lightbox.is-open{display:flex}
+.lightbox img{max-width:96vw;max-height:90vh;width:auto;height:auto;border-radius:8px;box-shadow:0 12px 48px rgba(0,0,0,.5);background:#fff}
+.lightbox button{position:absolute;top:14px;right:14px;min-width:44px;min-height:44px;padding:8px 14px;border:0;border-radius:999px;
+  background:#fff;color:#222;font-size:15px;cursor:pointer}
+@media (max-width:760px){
+  h2{margin-left:0;border-left:0;padding-left:0;border-top:3px solid var(--accent);padding-top:10px}
+}
+@media (max-width:640px){
+  body{font-size:16px}
+  .page{padding:0 16px 64px}
+  header.hero{padding-top:36px}
+  h2{font-size:1.35rem}
+  section.summary-card{padding:4px 16px 8px}
+}
+
+:root{--bg:#f7f8f2;--surface:#fffef9;--ink:#20372f;--muted:#58665d;--line:#dbe3d7;--accent:#176f5c;--accent-ink:#165d4d;--note:#edf2e8;--link:#225e80;--card:#eff3e8;--card-line:#d2dfca}
+body{line-height:1.72}
+p.lede{text-wrap:balance}
+header.hero{padding-top:40px}
+h1{font-size:clamp(1.85rem,1.35rem + 2vw,2.65rem)}
+article strong{background-image:linear-gradient(transparent 65%,rgba(52,119,82,.14) 65%);padding:0 1px}
+.reading-links{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:18px 0 12px}
+.reading-links a{display:inline-flex;align-items:center;min-height:44px;padding:8px 16px;border:1px solid var(--line);border-radius:999px;text-decoration:none;font-size:14px;background:var(--surface)}
+article figure.hero-figure,article figure.section-figure{max-width:860px;width:100%;margin-left:0;transform:none}
+figure.hero-figure img{box-shadow:none;border:1px solid var(--line)}
+.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:26px 0 30px}
+.metric{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 16px}
+.metric h3{font-size:14px;line-height:1.5;margin:0 0 12px;color:var(--muted);font-weight:650}
+.metric p{margin:0 0 10px;color:var(--accent-ink);font-weight:750;font-size:clamp(1.5rem,2.6vw,2rem);line-height:1.2;font-variant-numeric:tabular-nums}
+.metric span{display:block;font-size:14px;line-height:1.6;color:var(--muted)}
+.metric:last-child{background:var(--note)}
+@media(prefers-color-scheme:dark){:root{--bg:#17211c;--surface:#1e2b23;--ink:#e6eee4;--muted:#b6c3b7;--line:#3a4e3e;--accent:#83c2a6;--accent-ink:#a1d1b8;--note:#26382c;--link:#a5cee4;--card:#25392b;--card-line:#466342}}
+@media(max-width:640px){header.hero{text-align:left;padding-top:28px}.reading-links{justify-content:flex-start;gap:8px}.reading-links a{padding:8px 12px}figure.hero-figure picture img{max-width:100%}.metrics{grid-template-columns:1fr;gap:10px}.metric{padding:18px}.metric p{font-size:2rem}nav.toc ul{min-height:56px}h2{margin-top:42px}}
+
+
+/* Field Notes: a topic-specific digital editorial, not an award badge. */
+@font-face{font-family:"Behavior Serif";src:url("fonts/behavior-serif.woff2") format("woff2");font-weight:600;font-display:swap}
+:root{--bg:#f3f1e9;--surface:#fcfaf4;--ink:#20352c;--muted:#626a5f;--line:#d5d7c9;--accent:#526e35;--accent-ink:#40582b;--note:#e9ecdf;--link:#365b4d;--card:#e9ecdf;--card-line:#c7cebb;--serif:"Behavior Serif","Songti TC","Noto Serif TC",serif;--mono:ui-monospace,"SFMono-Regular",Consolas,monospace}
+body.editorial{background:var(--bg);color:var(--ink);font-size:17px;line-height:1.85;overflow-x:clip}
+.editorial *{box-sizing:border-box}
+.editorial .page{max-width:1280px;padding:0 40px 0}
+.editorial .skip:focus{z-index:400;background:var(--ink);color:var(--bg)}
+.read-progress{position:fixed;top:0;left:0;width:100%;height:3px;z-index:150;pointer-events:none}
+.read-progress span{display:block;width:0;height:100%;background:#bf5e3f;transform-origin:left}
+.masthead{max-width:1280px;margin:auto;min-height:100px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:22px 40px}
+.wordmark{display:flex;gap:12px;align-items:center;color:var(--ink);text-decoration:none;font-weight:600;font-size:18px;white-space:nowrap}
+.wordmark small{display:block;font:9px/1.8 var(--mono);letter-spacing:.12em;color:var(--muted)}
+.brand-symbol{font:44px/1 Georgia,serif;transform:rotate(-35deg);display:block;color:var(--accent-ink)}
+.edition-tag{font:10px/1.5 var(--mono);letter-spacing:.08em;color:var(--muted)}
+.mode-nav{flex-shrink:0;display:flex;border:1px solid var(--line);border-radius:4px;padding:4px;gap:2px}
+.mode-nav a{white-space:nowrap;display:block;padding:7px 22px;min-height:44px;color:var(--muted);font-size:13px;text-decoration:none;border-radius:2px;transition:background .2s,color .2s}
+.mode-nav a[aria-current=page]{background:var(--ink);color:var(--surface)}
+.mode-nav a:hover{background:var(--note);color:var(--ink)}
+.editorial nav.toc{top:0;border-top:1px solid var(--line);background:color-mix(in srgb,var(--bg) 96%,transparent);backdrop-filter:blur(16px)}
+.toc-top{max-width:1200px;margin:auto;display:flex;align-items:center;gap:28px;min-height:47px;padding:0 0}
+.micro-label{font:10px/1.5 var(--mono);letter-spacing:.1em;color:var(--accent-ink);font-weight:600}
+#current-section{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1;min-width:0}
+#toc-toggle{display:none;background:none;border:0;border-left:1px solid var(--line);min-height:46px;padding:0 0 0 26px;font:12px/1.5 inherit;color:var(--ink);cursor:pointer;white-space:nowrap}
+#toc-toggle span{display:inline-block;margin-left:15px;font-size:20px;font-weight:400;vertical-align:middle}
+.editorial nav.toc ul{max-width:1200px;min-height:44px;padding:0;gap:0}
+.editorial nav.toc a{font-size:12px;border-radius:0;min-height:44px;padding:11px 16px}
+.editorial nav.toc a[aria-current=location]{color:var(--ink);box-shadow:inset 0 -2px var(--accent)}
+.editorial.enhanced #toc-toggle{display:block}
+.editorial.enhanced #chapter-links{display:none}
+.editorial.enhanced nav.toc.is-open #chapter-links{display:block;border-top:1px solid var(--line);padding:20px 0}
+.editorial.enhanced nav.toc.is-open ul{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));white-space:normal}
+.editorial.enhanced nav.toc.is-open a{display:block}
+.editorial.enhanced nav.toc.is-open #toc-toggle span{transform:rotate(45deg)}
+.editorial header.hero{padding:65px 0 30px;text-align:left}
+.editorial .eyebrow{font:11px/1.8 var(--mono);letter-spacing:.08em;color:var(--accent-ink);margin:0 0 24px}
+.editorial h1{font-family:var(--serif);font-weight:600;max-width:none;font-size:clamp(34px,4.1vw,58px);line-height:1.35;text-align:left;margin:0 0 24px;letter-spacing:0;text-wrap:balance}
+.editorial p.lede{font-size:16px;line-height:1.8;margin:0 0 16px;max-width:650px;text-wrap:pretty}
+.editorial .byline{font:11px/1.9 var(--mono);color:var(--muted);margin:0}
+.editorial-hero{display:grid;grid-template-columns:1.06fr 1fr;column-gap:64px;align-items:center}
+.editorial .editorial-hero{padding:60px 0 0}
+.editorial-hero .issue-tag{color:var(--muted);border-right:1px solid var(--line);padding-right:14px;margin-right:14px}
+.editorial .editorial-hero h1{font-size:clamp(50px,5.4vw,78px);line-height:1.28;margin:0 0 25px}
+.title-choice{position:relative;color:var(--accent-ink)}
+.title-choice:after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:5px;border-bottom:1px solid var(--accent-ink);border-top:1px solid var(--accent-ink);transform:rotate(-3deg)}
+.editorial-hero .lede{font-size:15px;max-width:28em}
+.hero-deck{font-size:14px;line-height:1.85;color:var(--muted);margin:18px 0 25px}
+.hero-actions{display:flex;align-items:center;gap:24px;margin:30px 0 28px;flex-wrap:wrap}
+.primary-action{background:var(--ink);color:var(--surface);padding:13px 20px;display:inline-flex;align-items:center;gap:30px;min-height:48px;text-decoration:none;font-size:13px;border:1px solid var(--ink);transition:background .25s,color .25s}
+.primary-action:hover{background:var(--accent-ink);color:var(--surface)}
+.primary-action span{font-size:20px;line-height:1}
+.quiet-action{display:inline-block;font-size:12px;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);padding:8px 0}
+.quiet-action span{margin-left:12px}
+.hero-visual{background:#172c27;color:#e5e9d8;position:relative;border:1px solid #314c3f;align-self:stretch;display:flex;flex-direction:column;justify-content:center;min-width:0}
+.visual-caption,.visual-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:19px 23px;font:9px/1.6 var(--mono);letter-spacing:.06em;color:#c7d1bb}
+.visual-caption{border-bottom:1px solid #354a3e}
+.visual-foot{border-top:1px solid #354a3e;flex-wrap:wrap;letter-spacing:0}
+.visual-foot small{font:12px/1.6 var(--mono);color:#b3bfac}
+.visual-foot i{display:inline-block;width:5px;height:5px;border-radius:50%;margin-right:6px;background:#d5e8b0}
+.visual-foot i.legend-model{background:#f1a083}
+.data-portrait{display:block;width:100%;height:auto;overflow:visible;flex:1}
+.portrait-scan{animation:scan-line 11s ease-in-out infinite;transform-origin:center}
+@keyframes scan-line{0%,100%{transform:translateY(0);opacity:.15}50%{transform:translateY(175px);opacity:.65}}
+.hero-foot{grid-column:1/-1;display:grid;grid-template-columns:1.1fr repeat(3,1fr);border-top:1px solid var(--ink);border-bottom:1px solid var(--line);margin:48px 0 0;padding:25px 0;gap:24px;align-items:center}
+.hero-foot p{font:20px/1.15 Georgia,serif;letter-spacing:.025em;margin:0}
+.hero-foot p em{color:var(--accent-ink);font-weight:400}
+.hero-foot>div{border-left:1px solid var(--line);padding-left:25px}
+.hero-foot span{display:block;font:38px/1.2 Georgia,serif;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.hero-foot small{display:block;color:var(--muted);font-size:12px;margin-top:8px}
+.editorial main{max-width:none}
+.editorial article{max-width:720px;margin:0 auto;counter-reset:chapter}
+.editorial article>aside.note:first-child{margin:30px 0 60px;border-radius:0;border:0;border-left:2px solid var(--line);padding:0 0 0 16px;background:none;color:var(--muted);font-size:12px;line-height:1.9}
+.editorial article>p{margin:0 0 1.7em}
+.editorial article a{color:var(--link);text-decoration-color:#9fae99;text-underline-offset:4px}
+.editorial article a:hover{text-decoration-color:var(--ink)}
+.editorial article h2{font:600 clamp(25px,2.4vw,33px)/1.55 var(--serif);counter-increment:chapter;position:relative;margin:88px 0 29px;padding:22px 0 0;border:0;border-top:1px solid var(--line);letter-spacing:0;text-wrap:pretty;scroll-margin-top:78px}
+.editorial article h2:before{content:counter(chapter,decimal-leading-zero);font:11px/1 var(--mono);position:absolute;left:-58px;top:35px;color:var(--accent-ink)}
+.editorial article h3{font:600 24px/1.5 var(--serif);margin:30px 0 18px}
+.editorial article strong{font-weight:650;background:none;text-decoration:underline;text-decoration-color:#b6c59f;text-decoration-thickness:3px;text-underline-offset:4px}
+.editorial article figure{margin:45px 0}
+.editorial article figure img{border-radius:0;box-shadow:none;border:1px solid var(--line)}
+.editorial figcaption{font-size:12px;line-height:1.8;color:var(--muted);margin-top:14px;max-width:640px}
+.editorial section.summary-card{background:transparent;border:0;border-radius:0;padding:0;margin:60px 0}
+.editorial .table-scroll{border:0;border-radius:0;background:transparent}
+.editorial .table-scroll th{background:var(--note);font-size:12px;padding:16px 14px}
+.editorial .table-scroll td{font-size:14px;line-height:1.8;padding:19px 14px;border-color:var(--line)}
+.editorial .table-scroll tbody tr:nth-child(even){background:color-mix(in srgb,var(--note) 40%,transparent)}
+.denominator-lab{scroll-margin-top:72px;background:#1c342b;color:#f0f1e5;padding:36px 35px 24px;margin:36px 0 50px;border:1px solid #30483a}
+.lab-header{display:flex;justify-content:space-between;gap:20px;align-items:center}
+.denominator-lab .micro-label{color:#c4d9a5}
+.lab-index{font:10px/1.5 var(--mono);color:#c6cdbb}
+.editorial article .denominator-lab h3{color:#f4f2e9;font:600 33px/1.55 var(--serif);margin:30px 0}
+.research-values{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin:32px 0;border-top:1px solid #4e6352;border-bottom:1px solid #4e6352;padding:22px 0}
+.research-values>div+div{border-left:1px solid #4e6352;padding-left:15px}
+.research-values span{font-size:12px;color:#d1d7c6;display:block}
+.editorial article .research-values strong{display:block;color:#d5e8b0;font:34px/1.4 Georgia,serif;text-decoration:none;white-space:nowrap}
+.research-values strong small{font-size:17px}
+.exercise-intro{display:flex;gap:20px;align-items:start}
+.exercise-intro .micro-label{white-space:nowrap;padding-top:5px}
+.exercise-intro p{font-size:12px;line-height:1.85;color:#d1d7c6;margin:0}
+.lab-controls{margin:26px 0 16px}
+.lab-controls label{display:flex;justify-content:space-between;gap:16px;font-size:12px;color:#d1d7c6}
+.lab-controls output{font:15px/1.8 var(--mono);color:#e6efce}
+.lab-controls input{display:block;width:100%;height:30px;margin:10px 0;accent-color:#c9e2a1;cursor:ew-resize}
+.range-ends{display:flex;justify-content:space-between;align-items:center;color:#bfcbb7;font:10px/1.5 var(--mono)}
+.range-ends button{font:10px/1.5 inherit;color:#d5e8b0;background:none;border:0;border-bottom:1px solid #6d8261;padding:8px;min-height:36px;cursor:pointer}
+.ratio-readout{display:flex;justify-content:space-between;align-items:center;gap:18px;border-bottom:1px solid #4e6352;padding:20px 0 23px}
+.ratio-readout>span{font:15px/1.6 var(--mono);color:#c3cdb8}
+.editorial article .ratio-readout strong{font:36px/1.2 Georgia,serif;color:#f2ad8e;text-decoration:none;white-space:nowrap}
+.lab-note{font-size:12px;line-height:1.9;color:#c5cfbd;margin:19px 0 0}
+.lab-takeaway{font:13px/1.9 inherit;border-top:1px solid #4e6352;padding-top:20px;margin:24px 0 0;color:#e7ebdc}
+.editorial footer{border-top:0;font-size:11px;line-height:1.9;color:var(--muted);margin:50px auto 35px;max-width:720px}
+.onward{max-width:1000px;margin:90px auto 0;padding:30px 0 0;border-top:1px solid var(--ink)}
+.onward>div{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+.onward a{display:flex;align-items:center;gap:22px;text-decoration:none;color:var(--ink);padding:25px 0;border-bottom:1px solid var(--line)}
+.onward a small{font:10px/1 var(--mono);color:var(--muted)}
+.onward a span{font:600 23px/1.5 var(--serif);flex:1}
+.onward a b{font-size:25px;font-weight:400;transition:transform .2s}
+.onward a:hover b{transform:translate(3px,-3px)}
+.editorial.translation-page .hero,.editorial.player-page .hero{max-width:1000px;margin:0 auto;border-bottom:1px solid var(--line);padding-bottom:35px}
+.editorial .reading-links{justify-content:flex-start;gap:25px;margin-top:20px}
+.editorial .reading-links a{border:0;border-bottom:1px solid var(--line);border-radius:0;background:none;padding:4px 0;min-height:36px;font-size:12px}
+.transcript-tools{display:none;max-width:720px;margin:45px auto 35px;padding:26px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.editorial.enhanced .transcript-tools{display:block}
+.transcript-tools label{display:block;font:600 21px/1.7 var(--serif);margin-bottom:20px}
+.transcript-tools .micro-label{display:block;margin-bottom:12px}
+.search-row{display:flex;border:1px solid #a8b69c;background:var(--surface)}
+.search-row input{min-width:0;flex:1;background:transparent;border:0;padding:13px 16px;font:14px/1.6 inherit;color:var(--ink)}
+.search-row button{background:transparent;border:0;border-left:1px solid var(--line);font:12px/1.5 inherit;color:var(--ink);padding:10px 17px;cursor:pointer}
+#search-status{font-size:11px;color:var(--muted);margin:12px 0 0}
+.editorial mark{background:#d9e8af;color:#20352c;padding:0 2px}
+.editorial .cue-jump{display:inline-flex;align-items:center;justify-content:center;width:27px;min-height:30px;font-size:13px;margin-right:5px;text-decoration:none;color:var(--accent-ink)}
+.editorial.player-page{max-width:none;padding:0}
+.editorial.player-page>.wrap{max-width:1200px;padding:0 40px 30px}
+.editorial.player-page>main,.editorial.player-page .wrap main,.editorial.player-page .page main{max-width:1000px;margin:40px auto}
+.editorial.player-page .hero h1{max-width:900px;font-size:44px}
+.editorial.player-page .links{font-size:12px;text-align:left;line-height:2;margin-top:24px}
+.editorial.player-page .player-container{border-radius:0;border:1px solid var(--line);background:#142c23}
+.editorial.player-page .sub{border:0;border-bottom:1px solid var(--line);border-radius:0;background:transparent;text-align:left;margin:20px 0 0;padding:22px 0}
+.editorial.player-page .zh{font:600 25px/1.65 var(--serif);color:var(--ink)}
+.editorial.player-page .en{font:16px/1.8 Georgia,serif;color:var(--muted);margin-top:12px}
+.editorial.player-page .bar{border-bottom:1px solid var(--line);padding:20px 0}
+.editorial.player-page button,.editorial.player-page select{border-radius:2px}
+.editorial.player-page .bar button{background:transparent;border-color:var(--line);color:var(--ink);font-size:12px;min-height:44px}
+.editorial.player-page .bar button[aria-pressed=true]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.editorial.player-page select{background:var(--surface);color:var(--ink);max-width:100%}
+.editorial.player-page .note{background:var(--note);border:0;border-left:2px solid var(--accent);border-radius:0;font-size:12px;padding:25px}
+.editorial.player-page #list{border:1px solid var(--line);border-radius:0;max-height:500px}
+.editorial.player-page #list li button{color:var(--ink)}
+.editorial.player-page #list li.on{background:var(--note)}
+.editorial .lightbox{backdrop-filter:blur(8px)}
+.editorial .lightbox button{border-radius:0}
+.editorial :focus-visible{outline:2px solid #a55431;outline-offset:4px}
+@media(min-width:1441px){.editorial-hero{column-gap:90px}.editorial .editorial-hero h1{font-size:82px}}
+@media(max-width:1279px){.toc-top{padding:0 40px}.editorial nav.toc ul{padding:0 24px}.editorial-hero{column-gap:40px}}
+@media(max-width:900px){.editorial-hero{column-gap:28px}.editorial .editorial-hero h1{font-size:56px}.visual-caption,.visual-foot{padding:15px 16px;font-size:8px}.visual-foot small{width:100%}.hero-actions{gap:15px}.hero-foot{gap:16px}.hero-foot span{font-size:33px}.hero-foot>div{padding-left:17px}.editorial article h2:before{position:static;display:block;margin-bottom:14px}.editorial.player-page .wrap{padding:0 30px}.edition-tag{display:none}}
+@media(max-width:640px){
+ .editorial .page{padding:0 22px}.masthead{padding:18px 22px;min-height:85px;gap:14px}.wordmark{font-size:16px;gap:9px}.brand-symbol{font-size:35px}.wordmark small{font-size:7px;letter-spacing:.06em}.mode-nav a{font-size:11px;min-height:44px;padding:7px 12px}.mode-nav{padding:3px}.toc-top{min-height:44px;gap:14px;padding:0 22px}.toc-top>.micro-label{font-size:9px}#current-section{font-size:10px}#toc-toggle{font-size:10px;min-height:44px;padding-left:13px}#toc-toggle span{margin-left:7px;font-size:17px}.editorial nav.toc ul{padding:0 10px}.editorial.enhanced nav.toc.is-open ul{grid-template-columns:1fr 1fr;max-height:55vh;overflow-y:auto}.editorial nav.toc a{font-size:11px;white-space:normal}
+ .editorial .editorial-hero{grid-template-columns:1fr;padding-top:38px}.editorial .editorial-hero h1{font-size:clamp(42px,13vw,68px);line-height:1.35;margin-bottom:20px}.editorial-hero .eyebrow{font-size:9px;margin-bottom:22px}.editorial-hero .lede{font-size:13px;max-width:28em}.hero-deck{font-size:12px;margin:16px 0}.hero-actions{margin:23px 0;gap:20px}.primary-action{font-size:12px;min-height:46px;gap:20px;padding:11px 16px}.quiet-action{font-size:11px}.editorial .byline{font-size:11px}.hero-visual{margin-top:28px;max-height:none}.visual-caption,.visual-foot{font-size:10px;padding:13px 17px}.visual-foot small{width:auto;font-size:12px}.data-portrait{max-height:340px;aspect-ratio:1;object-fit:contain}.hero-foot{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:28px;padding:21px 0}.hero-foot>p{grid-column:1/-1;font-size:14px;display:flex;gap:4px;margin-bottom:9px}.hero-foot>p br{display:none}.hero-foot>div{padding-left:12px}.hero-foot>div:nth-child(2){padding-left:0;border-left:0}.hero-foot span{font-size:31px}.hero-foot small{font-size:10px;line-height:1.7}
+ .editorial article{font-size:16px;line-height:1.9}.editorial article>aside.note:first-child{margin:27px 0 45px;font-size:12px}.editorial article h2{font-size:25px;line-height:1.6;margin:62px 0 23px;padding-top:19px}.editorial article h2:before{font-size:10px}.editorial article figure{margin:30px 0}.editorial figcaption{font-size:12px;line-height:1.9}.editorial .table-scroll tr{padding:14px 0}.editorial .table-scroll td{padding:4px 10px;font-size:13px}.editorial .table-scroll td:before{font-size:11px}.editorial section.summary-card{margin:40px 0}
+ .denominator-lab{padding:25px 20px;margin:28px 0 40px}.lab-header{gap:12px}.lab-header .micro-label{font-size:8px;letter-spacing:.04em}.lab-index{font-size:10px}.editorial article .denominator-lab h3{font-size:27px;margin:25px 0}.research-values{gap:8px;padding:19px 0}.research-values>div+div{padding-left:8px}.research-values span{font-size:11px;line-height:1.8;min-height:40px}.editorial article .research-values strong{font-size:25px;line-height:1.5}.research-values strong small{font-size:11px}.exercise-intro{display:block}.exercise-intro .micro-label{font-size:9px}.exercise-intro p{font-size:12px;margin-top:8px}.exercise-intro br{display:none}.lab-controls label{font-size:12px}.lab-controls output{font-size:12px}.range-ends{font-size:10px}.range-ends button{font-size:11px;min-height:44px}.ratio-readout{gap:10px}.ratio-readout>span{font-size:11px}.editorial article .ratio-readout strong{font-size:30px}.lab-note{font-size:12px}.lab-takeaway{font-size:12px}
+ .editorial header.hero{padding:35px 0 28px}.editorial h1{font-size:32px;line-height:1.55}.editorial p.lede{font-size:13px}.editorial .reading-links{margin-top:20px;gap:22px}.editorial .reading-links a{font-size:11px}.onward{margin:55px 22px 0;padding-top:23px}.onward>div{grid-template-columns:1fr;gap:0}.onward a{padding:23px 0;gap:18px}.onward a span{font-size:22px}.editorial footer{font-size:10px;margin:35px auto;padding:0 0 30px}.editorial.player-page>.wrap{padding:0 22px 30px}.editorial.player-page .hero h1{font-size:30px}.editorial.player-page .hero .lede{font-size:12px}.editorial.player-page>main,.editorial.player-page .wrap main,.editorial.player-page .page main{margin:25px auto;max-width:100%}.editorial.player-page .zh{font-size:21px}.editorial.player-page .en{font-size:15px}.editorial.player-page .bar{gap:10px}.editorial.player-page .bar label:has(#chap){flex-basis:100%}.editorial.player-page .note{padding:20px;font-size:12px}.transcript-tools{padding:22px 0;margin:28px auto}.editorial.enhanced .transcript-tools{display:block}
+.transcript-tools label{font-size:20px}.search-row input{font-size:13px;padding:12px}.search-row button{padding:10px 14px}#search-status{font-size:10px}
+}
+@media(prefers-color-scheme:dark){:root{--bg:#16271f;--surface:#21382b;--ink:#eceee0;--muted:#b3bfac;--line:#43503c;--accent:#c0d99b;--accent-ink:#c5dcaa;--note:#263c2c;--link:#b9d2ab;--card:#263c2c;--card-line:#506444}.hero-visual{border-color:#526244}.title-choice:after{border-color:#b4c58f}.editorial article strong{text-decoration-color:#718b50}.primary-action{color:#1e3225}.primary-action:hover{color:#1e3225}.editorial .table-scroll th{background:#263c2c}.mode-nav a[aria-current=page]{color:#16271f}.editorial.player-page .bar button[aria-pressed=true]{color:#16271f}.hero-foot{border-top-color:#9dad8d}.search-row{border-color:#7e9271}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*:before,*:after{animation:none!important;transition:none!important}.portrait-scan{transform:none}}
+@media print{.masthead,.toc,.hero-actions,.hero-visual,.read-progress,.onward,.transcript-tools{display:none!important}.editorial .editorial-hero{display:block}.editorial-hero h1{font-size:40px!important}.hero-foot{margin:20px 0}.editorial .page{padding:0}body.editorial{background:white;color:black}.denominator-lab{break-inside:avoid}.editorial article h2{break-after:avoid}}
+
+.search-navigation{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:18px;font-size:12px}.search-navigation[hidden]{display:none}.search-navigation>span{color:var(--muted);margin-right:auto}.search-navigation button{min-height:44px;padding:8px 12px;border:1px solid var(--line);border-radius:0;background:var(--surface);color:var(--ink);font:12px/1.6 inherit;cursor:pointer}.editorial article p[tabindex="-1"]{scroll-margin-top:80px}.editorial article [hidden],.editorial nav.toc li[hidden]{display:none!important}
+@media(max-width:360px){.masthead{flex-wrap:wrap;row-gap:12px}.masthead .mode-nav{width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));text-align:center}.masthead .mode-nav a{padding:7px 12px}}
+
+.search-navigation{position:fixed;z-index:70;bottom:20px;left:50%;transform:translateX(-50%);width:max-content;max-width:calc(100vw - 32px);margin:0;padding:8px;background:var(--surface);border:1px solid var(--line);box-shadow:0 8px 30px #14261d25;gap:8px;flex-wrap:nowrap}.search-navigation>span{white-space:nowrap;margin:0 12px 0 5px}.search-navigation button{min-width:44px;flex-shrink:0;padding:8px 12px}.editorial.translation-page article p:last-child{margin-bottom:90px}@media(max-width:640px){.search-nav-label{display:none}.search-navigation{bottom:12px}}
+
+.editorial.translation-page header.hero{padding:35px 0 24px}.editorial.translation-page .hero h1{font-size:40px;margin-bottom:18px}.editorial.translation-page .hero .eyebrow{margin-bottom:15px}.editorial.translation-page .hero .lede{font-size:14px;margin-bottom:8px}.editorial.translation-page .hero .reading-links{margin-top:14px}.editorial.translation-page .transcript-tools{margin-top:24px;margin-bottom:25px;padding:20px 0}.editorial.player-page header.hero{padding:30px 0 24px}.editorial.player-page .hero h1{font-size:36px;margin-bottom:16px}.editorial.player-page .hero .eyebrow{margin-bottom:15px}.editorial.player-page .hero .links{margin-top:14px}.editorial.player-page .page main{margin-top:28px}@media(max-width:640px){.editorial.translation-page .hero h1{font-size:29px}.editorial.translation-page header.hero{padding:28px 0 22px}.editorial.translation-page .hero .lede{font-size:12px}.editorial.player-page .hero h1{font-size:28px}.editorial.player-page header.hero{padding:28px 0 22px}}
+
+@media(prefers-color-scheme:dark){.editorial :focus-visible{outline-color:#f2ad8e}}
+
+</style>
+<link rel="preload" href="fonts/behavior-serif.woff2" as="font" type="font/woff2" crossorigin>
+</head>
+<body class="editorial translation-page"><div class="read-progress" aria-hidden="true"><span></span></div>
+<div class="masthead"><a class="wordmark" href="index.html" aria-label="行為觀測：回到導讀"><span class="brand-symbol" aria-hidden="true">◒</span><span>行為觀測<small>BEHAVIOR / FIELD NOTES</small></span></a>
+<nav class="mode-nav" aria-label="閱讀模式"><a href="index.html">導讀</a><a href="translation-zh.html" aria-current="page">逐字稿</a><a href="player.html">觀看</a></nav><span class="edition-tag">SIMILE · 2026</span></div>
+<a class="skip" href="#main">跳到正文</a>
+<nav class="toc" aria-label="章節導覽"><div class="toc-top"><span class="micro-label">閱讀索引</span><span id="current-section">從這裡開始</span><button type="button" id="toc-toggle" aria-expanded="false" aria-controls="chapter-links">全部章節 <span aria-hidden="true">＋</span></button></div><div id="chapter-links"><ul><li><a href="#sec-1" title="章節 1：Joon Sung Park：Simile 共同創辦人暨執行長（00:00）">1·00:00</a></li><li><a href="#sec-2" title="章節 2：我們活在模擬裡嗎？（00:44）">2·00:44</a></li><li><a href="#sec-3" title="章節 3：自己籌辦情人節派對的 AI 小鎮（04:01）">3·04:01</a></li><li><a href="#sec-4" title="章節 4：以 85% 準確率預測人類行為（06:46）">4·06:46</a></li><li><a href="#sec-5" title="章節 5：人類行為可以預測嗎？（11:09）">5·11:09</a></li><li><a href="#sec-6" title="章節 6：到底是什麼在驅動人們做決定？（13:40）">6·13:40</a></li><li><a href="#sec-7" title="章節 7：Simile 如何模擬顧客與市場（15:45）">7·15:45</a></li><li><a href="#sec-8" title="章節 8：大企業為什麼想要模擬顧客（20:05）">8·20:05</a></li><li><a href="#sec-9" title="章節 9：數位分身與 4,000 萬真人受訪者樣本群（21:31）">9·21:31</a></li><li><a href="#sec-10" title="章節 10：到底是誰在回答民調？（22:51）">10·22:51</a></li><li><a href="#sec-11" title="章節 11：Simile 如何把劣質資料擋在門外（24:22）">11·24:22</a></li><li><a href="#sec-12" title="章節 12：Simile 對這集節目預測了什麼（29:29）">12·29:29</a></li><li><a href="#sec-13" title="章節 13：看似完美、結果卻出問題的電動車行銷方案（33:34）">13·33:34</a></li><li><a href="#sec-14" title="章節 14：氣候變遷、AGI 與全民基本收入（37:02）">14·37:02</a></li><li><a href="#sec-15" title="章節 15：先模擬主持人會問什麼（39:06）">15·39:06</a></li><li><a href="#sec-16" title="章節 16：累計募資 3 億美元、估值 20 億美元（40:13）">16·40:13</a></li><li><a href="#sec-17" title="章節 17：模擬正處於 GPT-4 時代（44:54）">17·44:54</a></li><li><a href="#sec-18" title="章節 18：最成功的人有什麼共通點（49:43）">18·49:43</a></li><li><a href="#sec-19" title="章節 19：讓職涯畫下句點的「接下來呢？」時刻（53:58）">19·53:58</a></li><li><a href="#sec-20" title="章節 20：如果有人出價 150 億美元（55:25）">20·55:25</a></li></ul></div></nav>
+<div class="page">
+<header class="hero">
+<p class="eyebrow">THE CONVERSATION / 完整繁中譯文</p>
+<h1>Simile 如何模擬人類行為？完整繁中譯文</h1>
+<p class="lede">The $2B AI Startup Simulating Human Behavior with 85% Accuracy｜非官方翻譯</p>
+<p class="byline">原片：Sourcery with Molly O’Shea，2026-10-26　翻譯整理：2026-10-31</p>
+<div class="reading-links" aria-label="閱讀方式"><a href="#sec-1">從 00:00 開始閱讀 ↓</a><a href="player.html">在播放器對照 ↗</a></div></header>
+<main id="main"><section class="transcript-tools" aria-label="搜尋逐字稿">
+<label for="transcript-search"><span class="micro-label">FIND A MOMENT</span>在訪談中找一個觀點</label>
+<div class="search-row"><input id="transcript-search" type="search" placeholder="搜尋：信心、真人、85%…" autocomplete="off"><button type="button" id="search-clear">清除</button></div>
+<p id="search-status" role="status">搜尋全文，點擊時間即可在雙語播放器對照。</p>
+<div class="search-navigation" id="search-navigation" hidden><span id="search-position" aria-live="polite"></span><button type="button" id="search-previous" aria-label="上一段搜尋結果"><span class="search-nav-label">上一段 </span>↑</button><button type="button" id="search-next" aria-label="下一段搜尋結果"><span class="search-nav-label">下一段 </span>↓</button><button type="button" id="search-exit" aria-label="清除搜尋並恢復全文">✕</button></div>
+</section><article>
+<aside class="note"><p>本頁字幕初譯由 agy 指定 Gemini 3.8 Flash Medium 完成，Codex 逐章精修，agy 指定 Claude Opus 5.5 High 統一終審；未經人工逐句校稿，依機器字幕製作、未逐句對照原音，可能有誤。少數專名依已核對來源修正中文，英文機器字幕保留。 非官方翻譯；若有出入，以原片為準。</p></aside>
+<p>原片由 Sourcery with Molly O’Shea 於 2026-10-26 發布，受訪者為 Simile 共同創辦人暨執行長 Joon Sung Park。原內容版權歸原權利人，僅供個人閱讀與研究。 <a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I" target="_blank" rel="noopener noreferrer">原始影片</a>｜<a href="index.html">深度導讀</a>｜<a href="player.html">中英雙語同步播放器</a></p>
+<hr>
+<h2 id="sec-1">章節 1：Joon Sung Park：Simile 共同創辦人暨執行長（00:00）</h2>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=0s" target="_blank" rel="noopener noreferrer">00:00</a><a class="cue-jump" href="player.html?t=0" aria-label="在雙語播放器觀看 00:00">↗</a> Elon Musk 認為，我們有可能生活在模擬當中。我確實認為我們生活在模擬當中。Simile 是一家［音樂］正與超過 4,000 萬名真人合作，打造人類基礎模型的公司。這確實是該領域第一次［音樂］，我們能夠證明，可以用 85% 的準確率預測人類行為。你們總共募資了 3 億美元［音樂］，在此之前的估值是 20 億美元。你們有名聲非常響亮的投資人，就像我提到的 Greenoaks、Index。那麼，如果有人來找你，出價 150 億美元要收購這家公司，會怎麼樣？</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=33s" target="_blank" rel="noopener noreferrer">00:33</a><a class="cue-jump" href="player.html?t=33" aria-label="在雙語播放器觀看 00:33">↗</a> 嗯，［音樂］</p>
+<h2 id="sec-2">章節 2：我們活在模擬裡嗎？（00:44）</h2>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=44s" target="_blank" rel="noopener noreferrer">00:44</a><a class="cue-jump" href="player.html?t=44" aria-label="在雙語播放器觀看 00:44">↗</a> Joon Sung Park，歡迎來到 Sourcery。謝謝你邀請我。我知道我們現在在 Index 的辦公室。他們是你們公司的重要貢獻者或投資人。恭喜你們最近發布的重大消息。今天我超級興奮。這是我不太了解的領域。我不太理解這家公司在市場上的定位，像是你們取代了什麼、現在正在做什麼。我不知道模擬究竟是什麼，但我發現它非常吸引人。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=75s" target="_blank" rel="noopener noreferrer">01:15</a><a class="cue-jump" href="player.html?t=75" aria-label="在雙語播放器觀看 01:15">↗</a> 嗯，Elon Musk 認為，我們有可能生活在模擬當中。那麼，這對你來說意味著什麼？嗯，我確實認為我們生活在模擬當中。你真的這樣認為。我真的這樣認為。解釋一下。嗯，［清喉嚨］ 當然，因為我們正在打造這家公司和技術，經常被問到這個問題也不令人意外。在某個時間點，我開始乾脆說：「嘿，我們生活在模擬當中。」但我認為說到底對我而言更重要的部分是，我們正在經歷的體驗究竟是不是真的？</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=110s" target="_blank" rel="noopener noreferrer">01:50</a><a class="cue-jump" href="player.html?t=110" aria-label="在雙語播放器觀看 01:50">↗</a> 對我們來說感覺真實嗎？這是否忠於我們真實的樣貌？我認為說到底，那才是最重要的。從機率的角度來看，我認為這是一個相當合理的論點：像我們這樣的人類和社會，永遠都會渴望更深入地了解自身。而我們發現，了解某件事物最好的方法，就是重新創造它。我有時會這樣描述模擬：它有點像是在替我們這個社會畫一幅肖像。所以，我認為人類或像我們這樣的文明，天生就有這種渴望。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=140s" target="_blank" rel="noopener noreferrer">02:20</a><a class="cue-jump" href="player.html?t=140" aria-label="在雙語播放器觀看 02:20">↗</a> 如果是這樣的話，那麼是的，任何文明都會創造出模擬。而在某個時間點，我們很有可能確實生活在模擬當中。那麼，在現實世界中，我們究竟是如何處於模擬之中的？是什麼構成了那個模擬？接著我們會深入探討你們正在打造的東西。對。你能多說一點是什麼構成了這個模擬嗎？你是什麼意思？人類怎麼可能生活在模擬當中？就像我們都有相同的……我們都被用同樣的方式寫進程式。我們都有相同的心理行為模式。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=171s" target="_blank" rel="noopener noreferrer">02:51</a><a class="cue-jump" href="player.html?t=171" aria-label="在雙語播放器觀看 02:51">↗</a> 就像是一切其實都已經被寫好了一樣。這究竟是什麼意思？我經常這樣看待社會，或像我們現在這樣的體驗：人的品味和行為，總有一些最基本的構成單位。所以，它實際上可能是像我與生俱來的特質這類東西。人的風險承受度，一般認為不太會改變。有些我特別喜歡的美學風格。而這些全都匯聚在一起。我們藉此建構出組成更大社會的基本單位，也就是個人。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=206s" target="_blank" rel="noopener noreferrer">03:26</a><a class="cue-jump" href="player.html?t=206" aria-label="在雙語播放器觀看 03:26">↗</a> 所以，當我們思考模擬時，我們確實會先考慮個人。我們能否模擬一個人，忠實且準確地呈現他多樣的個性、特質與行為？然後要創造文明規模的模擬，基本上意味著我們把所有這些人放進同一個環境中，讓他們彼此互動。而總是複雜且混亂的部分，就是在他們的互動中究竟誕生了什麼。所以，我認為說到底，這就是在社會規模上建立模擬真正會有的樣子。</p>
+<h2 id="sec-3">章節 3：自己籌辦情人節派對的 AI 小鎮（04:01）</h2>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=241s" target="_blank" rel="noopener noreferrer">04:01</a><a class="cue-jump" href="player.html?t=241" aria-label="在雙語播放器觀看 04:01">↗</a> 所以，這一切都是從 Smallville 開始的嗎？確實是。好，請解釋一下那是什麼，以及你投入這項工作的背景。沒問題。Smallville 是我們在 2022 年和 2023 年進行的一項實驗，當時我們最初觀察到，這些大型語言模型（一開始我們使用的是 GPT-3，接著是 GPT-3.5）雖然模型還相當粗糙，但你可以看見一絲契機：這些模型是基於如此廣泛的人類資料進行訓練，只要你從正確的角度去探測，</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=275s" target="_blank" rel="noopener noreferrer">04:35</a><a class="cue-jump" href="player.html?t=275" aria-label="在雙語播放器觀看 04:35">↗</a> 你就能從中取出許多原本出現在訓練資料裡的人類相關資訊。這可能來自網路、Wikipedia，以及一些社群媒體。於是我們開始問自己，能不能用這項能力，創造一種真正全新的互動方式，超越單純生成脈絡或分類不同任務，進一步產生真正全新的行為？我們認為，最有企圖心的做法，就是模擬一個完整的人。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=306s" target="_blank" rel="noopener noreferrer">05:06</a><a class="cue-jump" href="player.html?t=306" aria-label="在雙語播放器觀看 05:06">↗</a> 而一旦我們能模擬一個完整的人，我們是否能真正去創造一整個社群？所以，Smallville 就是從那項努力中誕生的實驗。它是一個遊戲小鎮。電腦科學家熱愛遊戲，因為它是展示新能力的極佳方式。所以，我們打造了一個遊戲小鎮，看起來很像 Pokémon、Sims 這類遊戲中的城鎮。接著我們在這個遊戲小鎮中放入了 25 位代理人。這些代理人都有不同的名字、不同的特質、不同的人生經歷，他們基本上是語言模型，搭配我們當時所稱的代理人架構，具備記憶、規劃和反思。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=344s" target="_blank" rel="noopener noreferrer">05:44</a><a class="cue-jump" href="player.html?t=344" aria-label="在雙語播放器觀看 05:44">↗</a> 所以，他們實際上會在早晨醒來、進行日常作息、去上班、建立人際關係。模擬本身實際上發生在情人節的前一天。所以，這些代理人實際上會聚在一起舉辦派對。因此有一個角色實際上正在籌辦情人節派對。有些角色正在互邀約會。這些都不是預先用程式設定好的。我們看到的是，建立這些人的模擬後，湧現現象就從模擬中產生。這就是我們在 2023 年進行的實驗。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=376s" target="_blank" rel="noopener noreferrer">06:16</a><a class="cue-jump" href="player.html?t=376" aria-label="在雙語播放器觀看 06:16">↗</a> 那就是 Smallville。那項特定的工作最終引進了幾個關鍵概念。其一是我們可以創造人類的模擬。另一個則是核心的代理人架構，以及我們可以使用生成式 AI 模型來創造代理人。那時是這些代理人工作流程非常早期的階段。所以我們確實能開始看見它們變得可行。從那之後，我們基本上就在該技術的基礎上持續研發，以便創造出越來越準確、更多元且規模更大的模擬。</p>
+<h2 id="sec-4">章節 4：以 85% 準確率預測人類行為（06:46）</h2>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=406s" target="_blank" rel="noopener noreferrer">06:46</a><a class="cue-jump" href="player.html?t=406" aria-label="在雙語播放器觀看 06:46">↗</a> 你如何測試這項技術的有效性？你怎麼知道它是否真的有效？我們進行測試的能力，實際上也隨著技術進步而有了相當大的轉變。最初打造 Smallville 時，我們做的就是訪談他們。我們訪談了那些代理人。我們所做的是將個別代理人從這個遊戲小鎮中抽離出來，讓他們坐在命令列上的假想椅子上，然後我們基本上會向他們提問。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=436s" target="_blank" rel="noopener noreferrer">07:16</a><a class="cue-jump" href="player.html?t=436" aria-label="在雙語播放器觀看 07:16">↗</a> 這些問題會探查代理人的某些能力，類似人們處理生活中不同任務時所運用的推理能力。很簡單的問題：告訴我你的名字。接著我們會問：告訴我們你的人生經歷。然後我們會問像是這樣的問題：你最想和誰共度時光？然後我們接著會問：如果你必須送那個人一份禮物，你會送什麼？我們會問這些問題，是因為從人類大腦和心智來看，</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=470s" target="_blank" rel="noopener noreferrer">07:50</a><a class="cue-jump" href="player.html?t=470" aria-label="在雙語播放器觀看 07:50">↗</a> 我們只有能夠記憶、預先規劃，也能反思，才能回答這些問題。接著我們最終所做的是生成了所有這些回覆，然後我們實際上找來人類評估者檢視這些回覆並說：「考量代理人在遊戲小鎮中的經歷，這些經驗或見解真的像人類的反應嗎？」我們會讓人類評估者比較真人作者寫的內容與代理人的回答，看看哪一方更逼真。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=502s" target="_blank" rel="noopener noreferrer">08:22</a><a class="cue-jump" href="player.html?t=502" aria-label="在雙語播放器觀看 08:22">↗</a> 我們的表現相當不錯，這些代理人確實很逼真。有時可以這樣判斷：假設你問代理人，「你最想和誰相處？」如果代理人回答「就是碰巧在街上最常看見的那個人」，就有點奇怪。它大概應該回答，自己真正關心的那個人。「你和誰有特殊的關係？你和人們進行了怎樣的對話？究竟有什麼特別突出的地方？」代理人應該反思這些經驗，再選出那些人。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=532s" target="_blank" rel="noopener noreferrer">08:52</a><a class="cue-jump" href="player.html?t=532" aria-label="在雙語播放器觀看 08:52">↗</a> 這些就是我們進行過的一些實驗，也是我們所能獲得的訊號。但隨著時間推移，我們希望能超越那一步。所以，最初的評估著重於可信感。我們開始在這些代理人身上看到所謂的「生命幻象」。但隨著整個領域逐漸成熟，我們開始更著重於評估忠實度與準確率。因此在那之後我們最終進行的實驗是，我們利用這個架構來創造 1,000 位真人的模擬。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=568s" target="_blank" rel="noopener noreferrer">09:28</a><a class="cue-jump" href="player.html?t=568" aria-label="在雙語播放器觀看 09:28">↗</a> 我們先去招募大量真人，透過抽樣，讓他們能代表美國人口。這是 1,000 人的美國人口代表性樣本，涵蓋性別、種族、族裔等面向。接著我們實際上從這些人身上蒐集了資料。所以，我們這次實際上進行了真人訪談。我們打造了一個能與人進行語音對話的 AI 代理人，讓這些代理人透過語音訪問真人。我們會問一些有點像我們在 Smallville 問代理人的問題。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=599s" target="_blank" rel="noopener noreferrer">09:59</a><a class="cue-jump" href="player.html?t=599" aria-label="在雙語播放器觀看 09:59">↗</a> 告訴我你的人生經歷。你在哪裡長大？你曾經做過哪些艱難的決定？誰對你來說很重要？我們會使用資料來訓練 AI 代理人，讓他們基本上能成為這些人的數位分身。然後我們會讓這些人離開 2 週，再把他們帶回實驗室，而這次我們實際上會要求人們完成一系列調查問卷、行為研究，對刺激做出反應，並讓他們的代理人預測他們會說什麼。到了 2024 年底，這確實是該領域第一次能夠證明，我們可以用這些代理人，以 85% 以上的準確率預測人類行為。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=637s" target="_blank" rel="noopener noreferrer">10:37</a><a class="cue-jump" href="player.html?t=637" aria-label="在雙語播放器觀看 10:37">↗</a> 那最終為公司奠定了今日技術的基礎。當然，技術本身已經有了相當大的改變，但那是最初的基礎，讓我們看見——啊，這些模型與這些代理人現在實際上能夠預測人類行為，這是一個令人驚嘆的基礎模組。但同時，這也是一項龐大的資料作業。我們並不是憑空創造模擬。我們堅信模擬必須有所依據。而且必須與真人一同進行評估。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=668s" target="_blank" rel="noopener noreferrer">11:08</a><a class="cue-jump" href="player.html?t=668" aria-label="在雙語播放器觀看 11:08">↗</a> 所以，這兩者確實缺一不可。</p>
+<h2 id="sec-5">章節 5：人類行為可以預測嗎？（11:09）</h2>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=669s" target="_blank" rel="noopener noreferrer">11:09</a><a class="cue-jump" href="player.html?t=669" aria-label="在雙語播放器觀看 11:09">↗</a> 我有好多問題想問。真的。［笑聲］ 你們有時會加入異常狀況，或其他可能帶來不可預測因素的東西嗎？然後我的第二個問題（其實本來想當作第一個問題）是：人類行為是可以被預測的嗎？在訓練資料中，我們實際上確實注入了大量的行為知識。這不只關於他們說了什麼，也關於他們實際做了什麼。而在人類的傾向中，存在著許多非理性的行為。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=702s" target="_blank" rel="noopener noreferrer">11:42</a><a class="cue-jump" href="player.html?t=702" aria-label="在雙語播放器觀看 11:42">↗</a> 我們在行為經濟賽局、隨機對照試驗中研究的許多問題，都試圖涵蓋這些行為。同時，人身上有些特質，一般並不認為會改變。就像我剛才簡單提到的，一個人的風險承受度，一般認為不太會改變。所以，一旦我們能夠掌握這一點，它實際上就成了一種非常容易預測的特質。因此，關鍵在於理解人們自以為的樣子，與他們在生活中實際作為之間的落差。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=736s" target="_blank" rel="noopener noreferrer">12:16</a><a class="cue-jump" href="player.html?t=736" aria-label="在雙語播放器觀看 12:16">↗</a> 而這裡的建模挑戰，實際上正在於學習那個轉譯層。你要如何從觀察到的行為或態度，掌握他們根本的傾向？而那個落差裡究竟包含了什麼？是時間嗎？還是你身邊發生的事件？到底是什麼，或者說你該如何判定那個最終促成結果的落差？在我們的實驗中，一再看到的是，這兩種表現其實由不同的函數所支配，</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=767s" target="_blank" rel="noopener noreferrer">12:47</a><a class="cue-jump" href="player.html?t=767" aria-label="在雙語播放器觀看 12:47">↗</a> 或者說是不同形狀的曲線。人們在問卷調查中的回答，往往呈現常態分布。對吧？所以，像是「我這週有可能去健身房嗎？」這種題目，我的回答大概會呈現某種常態分布。可能是「會吧，也許吧」；用 7 分量表來說，我每週大概都會填 5 到 6 分。但那週我真的有去健身房嗎？要讓我真的去健身房，所需的啟動能量其實遠高於我的預期。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=801s" target="_blank" rel="noopener noreferrer">13:21</a><a class="cue-jump" href="player.html?t=801" aria-label="在雙語播放器觀看 13:21">↗</a> 所以，那看起來更像是一條指數曲線，會出現更明顯的驟降，關鍵在於 需要什麼程度的啟動，才能讓我真的進入「喔，我這週要去運動」的狀態。這就是我們需要去學習的那種不同函數。而所有的落差正是在那裡。</p>
+<h2 id="sec-6">章節 6：到底是什麼在驅動人們做決定？（13:40）</h2>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=820s" target="_blank" rel="noopener noreferrer">13:40</a><a class="cue-jump" href="player.html?t=820" aria-label="在雙語播放器觀看 13:40">↗</a> 我對此依然有好多疑問。人類行為的第一大指標或最常見的指標是什麼？那些你注意到的、會引發反應或事件的特質或因素到底是什麼？是什麼驅使人們去採取行動？一個人為什麼會做出某項決定，或選擇不做？你該如何判定某人是否會延續某種模式？原來，這有時其實和是否有其他可選方案有關。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=854s" target="_blank" rel="noopener noreferrer">14:14</a><a class="cue-jump" href="player.html?t=854" aria-label="在雙語播放器觀看 14:14">↗</a> 讓我們先簡要看看心理學家通常如何在問卷中研究人類行為。我們會提出一個抽象的問題，並提供一組呈現在選擇題或 1 到 7 分李克特量表上的特定選項。那是一個非常受限的空間。但是當人們展現行為時，通常不是在真空或抽象的條件下行動。他們往往是在真實世界中行動，對吧？這基本上意味著，即便是像「我們想去哪裡吃飯？」這樣簡單的問題，</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=888s" target="_blank" rel="noopener noreferrer">14:48</a><a class="cue-jump" href="player.html?t=888" aria-label="在雙語播放器觀看 14:48">↗</a> 抽象來說，如果有人說：「嘿，我們去吃 X 吧。」大概是這樣：如果我不餓……其實，如果我非常餓，又沒有東西可吃，我幾乎一定會說：「好啊，就去吃那個。」但通常最後發生的情況是，我們無法獲得某些選項，卻能獲得其他選項。這就是人們擁有了這種可選方案的時候。於是他們現在必須思考了。他們必須考慮選擇該選項的機會成本。所以這才是真正支配人們行為的因素——沒錯，我這週可以去運動，但如果我不去，我就可以多睡 1 小時，或者多開 1 場會。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=929s" target="_blank" rel="noopener noreferrer">15:29</a><a class="cue-jump" href="player.html?t=929" aria-label="在雙語播放器觀看 15:29">↗</a> 就是這類的事情。可選方案以及可選方案的類型，往往真正支配著人們的行為。你們會從交友軟體抓取大量資料嗎？［笑聲］ 並沒有特別從交友軟體取資料，沒有。好，那麼綜合考慮這一切，這又是如何變成 Simile 的業務？</p>
+<h2 id="sec-7">章節 7：Simile 如何模擬顧客與市場（15:45）</h2>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=953s" target="_blank" rel="noopener noreferrer">15:53</a><a class="cue-jump" href="player.html?t=953" aria-label="在雙語播放器觀看 15:53">↗</a> 所以，Simile 是一家正在打造人類行為基礎模型的公司。它基本上可以輸入對某個人或某群人的描述，然後模擬這些人在不同情境下可能會做些什麼。所以，目前 Simile 的使用案例實際上會涵蓋調查、實驗等項目。許多消費者研究團隊，都有大量原本打算執行的研究。現在，Simile 能做的是實際去執行它們，但步調快得多，所耗費的資源也少得多。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=987s" target="_blank" rel="noopener noreferrer">16:27</a><a class="cue-jump" href="player.html?t=987" aria-label="在雙語播放器觀看 16:27">↗</a> 這就是顯而易見的使用案例。我們進行概念測試。在更複雜的情境中，我們會做聯合分析、最大差異分析。研究人員今天必須進行的傳統分析，有時會花費他們數十萬美元，有時甚至要數百萬美元或多年時間，而我們在模擬中基本上幾乎可以瞬間完成。只需發送一次查詢即可獲得。這就是目前的使用案例。但與此同時，使用者接著會來找我們問：很好，我們現在可以做這些研究了。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=1022s" target="_blank" rel="noopener noreferrer">17:02</a><a class="cue-jump" href="player.html?t=1022" aria-label="在雙語播放器觀看 17:02">↗</a> 那我們能不能做到我們原本研究做不到的事？人們實際上會做些什麼？他們實際上［清喉嚨］會如何回應不同的刺激？因此，這就是為什麼模擬真正的核心也在於建立環境模型，而不僅僅是人的模型。假設我們有顧客。這裡隨便舉個簡單的例子。想像你正試圖賣水。這其實滿有趣的。如果把這當成一個行為問題，其實相當有趣。假設只有一個水源。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=1052s" target="_blank" rel="noopener noreferrer">17:32</a><a class="cue-jump" href="player.html?t=1052" aria-label="在雙語播放器觀看 17:32">↗</a> 那麼，擁有水源的人，可能就能向我們收取 100 萬美元，才讓我們取得水。但這種情況之所以無法發生，是因為還有其他可選方案：水源有其周遭環境，而水其實到處都有。對吧？這關乎包裝。當然，也跟合適的供應方式有關，但說到底，水是普遍可得的。在這個領域裡存在著其他的可選方案。所以我們實際上想要對此建模。我們想要對那個環境建模。其他選項是什麼？其他替代方案是什麼？</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=1084s" target="_blank" rel="noopener noreferrer">18:04</a><a class="cue-jump" href="player.html?t=1084" aria-label="在雙語播放器觀看 18:04">↗</a> 以該情境為背景，我們是否能讓我們的代理人面臨這種決策情境？考量到所有這些相關的環境因素，你實際上會以什麼價格購買這瓶水？所以，這確實是在對人及其行為進行建模，但也是在對環境以及環繞著他們的一切進行建模。本集節目由我的最愛 Brex 贊助播出。你把錢花在哪裡，就成為什麼樣的人；而我拒絕把時間花在根本不該存在的工作上。費用報表、催收據，以及手動關帳。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=1117s" target="_blank" rel="noopener noreferrer">18:37</a><a class="cue-jump" href="player.html?t=1117" aria-label="在雙語播放器觀看 18:37">↗</a> 從 Vercel、OpenAI、Anthropic 到 Granola、Deepgram，這些正在打造未來的公司，都做出了同樣的選擇。他們全都採用 Brex。Brex 是一個智慧金融平台，將信用卡、費用管理與銀行服務整合進單一技術架構，並內建代理式金融。AI 代理人能自動處理費用，在支出發生前落實規範，並在幾分鐘內完成關帳。這就是 Sourcery 採用 Brex 的原因，讓我能把時間花在創造東西，而不是瑣碎的雜務。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=1149s" target="_blank" rel="noopener noreferrer">19:09</a><a class="cue-jump" href="player.html?t=1149" aria-label="在雙語播放器觀看 19:09">↗</a> 是時候體驗 Brex AF 了。前往 brex.com/sourcery 了解更多。網址是 b r e x.com/s o u r c e r y。掰掰。從握手洽談到簽署合約更快速。專為法律工作打造的 AI 平台 Harvey，深受 80% 的 Am Law 100 以及超過 20% 的 Fortune 500 企業信賴。立即造訪 harvey.ai 了解更多。網址就是 harvey.ai。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=1179s" target="_blank" rel="noopener noreferrer">19:39</a><a class="cue-jump" href="player.html?t=1179" aria-label="在雙語播放器觀看 19:39">↗</a> AI 需要的不只是晶片。它還需要電力、土地與基礎設施。Zone 開發次世代資料中心園區，與 AI 公司、場地開發商及技術領導者合作，更快速且具規模地將運算能力上線部署。Zone 正在奠定 AI 前沿的基石。造訪 zonefrontier.com 了解更多。造訪 zonefrontier.com 了解更多。</p>
+<h2 id="sec-8">章節 8：大企業為什麼想要模擬顧客（20:05）</h2>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=1205s" target="_blank" rel="noopener noreferrer">20:05</a><a class="cue-jump" href="player.html?t=1205" aria-label="在雙語播放器觀看 20:05">↗</a> 那麼，你們有哪些客戶？這些是哪種類型的公司？好的。我們目前跨足了幾種不同的垂直產業。目前較大的垂直產業之一是零售商。好的。但我們一直合作的客戶之一，當然就是 CVS。他們與我們合作建立了模擬，以進一步了解他們的消費者，好讓他們在店面配置、溝通訊息和整體裝潢上，都能更好地服務消費者。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=1239s" target="_blank" rel="noopener noreferrer">20:39</a><a class="cue-jump" href="player.html?t=1239" aria-label="在雙語播放器觀看 20:39">↗</a> 但我們也與金融公司合作。想想當今規模數一數二的大型金融機構。但我們也與國際機構合作，例如巴西的 Banco Itaú，他們也有類似的需求，想了解 我們需要推行什麼樣的政策或傳達什麼樣的訊息，才能更好地向我們的顧客傳達我們的價值。當然，我們也與娛樂公司、消費性包裝商品（CPG）公司合作。所以垂直領域相當廣泛，但將他們串聯在一起的是他們的共同需求：他們需要更了解自己的使用者族群。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=1274s" target="_blank" rel="noopener noreferrer">21:14</a><a class="cue-jump" href="player.html?t=1274" aria-label="在雙語播放器觀看 21:14">↗</a> 他們必須且正在努力變得更加以顧客為中心。而如今在每次有需要時就要去找每個人談談，實務上存在著真正的限制。但如果我們能建立人群的模擬，並且能在任何時間詢問任何問題，這就成了這些公司的超能力。</p>
+<h2 id="sec-9">章節 9：數位分身與 4,000 萬真人受訪者樣本群（21:31）</h2>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=1292s" target="_blank" rel="noopener noreferrer">21:32</a><a class="cue-jump" href="player.html?t=1292" aria-label="在雙語播放器觀看 21:32">↗</a> 針對這些客戶中的每一家，你們都會建立專屬於他們的數位分身嗎？你們如何為他們建立全新的族群，而不是每個用途都採用同一個樣本基礎，導致重複？沒錯。Simile 在關鍵的垂直產業中，維護著特定產業的代理人庫。所以這些實際上是從第一天起就隨時可用的模擬受訪者樣本群。因此當我們展開新的客戶合作關係時，那些隨時都能派上用場。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=1324s" target="_blank" rel="noopener noreferrer">22:04</a><a class="cue-jump" href="player.html?t=1324" aria-label="在雙語播放器觀看 22:04">↗</a> 接著我們的客戶往往會有進一步的要求。對吧？因為沒有人真的對整體大眾感興趣。每個人感興趣的，都是自己想進一步了解的特定族群。因此在這些情境下，Simile 實際上會去蒐集更多資料來建立並訓練模型，使其能夠涵蓋這些族群。如今，透過受訪者樣本群的合作夥伴，Simile 與超過 4,000 萬名真人建立了合作關係。這遍布全球各地。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=1354s" target="_blank" rel="noopener noreferrer">22:34</a><a class="cue-jump" href="player.html?t=1354" aria-label="在雙語播放器觀看 22:34">↗</a> 在任何一個時間點，我們每週都在與數萬名、甚至數十萬名真人交談。這就是我們當前營運的規模。如果需要新的受訪者樣本群成員，通常可以在 24 小時內滿足需求。</p>
+<h2 id="sec-10">章節 10：到底是誰在回答民調？（22:51）</h2>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=1372s" target="_blank" rel="noopener noreferrer">22:52</a><a class="cue-jump" href="player.html?t=1372" aria-label="在雙語播放器觀看 22:52">↗</a> 這些人是誰？我一直對這點非常好奇，因為我搞不懂民意調查。當人們說有 53% 的美國人認為是 X 或 Y 時，我就搞不懂。感覺就像，這些美國人到底是誰？誰啊？我不知道。我從沒遇過被民調調查過或做過問卷的人。你遇過嗎？好吧，你有，所以……［笑聲］［倒抽一口氣］ 但對啊。所以，這些人到底是誰？是這樣的，這些人就是一般人，</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=1403s" target="_blank" rel="noopener noreferrer">23:23</a><a class="cue-jump" href="player.html?t=1403" aria-label="在雙語播放器觀看 23:23">↗</a> 顯然是他們自己選擇回答民調，或決定參與這些資料蒐集過程。然而，這個過程的玄機往往在於懂得如何對他們進行抽樣。社會科學家一直在發展隨機抽樣、機率抽樣的方法，以真正對具代表性的人群樣本形成廣泛理解。在某些情況下，部分受訪者樣本群公司專門從事這項業務。而這對他們來說意味著，他們實際上努力與全國各地的人們建立真實的聯繫。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=1440s" target="_blank" rel="noopener noreferrer">24:00</a><a class="cue-jump" href="player.html?t=1440" aria-label="在雙語播放器觀看 24:00">↗</a> Simile 的策略合作夥伴之一其實就是 Gallup。Gallup 當然是數一數二的……我認為，Gallup 是民調或這類研究公司中，最具標竿地位的公司之一。他們有一個數十萬人規模的 Gallup 受訪者樣本群，過去十年乃至數十年間，他們持續與這些人建立關係。</p>
+<h2 id="sec-11">章節 11：Simile 如何把劣質資料擋在門外（24:22）</h2>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=1462s" target="_blank" rel="noopener noreferrer">24:22</a><a class="cue-jump" href="player.html?t=1462" aria-label="在雙語播放器觀看 24:22">↗</a> 但是，那些人在某個時間點難道不會有偏誤，或者覺得自己有資格根據自身狀況提供他們認為最好的資訊之類的嗎？像是，你實際上要怎麼知道那是有效資訊？對，我們會針對這些問題進行控制。我們有幾種控制的方式。第一種顯然是……而且偏誤實際上會以不同方式悄悄浮現。所以有不同的方式來對抗不同種類的偏誤。而且，你知道的，不出所料，這整件事本身就是一個研究領域。這是一整個學術領域，有許多研究人員致力於此。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=1492s" target="_blank" rel="noopener noreferrer">24:52</a><a class="cue-jump" href="player.html?t=1492" aria-label="在雙語播放器觀看 24:52">↗</a> 但舉例來說，我們經常看到的一個明確偏誤就是疲勞。如果你被問到相同的問題，甚至是不同的問題，但如果你每個星期都被抽樣調查，他們就會開始感到非常疲勞，並開始隨便作答，或者試圖鑽系統漏洞，對吧？「噢，如果我參與這個，我能拿到更多報酬，所以我隨便給個答案參與就好。」你就會開始看到那些行為。所以你實際上要做的是掌握好時間間隔，讓參與頻率盡可能稀疏、間隔夠長，同時又能維持這層關係。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=1529s" target="_blank" rel="noopener noreferrer">25:29</a><a class="cue-jump" href="player.html?t=1529" aria-label="在雙語播放器觀看 25:29">↗</a> 我們會實際研究，比較全新的受訪族群，和過去已回答過 X 個問題的族群。不同提問之間應該隔多久，才能得到我們認為符合黃金標準的高品質回答？我們實際上會去衡量這一點。另一件我們會做的事是，在這類研究中，我們通常也會做注意力檢查。所以這些基本上是虛設問題，實際上並不是核心衡量的一部分。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=1562s" target="_blank" rel="noopener noreferrer">26:02</a><a class="cue-jump" href="player.html?t=1562" aria-label="在雙語播放器觀看 26:02">↗</a> 嗯。所以你基本上是在暗中穿插問題，藉此過濾掉那些實際上沒有認真專注的參與者。那樣的問題會是什麼樣子？問題可能是……問題可能會像是，想像在我們的訪談剛結束之後，你問我第一段對話……你問我的第一個問題是什麼？在今天的對話中。如果我答得出來……這有點難。你問我關於 Elon 的問題，也就是我們是不是活在模擬世界裡？我想你應該……如果我真的有認真聽我們的對話，我應該要知道這點，但這就是注意力檢查的一個例子。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=1596s" target="_blank" rel="noopener noreferrer">26:36</a><a class="cue-jump" href="player.html?t=1596" aria-label="在雙語播放器觀看 26:36">↗</a> 我本來以為會是一些很無厘頭的問題。［笑聲］例如，為了確認對方有沒有專心，問他長頸鹿有多高？［笑聲］ 一個人能吃多少個漢堡？所以技術上來說，那些實際上是不錯的注意力檢查。真的嗎？對，他們……他們……如果你想的話，用那些也行。好吧，謝謝。［笑聲］我……我的意思是，這些確實也是我們有時會問的問題。某些問卷或資料蒐集流程真的會要求人們做非常簡單的算術。這樣一來，像是如果他們回答 10 + 10 是 30，那我們就知道他們很可能沒有專心。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=1632s" target="_blank" rel="noopener noreferrer">27:12</a><a class="cue-jump" href="player.html?t=1632" aria-label="在雙語播放器觀看 27:12">↗</a> 或者他們不……或者他們在那些情況下可能不擅長這個。這引出了另一個問題。我不知道該怎麼……我現在正好想到，但有沒有某些群體是你們必須避開的，例如有藥物成癮問題的人、精神疾病患者，或其他可能以某種方式使資料偏斜的人？還是說這也是整體圖譜的一部分？我知道這有點像是不恰當的問題，但我很好奇，你們在調查對象上有哪些禁區，你們又是如何將這些人篩選出去的？</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=1670s" target="_blank" rel="noopener noreferrer">27:50</a><a class="cue-jump" href="player.html?t=1670" aria-label="在雙語播放器觀看 27:50">↗</a> 所以對我們來說，禁區實際上是無法給予知情同意的參與者。我們非常重視知情同意。加入我們研究與資料蒐集流程的每一位受訪者樣本群成員，他們至少大致知道為什麼要蒐集資料，並且同意該流程。而且他們也有機會撤回他們的同意。這是我們很重視的事。舉例來說，未成年人無法參與。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=1700s" target="_blank" rel="noopener noreferrer">28:20</a><a class="cue-jump" href="player.html?t=1700" aria-label="在雙語播放器觀看 28:20">↗</a> 所以那實際上是我們承認的一個盲點。我們不蒐集未成年人的資料；同樣原則也適用於其他無法提供知情同意的群體。話雖如此，除了那個群體之外，Simile 的不同之處在於我們試圖……建立一個模型，能忠實呈現我們這個社會的代表性樣貌。所以實際上沒有任何我們應該避開的群體。我們實際上想了解現存的每一個群體。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=1731s" target="_blank" rel="noopener noreferrer">28:51</a><a class="cue-jump" href="player.html?t=1731" aria-label="在雙語播放器觀看 28:51">↗</a> 這也是舉例來說，我們與單純打造語言模型之類模型的其他建模公司相當不同的地方。其他建模公司試圖打造的是擅長寫程式、擅長數學的驚人推理機器，本質上是想成為優秀的聊天機器人、優秀的助手。對我們而言，我們試圖打造的是能夠真正模擬人們多元觀點、價值觀、偏好與品味的模型。其中的一部分也是去學習人們的良好行為，但同時也包括不良行為。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=1765s" target="_blank" rel="noopener noreferrer">29:25</a><a class="cue-jump" href="player.html?t=1765" aria-label="在雙語播放器觀看 29:25">↗</a> Simile 也必須能捕捉到這些行為。</p>
+<h2 id="sec-12">章節 12：Simile 對這集節目預測了什麼（29:29）</h2>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=1770s" target="_blank" rel="noopener noreferrer">29:30</a><a class="cue-jump" href="player.html?t=1770" aria-label="在雙語播放器觀看 29:30">↗</a> 這次準備訪談時，我們也用 Simile 做了一個……你們怎麼稱呼它？專案？試點計畫？為 Sourcery 做的，我覺得這真的很有趣，因為我心想，這些人是誰啊？對。你們是在訪談誰？不過當時有兩種不同的測試，一種測主題吸引力，另一種測標題。排名第一的標題是……嗯哼。就是它猜出的，或者……我也不確定，你們用什麼詞？它預測出的？</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=1801s" target="_blank" rel="noopener noreferrer">30:01</a><a class="cue-jump" href="player.html?t=1801" aria-label="在雙語播放器觀看 30:01">↗</a> 模擬的。模擬，當然。［笑聲］［倒抽一口氣］ 它模擬出來排名第一的標題是「這家價值 20 億美元的公司正在打造真人 AI 模擬」。整體而言，這是對我的受眾最有吸引力的標題；我的受眾主要是投資人、科技業高階主管之類的人。這很有趣。至於主題，則深入談到數位分身。最受青睞的是數位分身、模擬客戶測試和隱私。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=1833s" target="_blank" rel="noopener noreferrer">30:33</a><a class="cue-jump" href="player.html?t=1833" aria-label="在雙語播放器觀看 30:33">↗</a> 它們之間沒有明顯的勝出者。我算是同意，因為現在大家對這些 AI 事物最大的擔憂，就是資安和隱私風險。我顯然問了很多模擬客戶測試如何運作的問題。數位分身這件事相當有趣。我不知道……這對其他人來說是如何運作的？所以，輸出這些資訊的過程究竟是什麼？我們的使用者目前可以使用線上的……我們基本上是向使用者提供一個 SaaS 平台。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=1868s" target="_blank" rel="noopener noreferrer">31:08</a><a class="cue-jump" href="player.html?t=1868" aria-label="在雙語播放器觀看 31:08">↗</a> 所以他們可以使用這個網頁介面，基本上可以在裡面定義兩件事。他們可以說明想和誰對話，以及想問什麼問題。而且他們真的可以問任何問題。目前他們可以問任意數量的問題。他們能問的問題數量沒有限制。而我們會生成回覆。這就是他們目前得到的服務。不過，最重要的一點是，這是一種新的決策方式。我們還沒真正見過在社會情境中如此能夠泛用、能為所有人類決策提供參考的模擬。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=1904s" target="_blank" rel="noopener noreferrer">31:44</a><a class="cue-jump" href="player.html?t=1904" aria-label="在雙語播放器觀看 31:44">↗</a> 所以我們所做且與使用者非常緊密合作的事情之一，就是變革管理。協助使用者運用結果，並判斷何時使用、如何使用、哪些地方需要更多資料，以及要如何驗證。與我剛才所說相關、附加在這些報告上的核心功能之一，就是信心模型或預測準確率的概念。所以這個模型對我們來說實際上相當重要。Simile 將會生成未來的預測與模擬。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=1940s" target="_blank" rel="noopener noreferrer">32:20</a><a class="cue-jump" href="player.html?t=1940" aria-label="在雙語播放器觀看 32:20">↗</a> 在訓練用來模擬的核心基礎模型時，我們也同時訓練另一個模型，用來預測準確率。它的任務只有一件事。它的工作是輸出一個 0 到 100 範圍的機率，表示我們對這個特定回答有多大信心，這是基於我們用來訓練模型的所有資料以及我們收到的問題。這有點像推論統計學裡的概念；如果你是社會科學家，這有一點像是有了 p 值。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=1971s" target="_blank" rel="noopener noreferrer">32:51</a><a class="cue-jump" href="player.html?t=1971" aria-label="在雙語播放器觀看 32:51">↗</a> 而在科學中，當 p 值小於 0.05 時，那就算是表達「啊，我們準備好做決定了」的標準方式。我們提供了這個。所以，如果信心高於 90%，或者通常是 85%，我們的客戶發現，這是穩健的證據，實際上能用來做影響非常重大的決策。所以，這實際上是一整套服務。因此，除了提供洞察，也要提供無可否認的證據，讓人明白：</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=2003s" target="_blank" rel="noopener noreferrer">33:23</a><a class="cue-jump" href="player.html?t=2003" aria-label="在雙語播放器觀看 33:23">↗</a> 如果這就是證據，那麼這就是我們必須準備面對的完全合理的結果。再提供這個模型，基本上為我們帶來某種程度的信心校準。</p>
+<h2 id="sec-13">章節 13：看似完美、結果卻出問題的電動車行銷方案（33:34）</h2>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=2014s" target="_blank" rel="noopener noreferrer">33:34</a><a class="cue-jump" href="player.html?t=2014" aria-label="在雙語播放器觀看 33:34">↗</a> 這真的很有趣。我原本想問的一個問題是，最昂貴的錯誤是什麼—— 嗯哼。也就是 Simile 曾協助客戶避免的錯誤？對。那是什麼？實際上有一項我們做過滿有趣的研究。嚴格來說，這稍微早了一些……這是 Simile 成立前的事，不過我還是會提，因為我覺得這個例子很有意思。我們曾與幾家汽車公司合作。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=2047s" target="_blank" rel="noopener noreferrer">34:07</a><a class="cue-jump" href="player.html?t=2047" aria-label="在雙語播放器觀看 34:07">↗</a> 其中一家——其實是每一家——都對電動車感興趣。我們該做嗎？我們該什麼時候做？我們該怎麼做？那是我們見過的每一家電動車公司最關心的事。而這些是該領域規模最大的一些業者。我們進行的其中一項模擬實際上與這有關：我們能否預測，或者我們能否模擬人們對新電動車進入這個特定市場的不同宣傳訊息會如何反應，</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=2080s" target="_blank" rel="noopener noreferrer">34:40</a><a class="cue-jump" href="player.html?t=2080" aria-label="在雙語播放器觀看 34:40">↗</a> 以及如何最佳化宣傳訊息，向客戶傳達我們的價值。當時有一個策略的判斷是：「好，這明顯勝出。太棒了。我們準備好了，這樣很好。」然而有趣的是，這實際上帶來了後續影響。這種特定訊息、這種特定的進入市場方式，實際上改變了人們對非電動車的整體觀感，整體而言，也降低了整個市場的銷售量。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=2113s" target="_blank" rel="noopener noreferrer">35:13</a><a class="cue-jump" href="player.html?t=2113" aria-label="在雙語播放器觀看 35:13">↗</a> 天啊。所以，這顯然是在做研究，最後成為一項參考；但再說一次，當時這不屬於 Simile 的工作。不過，我覺得這類發現很有意思。這些發現並非狹隘地只看某個問題，而是更能延伸應用，從整體來看整個領域。模擬讓你能探索這點。而模擬發揮得最好的時候，應該能帶出反直覺、令人意外的洞察。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=2149s" target="_blank" rel="noopener noreferrer">35:49</a><a class="cue-jump" href="player.html?t=2149" aria-label="在雙語播放器觀看 35:49">↗</a> 所以這確實是目標，也確實是價值所在。AI 在真實專業工作中的表現有多好？Merkle 的 AI Productivity Index，也就是 Apex，會隨著每次重要的前沿模型［音樂］發布，追蹤這項表現。與 Harvey 和 Cognition 等合作夥伴共同打造，前往 merkle.com/apex 看看前沿技術目前真正的實力。［音樂］今天這集節目由 Fundrise 推出的 VCX 贊助。未上市科技公司的公開股票代碼。讓不同資金規模的投資人都能投資創投。造訪 getvcx.com 了解更多。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=2181s" target="_blank" rel="noopener noreferrer">36:21</a><a class="cue-jump" href="player.html?t=2181" aria-label="在雙語播放器觀看 36:21">↗</a> Public 是一個多元資產投資平台，讓你可以透過 AI 代理人實現投資自動化。只要一個簡單的提示詞，就能建立自己的客製代理人。代理人可以監控市場、執行交易策略，並管理你在股票、債券、選擇權、加密貨幣等領域的資金。想在收盤時買進、隔天開盤時賣出？只要告訴你的代理人即可。在 public.com 實現你的投資自動化。創辦人使用 Deel，能更快擴大事業規模。幾分鐘內設定好任何國家的薪資發放、隨時隨地招募任何人、快速辦妥簽證，然後回頭專注於打造產品。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=2215s" target="_blank" rel="noopener noreferrer">36:55</a><a class="cue-jump" href="player.html?t=2215" aria-label="在雙語播放器觀看 36:55">↗</a> 請造訪 deel.com/sourcing。就是 d e e l.com/sourcing。</p>
+<h2 id="sec-14">章節 14：氣候變遷、AGI 與全民基本收入（37:02）</h2>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=2223s" target="_blank" rel="noopener noreferrer">37:03</a><a class="cue-jump" href="player.html?t=2223" aria-label="在雙語播放器觀看 37:03">↗</a> 你有沒有什麼夢想中的情境或夢想中的模擬，是你想要解答或揭開的？像是最瘋狂的是什麼？你腦海中可能有一些瘋狂的想法。你最想解決、最天馬行空的問題是什麼？你希望有人讓你去解決，或者希望自己就能解決的那種。我們在經營這家公司，也提供了很多價值，但我心裡仍有一小部分保有研究者的身分。身為研究者，真正涉及社會與世代的問題會激發我的靈感。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=2255s" target="_blank" rel="noopener noreferrer">37:35</a><a class="cue-jump" href="player.html?t=2255" aria-label="在雙語播放器觀看 37:35">↗</a> 每個世代都有幾個這樣的問題。我心目中的研究英雄之一是 Thomas Schelling，他是 1970 與 1980 年代的行為經濟學家，提出了我們所稱的隔離模型。而種族隔離在當時是個重大議題。那是屬於那個世代的核心課題。所以他決定應用模擬來解決這個問題，至少理解其因果機制。所以我確實會思考：我們今天面臨的那些問題是什麼？氣候變遷就是其中之一。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=2287s" target="_blank" rel="noopener noreferrer">38:07</a><a class="cue-jump" href="player.html?t=2287" aria-label="在雙語播放器觀看 38:07">↗</a> 氣候變遷之所以困難，不只是因為它的物理機制，更因為它牽涉到協調問題。這牽涉很多誘因相互衝突的參與者，各自有想要達到最佳結果的目標。當他們匯聚在一起並發生衝突時，所產生的均衡狀態幾乎令人無從應對。所以，如果能反覆模擬，看看不同政策可能帶來哪些結果，那或許會相當強大。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=2317s" target="_blank" rel="noopener noreferrer">38:37</a><a class="cue-jump" href="player.html?t=2317" aria-label="在雙語播放器觀看 38:37">↗</a> 另一個則是，如果我們相信 AGI 已經到來，或者即將來臨，那麼，我們這個社群——至少社群中的某些群體——顯然已經提出了幾種不同構想。其中之一可能是全民基本收入（UBI）。可能還有其他構想。我們能否模擬出這類的發現？與其花 5 年針對 UBI 進行研究，我們是否真的能先予以模擬，並指出哪裡行得通、哪裡行不通？那些都是很值得進行的模擬。</p>
+<h2 id="sec-15">章節 15：先模擬主持人會問什麼（39:06）</h2>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=2346s" target="_blank" rel="noopener noreferrer">39:06</a><a class="cue-jump" href="player.html?t=2346" aria-label="在雙語播放器觀看 39:06">↗</a> 你們有模擬過該拿誰的資金嗎？我知道你們剛完成一大輪融資。［笑聲］ 這個嘛，你們一定有，對吧？事實上，我經常做的事確實包括模擬這類對話。嗯哼。你的網路能見度這麼高，所以當然，你可以相信，我走進來之前確實模擬過這些對話。這是其中一個問題嗎？好，這裡有個 跟我說說。有趣的地方。它確實提醒過我，你可能會問我們是否生活在模擬之中。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=2379s" target="_blank" rel="noopener noreferrer">39:39</a><a class="cue-jump" href="player.html?t=2379" aria-label="在雙語播放器觀看 39:39">↗</a> 當然囉。所以我本該更認真看待那個建議的。把你的結果調出來。我們現在就來一條一條對對看。它還模擬了什麼？［笑聲］ 所以，那確實是個大重點。而且我覺得那……那不是……這很有意思，對吧？因為這並不是每個訪談者都會問的問題。嗯哼。但不知為何，綜合我們對你的所有了解，模擬器確實認為這是一個你可能會問的好問題。嗯，我確實常常在 Twitter 上對 Elon 發推文。［笑聲］</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=2409s" target="_blank" rel="noopener noreferrer">40:09</a><a class="cue-jump" href="player.html?t=2409" aria-label="在雙語播放器觀看 40:09">↗</a> 所以那也是一部分原因。不過我很好奇，你們總共募資了 3 億美元，據報導估值達到 20 億美元。</p>
+<h2 id="sec-16">章節 16：累計募資 3 億美元、估值 20 億美元（40:13）</h2>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=2419s" target="_blank" rel="noopener noreferrer">40:19</a><a class="cue-jump" href="player.html?t=2419" aria-label="在雙語播放器觀看 40:19">↗</a> 而且你們有名聲非常響亮的投資人，像我剛才提到的 Greenoaks、Index。你們還有一些非常酷的個人投資者，像是李飛飛和 Andrej Karpathy。你是如何集結到如此引人注目的投資機構與天使投資人群體的？沒錯。某種程度上來說，我們很幸運過去曾與這些人當中的許多人共事過。他們當中很多人其實就是我們的同事。李飛飛當然是 Stanford 關係密切的同事。我的共同創辦人之一 Michael Bernstein，曾與她密切合作多年。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=2453s" target="_blank" rel="noopener noreferrer">40:53</a><a class="cue-jump" href="player.html?t=2453" aria-label="在雙語播放器觀看 40:53">↗</a> 甚至直到今天我們都還是同事。至於 Andrej，我的另一位共同創辦人 Percy Liang，當年其實是他的博士論文委員會成員。所以我們認識 Andrej 很久了。事實上，當我最初在 2023 年發表 Generative Agents 論文時，Andrej 其實就是最早大力推廣那項特定成果的人之一。因此從這個角度來看，感覺有點像是繞了一整圈又回到原點。但我覺得在很多方面我們也很幸運，因為這項技術的構想、核心研究以及核心需求是如此真實。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=2489s" target="_blank" rel="noopener noreferrer">41:29</a><a class="cue-jump" href="player.html?t=2489" aria-label="在雙語播放器觀看 41:29">↗</a> 我確實真心相信，從很多方面來看，模擬是不可避免的。人們有一種深層、與生俱來的渴望和需求，想更了解自己是誰。就像我們寫……寫自傳或畫肖像，模擬也很像這樣。從很多方面來說，我們是在替我們這個社會畫一幅肖像。我認為我們很多天使投資人都看到了這一點。這是一個能激發靈感的構想。這是一個確實需要存在的構想。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=2521s" target="_blank" rel="noopener noreferrer">42:01</a><a class="cue-jump" href="player.html?t=2521" aria-label="在雙語播放器觀看 42:01">↗</a> 我認為這就是讓他們感到興奮的原因。那是誰來著？是 Alexandr Wang 之前提到，當他第一次接觸到 OpenClaw 時——我想是從 Nat Friedman 那裡得知的—— Nat 給他的提示詞，是根據所有資訊做深入心理分析，而 OpenClaw 就讀取了他們電腦裡的所有內容，照片、電子郵件等等的一切，然後給出了一份詳細的心理分析。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=2553s" target="_blank" rel="noopener noreferrer">42:33</a><a class="cue-jump" href="player.html?t=2553" aria-label="在雙語播放器觀看 42:33">↗</a> Alexandr Wang 對此感到震驚。［笑聲］ 他就像是……這也是一個切入角度嗎？你是如何看待你們需要多少資料這件事的？資料量和資料種類都重要，不過更重要的是需要哪些資料。事實證明，提出正確的問題其實相當重要。所以我們會訪談受訪者，就像我們現在正在做的一樣。事實上，我之所以產生透過訪談來了解他們的構想，是在 2023 和 2024 年時，我因為我們在 Stanford 主導的學術研究，上了很多 Podcast。我發現，跟這些主持人聊上一兩個小時後，他們對你就有很多了解。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=2594s" target="_blank" rel="noopener noreferrer">43:14</a><a class="cue-jump" href="player.html?t=2594" aria-label="在雙語播放器觀看 43:14">↗</a> 特別是優秀的主持人。只要問對問題，他們就能對你的領域以及你這個人有極為深入的了解。所以，我們實際上就是從那裡獲得靈感的。因此，我們會問一些既切合主題、又相當廣泛的問題。而且我們發現，請人們述說自己的人生故事其實非常關鍵。這能揭露許多關於那些人的有趣資訊。不過，我們也蒐集大量行為資料。行為資料有一部分可能是觀察性的。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=2626s" target="_blank" rel="noopener noreferrer">43:46</a><a class="cue-jump" href="player.html?t=2626" aria-label="在雙語播放器觀看 43:46">↗</a> 例如交易資料、移動資料，這些都很合理。但真正重要的是因果機制。也就是隨機對照試驗。想像你有同一套實驗設定，並且在改變某個特定變數，無論是產品功能，還是溝通訊息，並實際觀察人們的行為改變，那樣的資料其實極為重要。因為我們隨著時間體會到的是，人們其實沒那麼有興趣預測未來。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=2659s" target="_blank" rel="noopener noreferrer">44:19</a><a class="cue-jump" href="player.html?t=2659" aria-label="在雙語播放器觀看 44:19">↗</a> 對我來說，這點有些令人意外。但除非你想在股市中勝出，否則如果我告訴你你的市場將在兩季後崩盤，你又能做什麼呢？他們接著都會問：「這太糟糕了。我們現在需要做什麼來改變這一點？」但總是後面那個問題更重要。那麼，我們現在需要做什麼來塑造未來？而這正是對我們而言，重點不只在於尋找相關性，而是在於理解因果機制、理解因果關係。因為說到底，那是我們用來改變未來方向的著力點。</p>
+<h2 id="sec-17">章節 17：模擬正處於 GPT-4 時代（44:54）</h2>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=2694s" target="_blank" rel="noopener noreferrer">44:54</a><a class="cue-jump" href="player.html?t=2694" aria-label="在雙語播放器觀看 44:54">↗</a> 那麼團隊由哪些人組成？你們在尋找什麼樣的人才？是研究員嗎？是科學家嗎？是工程師嗎？團隊是如何構成的？好的。我們現在是一支約 100 人的團隊。團隊中有 20% 其實是我們的實驗室同門，以及學術圈裡有淵源的人。他們曾是我在 Stanford 電腦科學系 Percy 團隊、Michael Bernstein 團隊裡的實驗室同門，後來去了前沿 AI 實驗室，然後又回來，跟我們一起打造這些人類行為基礎模型。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=2730s" target="_blank" rel="noopener noreferrer">45:30</a><a class="cue-jump" href="player.html?t=2730" aria-label="在雙語播放器觀看 45:30">↗</a> 在這類人才和我們有淵源的圈子裡，也有一群很優秀、比較專攻研究方法的人。對我們來說，這不僅僅是建立模型而已。這實際上關乎研究人類、理解人類。因此，我們也確實有一小群人數持續增加、較具社會科學背景的研究方法專家。這就是 Simile 在科學研究層面的部分。大約佔公司 20% 到 25%。建模、評估，以及進行這些模擬的科學研究，都是公司非常重要的一部分。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=2767s" target="_blank" rel="noopener noreferrer">46:07</a><a class="cue-jump" href="player.html?t=2767" aria-label="在雙語播放器觀看 46:07">↗</a> 然後我們有一群非常優秀的工程師與產品端人才。因為這項技術如今正交到許多 Fortune 100 企業與其他使用者手中。所以，我們正在與這群優秀的人才共同打造這項技術。我們最近延攬了工程主管加入，他最初其實來自 DoorDash。嗯。他在那裡是一位極其出色的領導者。他最近 順帶一提，我聽說 DoorDash 有非常頂尖的 AI 人才，評價被嚴重低估。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=2799s" target="_blank" rel="noopener noreferrer">46:39</a><a class="cue-jump" href="player.html?t=2799" aria-label="在雙語播放器觀看 46:39">↗</a> 他們個個都是箇中高手。沒錯。我一直欣賞 DoorDash 和那個特定團隊的一點是，他們在某些方面低調溫和，但他們在一個競爭極其殘酷的市場中奮戰，而且打贏了。這很能說明問題。所以，我們擁有一群優秀的工程師與產品人才。而這現在又搭配了一群出色的市場開發與導入部署團隊。身為一家公司，我們非常注重深入客戶現場協作。這部分由我的共同創辦人之一 Lainie Yallen 領導。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=2832s" target="_blank" rel="noopener noreferrer">47:12</a><a class="cue-jump" href="player.html?t=2832" aria-label="在雙語播放器觀看 47:12">↗</a> 不過，我們這家公司的根本想法是這樣的：資料與模型極其重要。模擬基本上正處於其 GPT-4、GPT-4.5 時代，這項技術已經來到能發揮影響力的階段，但這項技術每個月都在改變與演進。而這場戰役很大一部分也將發生在市場上，在我們深入客戶現場協作的推進方式中。這方面，我會參考近期這波 AI 浪潮中前幾個週期。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=2866s" target="_blank" rel="noopener noreferrer">47:46</a><a class="cue-jump" href="player.html?t=2866" aria-label="在雙語播放器觀看 47:46">↗</a> 例如，我會看程式代理人、寫程式這個階段。我實際上發現，採取深入客戶現場協作的公司其實獲得了很大的成功。隨著時間過去，客戶關係變得更有黏著度，抵禦競爭的能力也大幅提升，我認為這也會在模擬領域重演，因為我確實認為，模擬領域會逐漸成熟，到達這樣一個程度：大約 1 年半到 2 年後，我們會到達程式代理人產業目前所在的位置。所以，我認為我們也從那個時代汲取了許多借鏡與經驗。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=2899s" target="_blank" rel="noopener noreferrer">48:19</a><a class="cue-jump" href="player.html?t=2899" aria-label="在雙語播放器觀看 48:19">↗</a> 我們也處在有間諜、有人洩密，以及員工可能離職的時代。最近發生的那件事是……他們裡面有間諜，或是有人裝了竊聽器。對。所以，你們如何……你們會協助 HR 團隊嘗試判斷該錄用誰、不該錄用誰嗎？所以，這些是我們收到的部分使用案例，而且我們在某些情況下確實有進行合作。當然，再次強調，我們是在客戶公司成員知情同意、能自主決定的前提下進行。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=2934s" target="_blank" rel="noopener noreferrer">48:54</a><a class="cue-jump" href="player.html?t=2934" aria-label="在雙語播放器觀看 48:54">↗</a> 我們聽到的一種需求是，很多公司，尤其規模變大之後，都非常關心員工留任。我們要如何確保我們的成員充滿熱情，尤其是我們表現最最最優秀的成員對公司全心投入？而那是我們可以協助模擬的事情。另一個則是他們也想要招募人才。所以，想像一下你現在是一家正試圖從 Stanford、MIT 招募最頂尖學生的公司。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=2966s" target="_blank" rel="noopener noreferrer">49:26</a><a class="cue-jump" href="player.html?t=2966" aria-label="在雙語播放器觀看 49:26">↗</a> 與那個族群溝通的正確方式是什麼？這也是我們可以協助模擬的事情。因此，這不僅僅是了解消費者或客戶，而是真正去了解我們生態系中的每個人，而其中許多重要的利害關係人實際上是在內部。</p>
+<h2 id="sec-18">章節 18：最成功的人有什麼共通點（49:43）</h2>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=2983s" target="_blank" rel="noopener noreferrer">49:43</a><a class="cue-jump" href="player.html?t=2983" aria-label="在雙語播放器觀看 49:43">↗</a> 我必須說，我們聊得越多、你回答問題越多，我就越感到緊張，而且我覺得你好像有點能讀懂我的心思。我不知道你是不是常遇到這種情況。但我真的覺得：「靠，你做足了功課。」模擬是怎麼說的？好，在我們結束之前，這是我最喜歡的問題之一。你某種程度已經回答過了，但我很……我很想知道也許你能給出不同的答案，不過，我最喜歡的問題之一是我們與 Brex 合作的問題，也許已經出現在你的模擬中，這題談的是表現。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=3021s" target="_blank" rel="noopener noreferrer">50:21</a><a class="cue-jump" href="player.html?t=3021" aria-label="在雙語播放器觀看 50:21">↗</a> Brex 講求表現，把錢花得更聰明，行動更快。我從個人層面的角度來看這件事。所以我認為這取決於你身邊圍繞著什麼樣的人。有些人說是你最親近的 5 位朋友。你可能對此有更科學的答案，但也可能是導師。也可能是一路上激發過你靈感的人。我知道你也是一位畫家，所以也許是某位藝術家。我不知道。但我很好奇，對你來說那個人是誰，或者那些人是誰？對我來說，在我的職涯中最尊敬、最喜愛的人，其實具備兩種特質。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=3056s" target="_blank" rel="noopener noreferrer">50:56</a><a class="cue-jump" href="player.html?t=3056" aria-label="在雙語播放器觀看 50:56">↗</a> 一個是，他們是不是促成成功的共同因素？這些人在職涯不同階段，是否都會挺身而出說：「無論其他事情怎麼發展，我都會讓這件事成功。我會成為這件事成功的理由。」對我而言，這總是展現出他們重塑自我、真正承擔責任的能力。而另一種則是擁有超能力的人，但那是兩種照理說不該共存於同一人身上的超能力。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=3089s" target="_blank" rel="noopener noreferrer">51:29</a><a class="cue-jump" href="player.html?t=3089" aria-label="在雙語播放器觀看 51:29">↗</a> 有時我會這樣形容我的共同創辦人 Michael：他是一個非常 ［清喉嚨］ 成熟的科學家，熟悉科學研究方法等等，但同時又像個會為製作遊戲展示而興奮的孩子。或者像 Lainie Yallen，每天都抱著極度的危機感，覺得我們現在就得把每件事做好，並確實盡一切努力讓它成功。但同時又有極其虔誠的信念。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=3120s" target="_blank" rel="noopener noreferrer">52:00</a><a class="cue-jump" href="player.html?t=3120" aria-label="在雙語播放器觀看 52:00">↗</a> 相信無論發生什麼事，我們都會贏、都會成功。我發現那種張力格外美麗。當然還有我的另一位共同創辦人 Percy，在 Stanford 社群裡出了名的是，他是位鋼琴家。但他也是最具當代視野的 AI 研究者之一。令人驚豔的組合。所以這些人確實給了我很大的啟發。至於那些成為成功共同因素的人，你能從他們的行為和職涯中看見、感受到。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=3152s" target="_blank" rel="noopener noreferrer">52:32</a><a class="cue-jump" href="player.html?t=3152" aria-label="在雙語播放器觀看 52:32">↗</a> 我最近剛從一個工作坊回來，剛好坐在一位名叫 Sandy Pentland 的學者身旁。他曾在 MIT Media Lab 擔任了很長時間的教授。他實際上培養了我的領域以及更廣泛的電腦科學界許多最頂尖的人才。他的職涯也非常精彩，而且是我一直仰慕的人。他跨越許多世代，有一個階段他是物理學家。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=3183s" target="_blank" rel="noopener noreferrer">53:03</a><a class="cue-jump" href="player.html?t=3183" aria-label="在雙語播放器觀看 53:03">↗</a> 曾經有一個時代他是 AI 研究者，最終培養了那個世代幾位最知名的 AI 研究者。曾經有一個時代他是計算社會科學家。在每個階段，你都能看見 Sandy 是多麼有影響力的人物。觀察到這點也是非常令人驚嘆的部分。那是由什麼造就的？例如這些人如何在每個時代都成為那樣不同的一個人？只是極致的投入與韌性嗎？那究竟是什麼？我認為是極致的投入、毅力，以及持續保持興奮熱情的能力。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=3217s" target="_blank" rel="noopener noreferrer">53:37</a><a class="cue-jump" href="player.html?t=3217" aria-label="在雙語播放器觀看 53:37">↗</a> 而且這些人也是為了能玩下一場賽局而留在賽局中的人。這些人在當前賽局獲勝的最大獎賞，是獲得參與下一場賽局的權利與邀請。這就是讓他們與眾不同的地方。而這也是我們試圖效仿的。</p>
+<h2 id="sec-19">章節 19：讓職涯畫下句點的「接下來呢？」時刻（53:58）</h2>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=3239s" target="_blank" rel="noopener noreferrer">53:59</a><a class="cue-jump" href="player.html?t=3239" aria-label="在雙語播放器觀看 53:59">↗</a> 如果那些是成功的特質，那麼失敗的特質是什麼？是什麼導致了人們失敗？你知道，我認為就像俗話說的，每個不順遂的家庭都有各自的原因。我認為每種失敗看起來都可能稍微不同。但我想，我剛才所說的那些特質，反過來，有時可能就是大多數失敗的原因。就是你試圖為那單一特定的結果過度最佳化。我經常看見一種情況：有某一輪你特別想完成的募資。有那一位你想全力爭取的客戶。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=3271s" target="_blank" rel="noopener noreferrer">54:31</a><a class="cue-jump" href="player.html?t=3271" aria-label="在雙語播放器觀看 54:31">↗</a> 有某個你特別想拿到的最佳論文獎。你拿到了，然後問：「接下來呢？」然後他們就失去了興趣。我看過非常多機構和個人，在職涯某個時刻做出了了不起的成就，後來失去興趣，隨著時間逐漸淡出。至於那算不算是失敗，並不是由我來評斷的。在許多此類情況下，我認為它實際上可以被視為一項了不起的成功。但對那些想長期參與、跨越許多世代與時代發揮影響力的人來說，那是相當……［字幕不清］</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=3308s" target="_blank" rel="noopener noreferrer">55:08</a><a class="cue-jump" href="player.html?t=3308" aria-label="在雙語播放器觀看 55:08">↗</a> 所以，是短期思考與長期思考的差別。很有意思。而且我們為什麼要做這件事？對。我們做這件事是為了明天就能退場嗎？還是我們這麼做是因為想要從根本上重塑我們社會的運作方式，讓它變得更好？</p>
+<h2 id="sec-20">章節 20：如果有人出價 150 億美元（55:25）</h2>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=3325s" target="_blank" rel="noopener noreferrer">55:25</a><a class="cue-jump" href="player.html?t=3325" aria-label="在雙語播放器觀看 55:25">↗</a> 那麼，如果有人來找你，出價 150 億美元要收購你的公司，會發生什麼事？如果我有充分理由相信，有一個只有 Simile 能追求的遠大構想，那我們就會去追求它。好的。Joon Sung Park，這次對談真是太有趣了。非常感謝你，也很感謝你回答我那些傻問題。感謝邀請我。嘿，我是 Molly。如果你喜歡我們的訪談，可以看看我們的電子報 sourcery.bc。我們每週寄送一次精選交易［音樂］與科技頭條，也會更深入解析 Podcast 訪談。</p>
+<p><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=3361s" target="_blank" rel="noopener noreferrer">56:01</a><a class="cue-jump" href="player.html?t=3361" aria-label="在雙語播放器觀看 56:01">↗</a> 今天就訂閱 Sourcery，［音樂］也別忘了在 YouTube、Spotify、Apple，或任何你收聽的地方訂閱 Podcast。註冊連結在資訊欄。</p>
+</article></main><div class="onward"><p class="micro-label">繼續探索這場訪談</p><div><a href="index.html"><small>01</small><span>閱讀深度導讀</span><b aria-hidden="true">↗</b></a><a href="player.html"><small>03</small><span>觀看雙語訪談</span><b aria-hidden="true">↗</b></a></div></div>
+<footer>
+<p>本頁為非官方繁體中文翻譯，由 AI 模型翻譯與審校，未經人工逐句校稿，依機器字幕製作、未逐句對照原音，可能有誤。原文版權歸原權利人，僅供閱讀與研究；若有出入，以原文為準。</p>
+</footer>
+</div>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="圖片放大檢視"><button type="button" aria-label="關閉放大檢視">關閉（Esc）</button><img alt=""></div>
+<script>
+(function(){
+  var box=document.getElementById('lightbox'), big=box.querySelector('img'), btn=box.querySelector('button'), last=null;
+  function open(img){last=img;big.src=img.currentSrc||img.src;big.alt=img.alt;box.classList.add('is-open');btn.focus();}
+  function close(){box.classList.remove('is-open');big.removeAttribute('src');if(last){last.focus();}}
+  document.querySelectorAll('figure img').forEach(function(img){
+    img.addEventListener('click',function(){open(img);});
+    img.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();open(img);}});
+  });
+  box.addEventListener('click',function(e){if(e.target===box||e.target===btn){close();}});
+  document.addEventListener('keydown',function(e){
+    if(!box.classList.contains('is-open'))return;
+    if(e.key==='Escape'){close();}
+    if(e.key==='Tab'){e.preventDefault();btn.focus();}
+  });
+})();
+</script>
+<script>(function(){
+ 'use strict';
+ const body=document.body;
+ body.classList.add('enhanced');
+ const toc=document.querySelector('nav.toc'),toggle=document.getElementById('toc-toggle');
+ const closeToc=()=>{if(toc){toc.classList.remove('is-open');toggle?.setAttribute('aria-expanded','false')}};
+ toggle?.addEventListener('click',()=>{const on=toc.classList.toggle('is-open');toggle.setAttribute('aria-expanded',String(on))});
+ toc?.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeToc));
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&toc?.classList.contains('is-open')){closeToc();toggle.focus()}});
+ document.addEventListener('click',e=>{if(toc&&!toc.contains(e.target))closeToc()});
+ const bar=document.querySelector('.read-progress span'),heading=document.getElementById('current-section'),sections=[...document.querySelectorAll('article h2[id]')];
+ let queued=false;
+ function update(){queued=false;const max=document.documentElement.scrollHeight-innerHeight;const pct=max>0?Math.min(100,Math.max(0,scrollY/max*100)):0;if(bar)bar.style.width=pct+'%';const visible=sections.filter(s=>!s.hidden);let current=visible[0];for(const s of visible){if(s.getBoundingClientRect().top<=160)current=s;else break}if(current){if(heading)heading.textContent=String(sections.indexOf(current)+1).padStart(2,'0')+' / '+current.textContent;toc?.querySelectorAll('a').forEach(a=>{if(a.hash==='#'+current.id)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current')})}}
+ addEventListener('scroll',()=>{if(!queued){queued=true;requestAnimationFrame(update)}},{passive:true});addEventListener('resize',update);update();
+ const slider=document.getElementById('consistency');
+ if(slider){slider.disabled=false;document.getElementById('lab-reset').disabled=false;const original=81.25;function calculate(){const denominator=Number(slider.value),ratio=68.85/denominator*100;document.getElementById('consistency-value').textContent=denominator.toFixed(2)+'%';document.getElementById('denominator-value').textContent=denominator.toFixed(2);document.getElementById('ratio-value').textContent='≈ '+ratio.toFixed(2)+'%';slider.setAttribute('aria-valuetext','假設重測一致率'+denominator.toFixed(2)+'%，平均數的相對比例約'+ratio.toFixed(2)+'%')}slider.addEventListener('input',calculate);document.getElementById('lab-reset').addEventListener('click',()=>{slider.value=original;calculate()});calculate()}
+ const search=document.getElementById('transcript-search');
+ if(search){const article=document.querySelector('article'),paras=[...article.querySelectorAll('p')],originals=paras.map(p=>p.innerHTML),texts=paras.map(p=>p.textContent),status=document.getElementById('search-status'),navigation=document.getElementById('search-navigation'),position=document.getElementById('search-position');let timer,matched=[],matchIndex=-1;
+ function moveMatch(direction){if(!matched.length)return;matchIndex=matchIndex<0?(direction>0?0:matched.length-1):(matchIndex+direction+matched.length)%matched.length;const target=matched[matchIndex];position.textContent=(matchIndex+1)+' / '+matched.length;target.setAttribute('tabindex','-1');target.focus({preventScroll:true});target.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'center'})}
+ document.getElementById('search-previous').addEventListener('click',()=>moveMatch(-1));document.getElementById('search-next').addEventListener('click',()=>moveMatch(1));
+ function filter(){const q=search.value.trim().toLocaleLowerCase();let matches=0;matched=[];matchIndex=-1;paras.forEach((p,i)=>{p.innerHTML=originals[i];p.removeAttribute('tabindex');const hit=!q||texts[i].toLocaleLowerCase().includes(q);p.hidden=!hit;if(q&&hit){matches++;matched.push(p);const walker=document.createTreeWalker(p,NodeFilter.SHOW_TEXT),nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);for(const n of nodes){if(n.parentElement.closest('a'))continue;const t=n.textContent,index=t.toLocaleLowerCase().indexOf(q);if(index>=0){const fragment=document.createDocumentFragment();fragment.append(document.createTextNode(t.slice(0,index)));const mark=document.createElement('mark');mark.textContent=t.slice(index,index+q.length);fragment.append(mark,document.createTextNode(t.slice(index+q.length)));n.replaceWith(fragment)}}}});sections.forEach(s=>{let next=s.nextElementSibling,hasMatch=false;while(next&&next.tagName!=='H2'){if(next.matches('p')&&!next.hidden)hasMatch=true;next=next.nextElementSibling}s.hidden=!!q&&!hasMatch;const item=toc?.querySelector('a[href="#'+s.id+'"]')?.closest('li');if(item)item.hidden=s.hidden});navigation.hidden=!q||!matches;position.textContent=matches+' 段結果';status.textContent=q?(matches?'找到 '+matches+' 段相關內容；清除搜尋可恢復全文。':'沒有符合的段落，試試其他詞。'):'搜尋全文，點擊時間即可在雙語播放器對照。';update()}
+ search.addEventListener('input',()=>{clearTimeout(timer);timer=setTimeout(filter,100)});document.getElementById('search-clear').addEventListener('click',()=>{clearTimeout(timer);search.value='';filter();search.focus()});document.getElementById('search-exit').addEventListener('click',()=>document.getElementById('search-clear').click());
+ }
+})();
+</script>
+</body>
+</html>

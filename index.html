@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20fill%3D%22%23f3f1e9%22/%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2224%22%20fill%3D%22none%22%20stroke%3D%22%2340582b%22%20stroke-width%3D%222%22/%3E%3Cpath%20d%3D%22M15%2049A24%2024%200%200%200%2049%2015Z%22%20fill%3D%22%2340582b%22/%3E%3C/svg%3E">
+<title>AI 能預演你的選擇嗎？</title>
+<meta name="description" content="拆解 Simile 人類行為模擬：Smallville、85% 指標的分母、真人資料、信心模型與企業決策的證據邊界。">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:title" content="AI 能預演你的選擇嗎？">
+<meta property="og:description" content="拆解 Simile 人類行為模擬：Smallville、85% 指標的分母、真人資料、信心模型與企業決策的證據邊界。">
+<meta property="og:image" content="images/og-editorial.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="行為觀測：AI能預演你的選擇嗎？以點群呈現真人與模擬對照的概念肖像，非個體資料">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI 能預演你的選擇嗎？">
+<meta name="twitter:description" content="拆解 Simile 人類行為模擬：Smallville、85% 指標的分母、真人資料、信心模型與企業決策的證據邊界。">
+<meta name="twitter:image" content="images/og-editorial.png">
+<style>
+:root{
+  --bg:#f9f7f4; --surface:#fffdf9; --ink:#1a1a1a; --muted:#5f5b54; --line:#e4dfd6;
+  --accent:#0f7b6c; --accent-ink:#0b5c51; --note:#f0ebe1; --code:#ece6d8; --link:#1f5f99;
+  --card:#fff6e8; --card-line:#e8c99a; --shadow:0 6px 24px rgba(40,30,10,.08);
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#1b1a18; --surface:#26241f; --ink:#ece8de; --muted:#aaa497; --line:#3a3730;
+    --accent:#4fc1ad; --accent-ink:#7fd6c6; --note:#2f2c25; --code:#33302a; --link:#8fbde8;
+    --card:#2d2820; --card-line:#5b4a30; --shadow:0 6px 24px rgba(0,0,0,.35);}
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);overflow-x:hidden;
+  font:17px/1.7 "Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;letter-spacing:0}
+.skip{position:absolute;left:-999px;top:0;background:var(--accent);color:#fff;padding:8px 14px;z-index:300}
+.skip:focus{left:8px;top:8px}
+nav.toc{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 92%,transparent);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav.toc ul{list-style:none;margin:0 auto;padding:0 16px;max-width:1120px;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;
+  white-space:nowrap;-webkit-overflow-scrolling:touch;min-height:52px;align-items:center}
+nav.toc ul::-webkit-scrollbar{display:none}
+nav.toc a{display:inline-block;padding:8px 12px;border-radius:999px;color:var(--muted);text-decoration:none;font-size:14px;min-height:36px}
+nav.toc a:hover,nav.toc a:focus-visible{background:var(--note);color:var(--ink)}
+a{color:var(--link);overflow-wrap:anywhere}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.page{max-width:1120px;margin:0 auto;padding:0 20px 80px}
+header.hero{padding:56px 0 8px;text-align:center}
+.eyebrow{margin:0 0 8px;color:var(--accent-ink);font-weight:700;letter-spacing:0;font-size:14px}
+h1{margin:0 auto 14px;max-width:820px;font-size:clamp(1.7rem,1.2rem + 2vw,2.6rem);line-height:1.3;text-wrap:balance}
+.byline{margin:0 0 6px;color:var(--muted);font-size:14px}
+.video-link{margin:0 0 28px;font-size:14px}
+figure{margin:32px 0}
+figure img{display:block;width:100%;height:auto;aspect-ratio:var(--ar-d,16/9);object-fit:contain;border-radius:12px;
+  box-shadow:var(--shadow);background:var(--surface);cursor:zoom-in}
+@media (max-width:640px){figure picture img{aspect-ratio:var(--ar-m,9/16)}}
+@media (max-width:640px){figure.hero-figure picture img{max-width:300px;margin:0 auto}}
+figure.hero-figure{max-width:720px;margin-left:auto;margin-right:auto}
+hr{border:0;border-top:1px solid var(--line);margin:40px 0}
+p.figcap{margin:-18px auto 1.4em;text-align:center;font-size:14px;color:var(--muted)}
+figcaption{margin:10px auto 0;max-width:720px;font-size:14px;line-height:1.55;color:var(--muted);text-align:center}
+article{max-width:720px;margin:0 auto}
+article figure.section-figure{margin-left:50%;transform:translateX(-50%);width:min(860px,calc(100vw - 32px))}
+h2{margin:56px 0 12px;font-size:1.55rem;line-height:1.4;scroll-margin-top:72px;text-wrap:balance;
+  border-left:5px solid var(--accent);padding-left:14px;margin-left:-19px}
+h3{margin:36px 0 8px;font-size:1.2rem;line-height:1.45}
+p{margin:0 0 1.1em}
+ul,ol{margin:0 0 1.2em;padding-left:1.4em}
+li{margin:.35em 0}
+strong{font-weight:700}
+code{background:var(--code);padding:.1em .4em;border-radius:5px;font:0.9em ui-monospace,SFMono-Regular,Menlo,monospace;word-break:break-word}
+section.summary-card{background:var(--card);border:1px solid var(--card-line);border-radius:14px;padding:6px 22px 10px;margin:24px 0 8px;box-shadow:var(--shadow)}
+section.summary-card h2{margin:14px 0 8px;font-size:1.2rem;border-left:0;padding-left:0;margin-left:0}
+section.summary-card p{margin:0 0 .8em;font-size:16.5px}
+ol.takeaways{padding-left:1.6em}
+ol.takeaways li{margin:.8em 0;padding-left:.2em}
+ol.takeaways li::marker{color:var(--accent-ink);font-weight:700}
+ul.sources li{overflow-wrap:anywhere}
+aside.note{background:var(--note);border-left:4px solid var(--accent);border-radius:8px;padding:12px 16px;margin:0 0 1.6em;font-size:15px;color:var(--ink)}
+aside.note p,aside.note ul{margin:0 0 .6em}
+aside.note ul{padding-left:1.3em}
+figure.diagram{margin:28px 0}
+.mermaid-scroll{overflow-x:auto;max-width:100%;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px;-webkit-overflow-scrolling:touch}
+.mermaid-scroll pre{margin:0;font:14px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre;color:var(--ink)}
+.mermaid-scroll svg{display:block;margin:0 auto;height:auto;max-width:100%}
+.table-scroll{overflow-x:auto;margin:0 0 1.6em;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.table-scroll table{border-collapse:collapse;width:100%;min-width:560px;font-size:15px;line-height:1.55}
+.table-scroll th,.table-scroll td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.table-scroll th{background:var(--note);font-weight:700}
+.table-scroll tr:last-child td{border-bottom:0}
+.table-scroll td.k{font-weight:600;white-space:nowrap}
+.table-scroll td.nw{white-space:nowrap}
+.table-scroll.wide{margin-left:50%;transform:translateX(-50%);width:min(1040px,calc(100vw - 32px))}
+@media (max-width:640px){.table-scroll.wide{margin-left:0;transform:none;width:auto}}
+@media (max-width:640px){
+  .table-scroll{overflow-x:visible}
+  .table-scroll table{min-width:0}
+  .table-scroll thead{position:absolute;left:-9999px}
+  .table-scroll tr,.table-scroll td{display:block}
+  .table-scroll tr{padding:10px 12px;border-bottom:1px solid var(--line)}
+  .table-scroll tr:last-child{border-bottom:0}
+  .table-scroll td{padding:2px 0;border:0}
+  .table-scroll td.k{color:var(--accent-ink);white-space:normal}
+  .table-scroll td.nw{white-space:normal}
+  .table-scroll td::before{content:attr(data-label) "：";font-weight:700;color:var(--muted);font-size:13px}
+}
+
+p.lede{margin:0 auto 10px;max-width:760px;color:var(--muted);font-size:16px;line-height:1.65}
+footer{max-width:720px;margin:64px auto 0;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+.lightbox{display:none;position:fixed;inset:0;z-index:200;background:rgba(20,18,14,.9);align-items:center;justify-content:center;padding:24px}
+.lightbox.is-open{display:flex}
+.lightbox img{max-width:96vw;max-height:90vh;width:auto;height:auto;border-radius:8px;box-shadow:0 12px 48px rgba(0,0,0,.5);background:#fff}
+.lightbox button{position:absolute;top:14px;right:14px;min-width:44px;min-height:44px;padding:8px 14px;border:0;border-radius:999px;
+  background:#fff;color:#222;font-size:15px;cursor:pointer}
+@media (max-width:760px){
+  h2{margin-left:0;border-left:0;padding-left:0;border-top:3px solid var(--accent);padding-top:10px}
+}
+@media (max-width:640px){
+  body{font-size:16px}
+  .page{padding:0 16px 64px}
+  header.hero{padding-top:36px}
+  h2{font-size:1.35rem}
+  section.summary-card{padding:4px 16px 8px}
+}
+
+:root{--bg:#f7f8f2;--surface:#fffef9;--ink:#20372f;--muted:#58665d;--line:#dbe3d7;--accent:#176f5c;--accent-ink:#165d4d;--note:#edf2e8;--link:#225e80;--card:#eff3e8;--card-line:#d2dfca}
+body{line-height:1.72}
+p.lede{text-wrap:balance}
+header.hero{padding-top:40px}
+h1{font-size:clamp(1.85rem,1.35rem + 2vw,2.65rem)}
+article strong{background-image:linear-gradient(transparent 65%,rgba(52,119,82,.14) 65%);padding:0 1px}
+.reading-links{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:18px 0 12px}
+.reading-links a{display:inline-flex;align-items:center;min-height:44px;padding:8px 16px;border:1px solid var(--line);border-radius:999px;text-decoration:none;font-size:14px;background:var(--surface)}
+article figure.hero-figure,article figure.section-figure{max-width:860px;width:100%;margin-left:0;transform:none}
+figure.hero-figure img{box-shadow:none;border:1px solid var(--line)}
+.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:26px 0 30px}
+.metric{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 16px}
+.metric h3{font-size:14px;line-height:1.5;margin:0 0 12px;color:var(--muted);font-weight:650}
+.metric p{margin:0 0 10px;color:var(--accent-ink);font-weight:750;font-size:clamp(1.5rem,2.6vw,2rem);line-height:1.2;font-variant-numeric:tabular-nums}
+.metric span{display:block;font-size:14px;line-height:1.6;color:var(--muted)}
+.metric:last-child{background:var(--note)}
+@media(prefers-color-scheme:dark){:root{--bg:#17211c;--surface:#1e2b23;--ink:#e6eee4;--muted:#b6c3b7;--line:#3a4e3e;--accent:#83c2a6;--accent-ink:#a1d1b8;--note:#26382c;--link:#a5cee4;--card:#25392b;--card-line:#466342}}
+@media(max-width:640px){header.hero{text-align:left;padding-top:28px}.reading-links{justify-content:flex-start;gap:8px}.reading-links a{padding:8px 12px}figure.hero-figure picture img{max-width:100%}.metrics{grid-template-columns:1fr;gap:10px}.metric{padding:18px}.metric p{font-size:2rem}nav.toc ul{min-height:56px}h2{margin-top:42px}}
+
+
+/* Field Notes: a topic-specific digital editorial, not an award badge. */
+@font-face{font-family:"Behavior Serif";src:url("fonts/behavior-serif.woff2") format("woff2");font-weight:600;font-display:swap}
+:root{--bg:#f3f1e9;--surface:#fcfaf4;--ink:#20352c;--muted:#626a5f;--line:#d5d7c9;--accent:#526e35;--accent-ink:#40582b;--note:#e9ecdf;--link:#365b4d;--card:#e9ecdf;--card-line:#c7cebb;--serif:"Behavior Serif","Songti TC","Noto Serif TC",serif;--mono:ui-monospace,"SFMono-Regular",Consolas,monospace}
+body.editorial{background:var(--bg);color:var(--ink);font-size:17px;line-height:1.85;overflow-x:clip}
+.editorial *{box-sizing:border-box}
+.editorial .page{max-width:1280px;padding:0 40px 0}
+.editorial .skip:focus{z-index:400;background:var(--ink);color:var(--bg)}
+.read-progress{position:fixed;top:0;left:0;width:100%;height:3px;z-index:150;pointer-events:none}
+.read-progress span{display:block;width:0;height:100%;background:#bf5e3f;transform-origin:left}
+.masthead{max-width:1280px;margin:auto;min-height:100px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:22px 40px}
+.wordmark{display:flex;gap:12px;align-items:center;color:var(--ink);text-decoration:none;font-weight:600;font-size:18px;white-space:nowrap}
+.wordmark small{display:block;font:9px/1.8 var(--mono);letter-spacing:.12em;color:var(--muted)}
+.brand-symbol{font:44px/1 Georgia,serif;transform:rotate(-35deg);display:block;color:var(--accent-ink)}
+.edition-tag{font:10px/1.5 var(--mono);letter-spacing:.08em;color:var(--muted)}
+.mode-nav{flex-shrink:0;display:flex;border:1px solid var(--line);border-radius:4px;padding:4px;gap:2px}
+.mode-nav a{white-space:nowrap;display:block;padding:7px 22px;min-height:44px;color:var(--muted);font-size:13px;text-decoration:none;border-radius:2px;transition:background .2s,color .2s}
+.mode-nav a[aria-current=page]{background:var(--ink);color:var(--surface)}
+.mode-nav a:hover{background:var(--note);color:var(--ink)}
+.editorial nav.toc{top:0;border-top:1px solid var(--line);background:color-mix(in srgb,var(--bg) 96%,transparent);backdrop-filter:blur(16px)}
+.toc-top{max-width:1200px;margin:auto;display:flex;align-items:center;gap:28px;min-height:47px;padding:0 0}
+.micro-label{font:10px/1.5 var(--mono);letter-spacing:.1em;color:var(--accent-ink);font-weight:600}
+#current-section{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1;min-width:0}
+#toc-toggle{display:none;background:none;border:0;border-left:1px solid var(--line);min-height:46px;padding:0 0 0 26px;font:12px/1.5 inherit;color:var(--ink);cursor:pointer;white-space:nowrap}
+#toc-toggle span{display:inline-block;margin-left:15px;font-size:20px;font-weight:400;vertical-align:middle}
+.editorial nav.toc ul{max-width:1200px;min-height:44px;padding:0;gap:0}
+.editorial nav.toc a{font-size:12px;border-radius:0;min-height:44px;padding:11px 16px}
+.editorial nav.toc a[aria-current=location]{color:var(--ink);box-shadow:inset 0 -2px var(--accent)}
+.editorial.enhanced #toc-toggle{display:block}
+.editorial.enhanced #chapter-links{display:none}
+.editorial.enhanced nav.toc.is-open #chapter-links{display:block;border-top:1px solid var(--line);padding:20px 0}
+.editorial.enhanced nav.toc.is-open ul{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));white-space:normal}
+.editorial.enhanced nav.toc.is-open a{display:block}
+.editorial.enhanced nav.toc.is-open #toc-toggle span{transform:rotate(45deg)}
+.editorial header.hero{padding:65px 0 30px;text-align:left}
+.editorial .eyebrow{font:11px/1.8 var(--mono);letter-spacing:.08em;color:var(--accent-ink);margin:0 0 24px}
+.editorial h1{font-family:var(--serif);font-weight:600;max-width:none;font-size:clamp(34px,4.1vw,58px);line-height:1.35;text-align:left;margin:0 0 24px;letter-spacing:0;text-wrap:balance}
+.editorial p.lede{font-size:16px;line-height:1.8;margin:0 0 16px;max-width:650px;text-wrap:pretty}
+.editorial .byline{font:11px/1.9 var(--mono);color:var(--muted);margin:0}
+.editorial-hero{display:grid;grid-template-columns:1.06fr 1fr;column-gap:64px;align-items:center}
+.editorial .editorial-hero{padding:60px 0 0}
+.editorial-hero .issue-tag{color:var(--muted);border-right:1px solid var(--line);padding-right:14px;margin-right:14px}
+.editorial .editorial-hero h1{font-size:clamp(50px,5.4vw,78px);line-height:1.28;margin:0 0 25px}
+.title-choice{position:relative;color:var(--accent-ink)}
+.title-choice:after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:5px;border-bottom:1px solid var(--accent-ink);border-top:1px solid var(--accent-ink);transform:rotate(-3deg)}
+.editorial-hero .lede{font-size:15px;max-width:28em}
+.hero-deck{font-size:14px;line-height:1.85;color:var(--muted);margin:18px 0 25px}
+.hero-actions{display:flex;align-items:center;gap:24px;margin:30px 0 28px;flex-wrap:wrap}
+.primary-action{background:var(--ink);color:var(--surface);padding:13px 20px;display:inline-flex;align-items:center;gap:30px;min-height:48px;text-decoration:none;font-size:13px;border:1px solid var(--ink);transition:background .25s,color .25s}
+.primary-action:hover{background:var(--accent-ink);color:var(--surface)}
+.primary-action span{font-size:20px;line-height:1}
+.quiet-action{display:inline-block;font-size:12px;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);padding:8px 0}
+.quiet-action span{margin-left:12px}
+.hero-visual{background:#172c27;color:#e5e9d8;position:relative;border:1px solid #314c3f;align-self:stretch;display:flex;flex-direction:column;justify-content:center;min-width:0}
+.visual-caption,.visual-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:19px 23px;font:9px/1.6 var(--mono);letter-spacing:.06em;color:#c7d1bb}
+.visual-caption{border-bottom:1px solid #354a3e}
+.visual-foot{border-top:1px solid #354a3e;flex-wrap:wrap;letter-spacing:0}
+.visual-foot small{font:12px/1.6 var(--mono);color:#b3bfac}
+.visual-foot i{display:inline-block;width:5px;height:5px;border-radius:50%;margin-right:6px;background:#d5e8b0}
+.visual-foot i.legend-model{background:#f1a083}
+.data-portrait{display:block;width:100%;height:auto;overflow:visible;flex:1}
+.portrait-scan{animation:scan-line 11s ease-in-out infinite;transform-origin:center}
+@keyframes scan-line{0%,100%{transform:translateY(0);opacity:.15}50%{transform:translateY(175px);opacity:.65}}
+.hero-foot{grid-column:1/-1;display:grid;grid-template-columns:1.1fr repeat(3,1fr);border-top:1px solid var(--ink);border-bottom:1px solid var(--line);margin:48px 0 0;padding:25px 0;gap:24px;align-items:center}
+.hero-foot p{font:20px/1.15 Georgia,serif;letter-spacing:.025em;margin:0}
+.hero-foot p em{color:var(--accent-ink);font-weight:400}
+.hero-foot>div{border-left:1px solid var(--line);padding-left:25px}
+.hero-foot span{display:block;font:38px/1.2 Georgia,serif;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.hero-foot small{display:block;color:var(--muted);font-size:12px;margin-top:8px}
+.editorial main{max-width:none}
+.editorial article{max-width:720px;margin:0 auto;counter-reset:chapter}
+.editorial article>aside.note:first-child{margin:30px 0 60px;border-radius:0;border:0;border-left:2px solid var(--line);padding:0 0 0 16px;background:none;color:var(--muted);font-size:12px;line-height:1.9}
+.editorial article>p{margin:0 0 1.7em}
+.editorial article a{color:var(--link);text-decoration-color:#9fae99;text-underline-offset:4px}
+.editorial article a:hover{text-decoration-color:var(--ink)}
+.editorial article h2{font:600 clamp(25px,2.4vw,33px)/1.55 var(--serif);counter-increment:chapter;position:relative;margin:88px 0 29px;padding:22px 0 0;border:0;border-top:1px solid var(--line);letter-spacing:0;text-wrap:pretty;scroll-margin-top:78px}
+.editorial article h2:before{content:counter(chapter,decimal-leading-zero);font:11px/1 var(--mono);position:absolute;left:-58px;top:35px;color:var(--accent-ink)}
+.editorial article h3{font:600 24px/1.5 var(--serif);margin:30px 0 18px}
+.editorial article strong{font-weight:650;background:none;text-decoration:underline;text-decoration-color:#b6c59f;text-decoration-thickness:3px;text-underline-offset:4px}
+.editorial article figure{margin:45px 0}
+.editorial article figure img{border-radius:0;box-shadow:none;border:1px solid var(--line)}
+.editorial figcaption{font-size:12px;line-height:1.8;color:var(--muted);margin-top:14px;max-width:640px}
+.editorial section.summary-card{background:transparent;border:0;border-radius:0;padding:0;margin:60px 0}
+.editorial .table-scroll{border:0;border-radius:0;background:transparent}
+.editorial .table-scroll th{background:var(--note);font-size:12px;padding:16px 14px}
+.editorial .table-scroll td{font-size:14px;line-height:1.8;padding:19px 14px;border-color:var(--line)}
+.editorial .table-scroll tbody tr:nth-child(even){background:color-mix(in srgb,var(--note) 40%,transparent)}
+.denominator-lab{scroll-margin-top:72px;background:#1c342b;color:#f0f1e5;padding:36px 35px 24px;margin:36px 0 50px;border:1px solid #30483a}
+.lab-header{display:flex;justify-content:space-between;gap:20px;align-items:center}
+.denominator-lab .micro-label{color:#c4d9a5}
+.lab-index{font:10px/1.5 var(--mono);color:#c6cdbb}
+.editorial article .denominator-lab h3{color:#f4f2e9;font:600 33px/1.55 var(--serif);margin:30px 0}
+.research-values{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin:32px 0;border-top:1px solid #4e6352;border-bottom:1px solid #4e6352;padding:22px 0}
+.research-values>div+div{border-left:1px solid #4e6352;padding-left:15px}
+.research-values span{font-size:12px;color:#d1d7c6;display:block}
+.editorial article .research-values strong{display:block;color:#d5e8b0;font:34px/1.4 Georgia,serif;text-decoration:none;white-space:nowrap}
+.research-values strong small{font-size:17px}
+.exercise-intro{display:flex;gap:20px;align-items:start}
+.exercise-intro .micro-label{white-space:nowrap;padding-top:5px}
+.exercise-intro p{font-size:12px;line-height:1.85;color:#d1d7c6;margin:0}
+.lab-controls{margin:26px 0 16px}
+.lab-controls label{display:flex;justify-content:space-between;gap:16px;font-size:12px;color:#d1d7c6}
+.lab-controls output{font:15px/1.8 var(--mono);color:#e6efce}
+.lab-controls input{display:block;width:100%;height:30px;margin:10px 0;accent-color:#c9e2a1;cursor:ew-resize}
+.range-ends{display:flex;justify-content:space-between;align-items:center;color:#bfcbb7;font:10px/1.5 var(--mono)}
+.range-ends button{font:10px/1.5 inherit;color:#d5e8b0;background:none;border:0;border-bottom:1px solid #6d8261;padding:8px;min-height:36px;cursor:pointer}
+.ratio-readout{display:flex;justify-content:space-between;align-items:center;gap:18px;border-bottom:1px solid #4e6352;padding:20px 0 23px}
+.ratio-readout>span{font:15px/1.6 var(--mono);color:#c3cdb8}
+.editorial article .ratio-readout strong{font:36px/1.2 Georgia,serif;color:#f2ad8e;text-decoration:none;white-space:nowrap}
+.lab-note{font-size:12px;line-height:1.9;color:#c5cfbd;margin:19px 0 0}
+.lab-takeaway{font:13px/1.9 inherit;border-top:1px solid #4e6352;padding-top:20px;margin:24px 0 0;color:#e7ebdc}
+.editorial footer{border-top:0;font-size:11px;line-height:1.9;color:var(--muted);margin:50px auto 35px;max-width:720px}
+.onward{max-width:1000px;margin:90px auto 0;padding:30px 0 0;border-top:1px solid var(--ink)}
+.onward>div{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+.onward a{display:flex;align-items:center;gap:22px;text-decoration:none;color:var(--ink);padding:25px 0;border-bottom:1px solid var(--line)}
+.onward a small{font:10px/1 var(--mono);color:var(--muted)}
+.onward a span{font:600 23px/1.5 var(--serif);flex:1}
+.onward a b{font-size:25px;font-weight:400;transition:transform .2s}
+.onward a:hover b{transform:translate(3px,-3px)}
+.editorial.translation-page .hero,.editorial.player-page .hero{max-width:1000px;margin:0 auto;border-bottom:1px solid var(--line);padding-bottom:35px}
+.editorial .reading-links{justify-content:flex-start;gap:25px;margin-top:20px}
+.editorial .reading-links a{border:0;border-bottom:1px solid var(--line);border-radius:0;background:none;padding:4px 0;min-height:36px;font-size:12px}
+.transcript-tools{display:none;max-width:720px;margin:45px auto 35px;padding:26px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.editorial.enhanced .transcript-tools{display:block}
+.transcript-tools label{display:block;font:600 21px/1.7 var(--serif);margin-bottom:20px}
+.transcript-tools .micro-label{display:block;margin-bottom:12px}
+.search-row{display:flex;border:1px solid #a8b69c;background:var(--surface)}
+.search-row input{min-width:0;flex:1;background:transparent;border:0;padding:13px 16px;font:14px/1.6 inherit;color:var(--ink)}
+.search-row button{background:transparent;border:0;border-left:1px solid var(--line);font:12px/1.5 inherit;color:var(--ink);padding:10px 17px;cursor:pointer}
+#search-status{font-size:11px;color:var(--muted);margin:12px 0 0}
+.editorial mark{background:#d9e8af;color:#20352c;padding:0 2px}
+.editorial .cue-jump{display:inline-flex;align-items:center;justify-content:center;width:27px;min-height:30px;font-size:13px;margin-right:5px;text-decoration:none;color:var(--accent-ink)}
+.editorial.player-page{max-width:none;padding:0}
+.editorial.player-page>.wrap{max-width:1200px;padding:0 40px 30px}
+.editorial.player-page>main,.editorial.player-page .wrap main,.editorial.player-page .page main{max-width:1000px;margin:40px auto}
+.editorial.player-page .hero h1{max-width:900px;font-size:44px}
+.editorial.player-page .links{font-size:12px;text-align:left;line-height:2;margin-top:24px}
+.editorial.player-page .player-container{border-radius:0;border:1px solid var(--line);background:#142c23}
+.editorial.player-page .sub{border:0;border-bottom:1px solid var(--line);border-radius:0;background:transparent;text-align:left;margin:20px 0 0;padding:22px 0}
+.editorial.player-page .zh{font:600 25px/1.65 var(--serif);color:var(--ink)}
+.editorial.player-page .en{font:16px/1.8 Georgia,serif;color:var(--muted);margin-top:12px}
+.editorial.player-page .bar{border-bottom:1px solid var(--line);padding:20px 0}
+.editorial.player-page button,.editorial.player-page select{border-radius:2px}
+.editorial.player-page .bar button{background:transparent;border-color:var(--line);color:var(--ink);font-size:12px;min-height:44px}
+.editorial.player-page .bar button[aria-pressed=true]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.editorial.player-page select{background:var(--surface);color:var(--ink);max-width:100%}
+.editorial.player-page .note{background:var(--note);border:0;border-left:2px solid var(--accent);border-radius:0;font-size:12px;padding:25px}
+.editorial.player-page #list{border:1px solid var(--line);border-radius:0;max-height:500px}
+.editorial.player-page #list li button{color:var(--ink)}
+.editorial.player-page #list li.on{background:var(--note)}
+.editorial .lightbox{backdrop-filter:blur(8px)}
+.editorial .lightbox button{border-radius:0}
+.editorial :focus-visible{outline:2px solid #a55431;outline-offset:4px}
+@media(min-width:1441px){.editorial-hero{column-gap:90px}.editorial .editorial-hero h1{font-size:82px}}
+@media(max-width:1279px){.toc-top{padding:0 40px}.editorial nav.toc ul{padding:0 24px}.editorial-hero{column-gap:40px}}
+@media(max-width:900px){.editorial-hero{column-gap:28px}.editorial .editorial-hero h1{font-size:56px}.visual-caption,.visual-foot{padding:15px 16px;font-size:8px}.visual-foot small{width:100%}.hero-actions{gap:15px}.hero-foot{gap:16px}.hero-foot span{font-size:33px}.hero-foot>div{padding-left:17px}.editorial article h2:before{position:static;display:block;margin-bottom:14px}.editorial.player-page .wrap{padding:0 30px}.edition-tag{display:none}}
+@media(max-width:640px){
+ .editorial .page{padding:0 22px}.masthead{padding:18px 22px;min-height:85px;gap:14px}.wordmark{font-size:16px;gap:9px}.brand-symbol{font-size:35px}.wordmark small{font-size:7px;letter-spacing:.06em}.mode-nav a{font-size:11px;min-height:44px;padding:7px 12px}.mode-nav{padding:3px}.toc-top{min-height:44px;gap:14px;padding:0 22px}.toc-top>.micro-label{font-size:9px}#current-section{font-size:10px}#toc-toggle{font-size:10px;min-height:44px;padding-left:13px}#toc-toggle span{margin-left:7px;font-size:17px}.editorial nav.toc ul{padding:0 10px}.editorial.enhanced nav.toc.is-open ul{grid-template-columns:1fr 1fr;max-height:55vh;overflow-y:auto}.editorial nav.toc a{font-size:11px;white-space:normal}
+ .editorial .editorial-hero{grid-template-columns:1fr;padding-top:38px}.editorial .editorial-hero h1{font-size:clamp(42px,13vw,68px);line-height:1.35;margin-bottom:20px}.editorial-hero .eyebrow{font-size:9px;margin-bottom:22px}.editorial-hero .lede{font-size:13px;max-width:28em}.hero-deck{font-size:12px;margin:16px 0}.hero-actions{margin:23px 0;gap:20px}.primary-action{font-size:12px;min-height:46px;gap:20px;padding:11px 16px}.quiet-action{font-size:11px}.editorial .byline{font-size:11px}.hero-visual{margin-top:28px;max-height:none}.visual-caption,.visual-foot{font-size:10px;padding:13px 17px}.visual-foot small{width:auto;font-size:12px}.data-portrait{max-height:340px;aspect-ratio:1;object-fit:contain}.hero-foot{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:28px;padding:21px 0}.hero-foot>p{grid-column:1/-1;font-size:14px;display:flex;gap:4px;margin-bottom:9px}.hero-foot>p br{display:none}.hero-foot>div{padding-left:12px}.hero-foot>div:nth-child(2){padding-left:0;border-left:0}.hero-foot span{font-size:31px}.hero-foot small{font-size:10px;line-height:1.7}
+ .editorial article{font-size:16px;line-height:1.9}.editorial article>aside.note:first-child{margin:27px 0 45px;font-size:12px}.editorial article h2{font-size:25px;line-height:1.6;margin:62px 0 23px;padding-top:19px}.editorial article h2:before{font-size:10px}.editorial article figure{margin:30px 0}.editorial figcaption{font-size:12px;line-height:1.9}.editorial .table-scroll tr{padding:14px 0}.editorial .table-scroll td{padding:4px 10px;font-size:13px}.editorial .table-scroll td:before{font-size:11px}.editorial section.summary-card{margin:40px 0}
+ .denominator-lab{padding:25px 20px;margin:28px 0 40px}.lab-header{gap:12px}.lab-header .micro-label{font-size:8px;letter-spacing:.04em}.lab-index{font-size:10px}.editorial article .denominator-lab h3{font-size:27px;margin:25px 0}.research-values{gap:8px;padding:19px 0}.research-values>div+div{padding-left:8px}.research-values span{font-size:11px;line-height:1.8;min-height:40px}.editorial article .research-values strong{font-size:25px;line-height:1.5}.research-values strong small{font-size:11px}.exercise-intro{display:block}.exercise-intro .micro-label{font-size:9px}.exercise-intro p{font-size:12px;margin-top:8px}.exercise-intro br{display:none}.lab-controls label{font-size:12px}.lab-controls output{font-size:12px}.range-ends{font-size:10px}.range-ends button{font-size:11px;min-height:44px}.ratio-readout{gap:10px}.ratio-readout>span{font-size:11px}.editorial article .ratio-readout strong{font-size:30px}.lab-note{font-size:12px}.lab-takeaway{font-size:12px}
+ .editorial header.hero{padding:35px 0 28px}.editorial h1{font-size:32px;line-height:1.55}.editorial p.lede{font-size:13px}.editorial .reading-links{margin-top:20px;gap:22px}.editorial .reading-links a{font-size:11px}.onward{margin:55px 22px 0;padding-top:23px}.onward>div{grid-template-columns:1fr;gap:0}.onward a{padding:23px 0;gap:18px}.onward a span{font-size:22px}.editorial footer{font-size:10px;margin:35px auto;padding:0 0 30px}.editorial.player-page>.wrap{padding:0 22px 30px}.editorial.player-page .hero h1{font-size:30px}.editorial.player-page .hero .lede{font-size:12px}.editorial.player-page>main,.editorial.player-page .wrap main,.editorial.player-page .page main{margin:25px auto;max-width:100%}.editorial.player-page .zh{font-size:21px}.editorial.player-page .en{font-size:15px}.editorial.player-page .bar{gap:10px}.editorial.player-page .bar label:has(#chap){flex-basis:100%}.editorial.player-page .note{padding:20px;font-size:12px}.transcript-tools{padding:22px 0;margin:28px auto}.editorial.enhanced .transcript-tools{display:block}
+.transcript-tools label{font-size:20px}.search-row input{font-size:13px;padding:12px}.search-row button{padding:10px 14px}#search-status{font-size:10px}
+}
+@media(prefers-color-scheme:dark){:root{--bg:#16271f;--surface:#21382b;--ink:#eceee0;--muted:#b3bfac;--line:#43503c;--accent:#c0d99b;--accent-ink:#c5dcaa;--note:#263c2c;--link:#b9d2ab;--card:#263c2c;--card-line:#506444}.hero-visual{border-color:#526244}.title-choice:after{border-color:#b4c58f}.editorial article strong{text-decoration-color:#718b50}.primary-action{color:#1e3225}.primary-action:hover{color:#1e3225}.editorial .table-scroll th{background:#263c2c}.mode-nav a[aria-current=page]{color:#16271f}.editorial.player-page .bar button[aria-pressed=true]{color:#16271f}.hero-foot{border-top-color:#9dad8d}.search-row{border-color:#7e9271}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*:before,*:after{animation:none!important;transition:none!important}.portrait-scan{transform:none}}
+@media print{.masthead,.toc,.hero-actions,.hero-visual,.read-progress,.onward,.transcript-tools{display:none!important}.editorial .editorial-hero{display:block}.editorial-hero h1{font-size:40px!important}.hero-foot{margin:20px 0}.editorial .page{padding:0}body.editorial{background:white;color:black}.denominator-lab{break-inside:avoid}.editorial article h2{break-after:avoid}}
+
+.search-navigation{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:18px;font-size:12px}.search-navigation[hidden]{display:none}.search-navigation>span{color:var(--muted);margin-right:auto}.search-navigation button{min-height:44px;padding:8px 12px;border:1px solid var(--line);border-radius:0;background:var(--surface);color:var(--ink);font:12px/1.6 inherit;cursor:pointer}.editorial article p[tabindex="-1"]{scroll-margin-top:80px}.editorial article [hidden],.editorial nav.toc li[hidden]{display:none!important}
+@media(max-width:360px){.masthead{flex-wrap:wrap;row-gap:12px}.masthead .mode-nav{width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));text-align:center}.masthead .mode-nav a{padding:7px 12px}}
+
+.search-navigation{position:fixed;z-index:70;bottom:20px;left:50%;transform:translateX(-50%);width:max-content;max-width:calc(100vw - 32px);margin:0;padding:8px;background:var(--surface);border:1px solid var(--line);box-shadow:0 8px 30px #14261d25;gap:8px;flex-wrap:nowrap}.search-navigation>span{white-space:nowrap;margin:0 12px 0 5px}.search-navigation button{min-width:44px;flex-shrink:0;padding:8px 12px}.editorial.translation-page article p:last-child{margin-bottom:90px}@media(max-width:640px){.search-nav-label{display:none}.search-navigation{bottom:12px}}
+
+.editorial.translation-page header.hero{padding:35px 0 24px}.editorial.translation-page .hero h1{font-size:40px;margin-bottom:18px}.editorial.translation-page .hero .eyebrow{margin-bottom:15px}.editorial.translation-page .hero .lede{font-size:14px;margin-bottom:8px}.editorial.translation-page .hero .reading-links{margin-top:14px}.editorial.translation-page .transcript-tools{margin-top:24px;margin-bottom:25px;padding:20px 0}.editorial.player-page header.hero{padding:30px 0 24px}.editorial.player-page .hero h1{font-size:36px;margin-bottom:16px}.editorial.player-page .hero .eyebrow{margin-bottom:15px}.editorial.player-page .hero .links{margin-top:14px}.editorial.player-page .page main{margin-top:28px}@media(max-width:640px){.editorial.translation-page .hero h1{font-size:29px}.editorial.translation-page header.hero{padding:28px 0 22px}.editorial.translation-page .hero .lede{font-size:12px}.editorial.player-page .hero h1{font-size:28px}.editorial.player-page header.hero{padding:28px 0 22px}}
+
+@media(prefers-color-scheme:dark){.editorial :focus-visible{outline-color:#f2ad8e}}
+
+</style>
+<link rel="preload" href="fonts/behavior-serif.woff2" as="font" type="font/woff2" crossorigin>
+</head>
+<body class="editorial guide-page"><div class="read-progress" aria-hidden="true"><span></span></div>
+<div class="masthead"><a class="wordmark" href="index.html" aria-label="行為觀測：回到導讀"><span class="brand-symbol" aria-hidden="true">◒</span><span>行為觀測<small>BEHAVIOR / FIELD NOTES</small></span></a>
+<nav class="mode-nav" aria-label="閱讀模式"><a href="index.html" aria-current="page">導讀</a><a href="translation-zh.html">逐字稿</a><a href="player.html">觀看</a></nav><span class="edition-tag">SIMILE · 2026</span></div>
+<a class="skip" href="#main">跳到正文</a>
+<nav class="toc" aria-label="章節導覽"><div class="toc-top"><span class="micro-label">閱讀索引</span><span id="current-section">從這裡開始</span><button type="button" id="toc-toggle" aria-expanded="false" aria-controls="chapter-links">全部章節 <span aria-hidden="true">＋</span></button></div><div id="chapter-links"><ul><li><a href="#sec-1" title="產品還沒上市，先問模擬顧客">從決策開始</a></li><li><a href="#sec-2" title="先看重點：訪談說法與證據的距離">重點對照</a></li><li><a href="#sec-3" title="一座小鎮，先解決角色能不能記得昨天">Smallville</a></li><li><a href="#sec-4" title="從虛構角色到真人，85% 的分母變了">85% 的分母</a></li><li><a href="#sec-5" title="人的選擇，還取決於旁邊有哪些路">情境與選項</a></li><li><a href="#sec-6" title="4,000 萬真人背後，是一門持續取得資料的生意">資料與生意</a></li><li><a href="#sec-7" title="信心分數，究竟在替什麼背書？">信心模型</a></li><li><a href="#sec-8" title="改了模擬中的未來，現實會跟著改嗎？">因果與驗證</a></li><li><a href="#sec-9" title="讀完訪談，帶回決策桌上的三件事">帶回決策桌</a></li><li><a href="#sec-10" title="讀這場訪談要記得的限制">閱讀限制</a></li><li><a href="#sec-11" title="製作說明：這篇導讀由 AI 模型完成">製作說明</a></li><li><a href="#sec-12" title="來源清單">來源</a></li></ul></div></nav>
+<div class="page">
+<header class="hero editorial-hero">
+<div class="hero-copy"><p class="eyebrow"><span class="issue-tag">FIELD NOTE 01</span> AI × 人類行為</p>
+<h1>AI 能預演<br>你的<span class="title-choice">選擇</span>嗎？</h1>
+<p class="lede">拆解 Simile 的人類行為模擬、85% 指標與決策生意</p>
+<p class="hero-deck">從一座 AI 小鎮，走到企業的決策桌。<br>看懂模擬如何理解人，以及證據能支持到哪裡。</p>
+<div class="hero-actions"><a class="primary-action" href="#sec-1">開始閱讀 <span aria-hidden="true">↘</span></a><a class="quiet-action" href="#denominator-lab">拆開 85% 的分母 <span aria-hidden="true">↗</span></a></div>
+<p class="byline">原片上架 2026.10.26<br>定稿 2026.10.31 · 資料截至 2026.10.30</p></div>
+<div class="hero-visual"><div class="visual-caption"><span>A PORTRAIT IN DATA</span><span>真人 ↔ 模擬</span></div><svg class="data-portrait" viewBox="0 0 488 488" role="img" aria-labelledby="portrait-title portrait-desc">
+<title id="portrait-title">人類的資料肖像</title><desc id="portrait-desc">兩種顏色的點構成抽象人物輪廓，象徵真人與模擬之間的對照。這是視覺隱喻，不是真實受試者資料。</desc>
+<defs><radialGradient id="portrait-glow"><stop stop-color="#30483b"/><stop offset="1" stop-color="#172c27"/></radialGradient></defs>
+<rect width="488" height="488" fill="url(#portrait-glow)"/>
+<g fill="none" stroke="#4b5d51" stroke-width=".6"><circle cx="244" cy="244" r="211"/><circle cx="244" cy="244" r="151"/><path d="M12 244H476M244 12V476"/></g>
+<g class="portrait-points"><circle cx="22" cy="22" r="1.1" fill="#465954"/><circle cx="165" cy="22" r="1.1" fill="#465954"/><circle cx="308" cy="22" r="1.1" fill="#465954"/><circle cx="451" cy="22" r="1.1" fill="#465954"/><circle cx="48" cy="35" r="1.1" fill="#465954"/><circle cx="191" cy="35" r="1.1" fill="#465954"/><circle cx="334" cy="35" r="1.1" fill="#465954"/><circle cx="74" cy="48" r="1.1" fill="#465954"/><circle cx="217" cy="48" r="1.1" fill="#465954"/><circle cx="360" cy="48" r="1.1" fill="#465954"/><circle cx="100" cy="61" r="1.1" fill="#465954"/><circle cx="217" cy="61" r="2.4" fill="#d5e8b0"/><circle cx="230" cy="61" r="2.4" fill="#d5e8b0"/><circle cx="243" cy="61" r="2.4" fill="#f1a083"/><circle cx="256" cy="61" r="2.4" fill="#f1a083"/><circle cx="386" cy="61" r="1.1" fill="#465954"/><circle cx="126" cy="74" r="1.1" fill="#465954"/><circle cx="204" cy="74" r="2.4" fill="#d5e8b0"/><circle cx="217" cy="74" r="2.4" fill="#d5e8b0"/><circle cx="230" cy="74" r="2.4" fill="#d5e8b0"/><circle cx="243" cy="74" r="2.4" fill="#f1a083"/><circle cx="256" cy="74" r="2.4" fill="#f1a083"/><circle cx="269" cy="74" r="2.4" fill="#f1a083"/><circle cx="282" cy="74" r="2.4" fill="#f1a083"/><circle cx="412" cy="74" r="1.1" fill="#465954"/><circle cx="152" cy="87" r="1.1" fill="#465954"/><circle cx="191" cy="87" r="2.4" fill="#d5e8b0"/><circle cx="204" cy="87" r="2.4" fill="#d5e8b0"/><circle cx="217" cy="87" r="2.4" fill="#d5e8b0"/><circle cx="230" cy="87" r="2.4" fill="#d5e8b0"/><circle cx="243" cy="87" r="2.4" fill="#f1a083"/><circle cx="256" cy="87" r="2.4" fill="#f1a083"/><circle cx="269" cy="87" r="2.4" fill="#f1a083"/><circle cx="282" cy="87" r="2.4" fill="#f1a083"/><circle cx="295" cy="87" r="2.4" fill="#f1a083"/><circle cx="438" cy="87" r="1.1" fill="#465954"/><circle cx="35" cy="100" r="1.1" fill="#465954"/><circle cx="178" cy="100" r="2.4" fill="#d5e8b0"/><circle cx="191" cy="100" r="2.4" fill="#d5e8b0"/><circle cx="204" cy="100" r="2.4" fill="#d5e8b0"/><circle cx="217" cy="100" r="2.4" fill="#d5e8b0"/><circle cx="230" cy="100" r="2.4" fill="#d5e8b0"/><circle cx="243" cy="100" r="2.4" fill="#f1a083"/><circle cx="256" cy="100" r="2.4" fill="#f1a083"/><circle cx="269" cy="100" r="2.4" fill="#f1a083"/><circle cx="282" cy="100" r="2.4" fill="#f1a083"/><circle cx="295" cy="100" r="2.4" fill="#f1a083"/><circle cx="308" cy="100" r="2.4" fill="#f1a083"/><circle cx="321" cy="100" r="1.1" fill="#465954"/><circle cx="464" cy="100" r="1.1" fill="#465954"/><circle cx="61" cy="113" r="1.1" fill="#465954"/><circle cx="165" cy="113" r="2.4" fill="#d5e8b0"/><circle cx="178" cy="113" r="2.4" fill="#d5e8b0"/><circle cx="191" cy="113" r="2.4" fill="#d5e8b0"/><circle cx="204" cy="113" r="2.4" fill="#d5e8b0"/><circle cx="217" cy="113" r="2.4" fill="#d5e8b0"/><circle cx="230" cy="113" r="2.4" fill="#d5e8b0"/><circle cx="243" cy="113" r="2.4" fill="#f1a083"/><circle cx="256" cy="113" r="2.4" fill="#f1a083"/><circle cx="269" cy="113" r="2.4" fill="#f1a083"/><circle cx="282" cy="113" r="2.4" fill="#f1a083"/><circle cx="295" cy="113" r="2.4" fill="#f1a083"/><circle cx="308" cy="113" r="2.4" fill="#f1a083"/><circle cx="347" cy="113" r="1.1" fill="#465954"/><circle cx="87" cy="126" r="1.1" fill="#465954"/><circle cx="165" cy="126" r="2.4" fill="#d5e8b0"/><circle cx="178" cy="126" r="2.4" fill="#d5e8b0"/><circle cx="191" cy="126" r="2.4" fill="#d5e8b0"/><circle cx="204" cy="126" r="2.4" fill="#d5e8b0"/><circle cx="217" cy="126" r="2.4" fill="#d5e8b0"/><circle cx="230" cy="126" r="2.4" fill="#d5e8b0"/><circle cx="243" cy="126" r="2.4" fill="#f1a083"/><circle cx="256" cy="126" r="2.4" fill="#f1a083"/><circle cx="269" cy="126" r="2.4" fill="#f1a083"/><circle cx="282" cy="126" r="2.4" fill="#f1a083"/><circle cx="295" cy="126" r="2.4" fill="#f1a083"/><circle cx="308" cy="126" r="2.4" fill="#f1a083"/><circle cx="321" cy="126" r="2.4" fill="#f1a083"/><circle cx="373" cy="126" r="1.1" fill="#465954"/><circle cx="113" cy="139" r="1.1" fill="#465954"/><circle cx="165" cy="139" r="2.4" fill="#d5e8b0"/><circle cx="178" cy="139" r="2.4" fill="#d5e8b0"/><circle cx="191" cy="139" r="2.4" fill="#d5e8b0"/><circle cx="204" cy="139" r="2.4" fill="#d5e8b0"/><circle cx="217" cy="139" r="2.4" fill="#d5e8b0"/><circle cx="230" cy="139" r="2.4" fill="#d5e8b0"/><circle cx="243" cy="139" r="2.4" fill="#f1a083"/><circle cx="256" cy="139" r="2.4" fill="#f1a083"/><circle cx="269" cy="139" r="2.4" fill="#f1a083"/><circle cx="282" cy="139" r="2.4" fill="#f1a083"/><circle cx="295" cy="139" r="2.4" fill="#f1a083"/><circle cx="308" cy="139" r="2.4" fill="#f1a083"/><circle cx="321" cy="139" r="2.4" fill="#f1a083"/><circle cx="399" cy="139" r="1.1" fill="#465954"/><circle cx="139" cy="152" r="1.1" fill="#465954"/><circle cx="152" cy="152" r="2.4" fill="#d5e8b0"/><circle cx="165" cy="152" r="2.4" fill="#d5e8b0"/><circle cx="178" cy="152" r="2.4" fill="#d5e8b0"/><circle cx="191" cy="152" r="2.4" fill="#d5e8b0"/><circle cx="204" cy="152" r="2.4" fill="#d5e8b0"/><circle cx="217" cy="152" r="2.4" fill="#d5e8b0"/><circle cx="230" cy="152" r="2.4" fill="#d5e8b0"/><circle cx="243" cy="152" r="2.4" fill="#f1a083"/><circle cx="256" cy="152" r="2.4" fill="#f1a083"/><circle cx="269" cy="152" r="2.4" fill="#f1a083"/><circle cx="282" cy="152" r="2.4" fill="#f1a083"/><circle cx="295" cy="152" r="2.4" fill="#f1a083"/><circle cx="308" cy="152" r="2.4" fill="#f1a083"/><circle cx="321" cy="152" r="2.4" fill="#f1a083"/><circle cx="425" cy="152" r="1.1" fill="#465954"/><circle cx="22" cy="165" r="1.1" fill="#465954"/><circle cx="152" cy="165" r="2.4" fill="#d5e8b0"/><circle cx="165" cy="165" r="2.4" fill="#d5e8b0"/><circle cx="178" cy="165" r="2.4" fill="#d5e8b0"/><circle cx="191" cy="165" r="2.4" fill="#d5e8b0"/><circle cx="204" cy="165" r="2.4" fill="#d5e8b0"/><circle cx="217" cy="165" r="2.4" fill="#d5e8b0"/><circle cx="230" cy="165" r="2.4" fill="#d5e8b0"/><circle cx="243" cy="165" r="2.4" fill="#f1a083"/><circle cx="256" cy="165" r="2.4" fill="#f1a083"/><circle cx="269" cy="165" r="2.4" fill="#f1a083"/><circle cx="282" cy="165" r="2.4" fill="#f1a083"/><circle cx="295" cy="165" r="2.4" fill="#f1a083"/><circle cx="308" cy="165" r="2.4" fill="#f1a083"/><circle cx="321" cy="165" r="2.4" fill="#f1a083"/><circle cx="451" cy="165" r="1.1" fill="#465954"/><circle cx="48" cy="178" r="1.1" fill="#465954"/><circle cx="152" cy="178" r="2.4" fill="#d5e8b0"/><circle cx="165" cy="178" r="2.4" fill="#d5e8b0"/><circle cx="178" cy="178" r="2.4" fill="#d5e8b0"/><circle cx="191" cy="178" r="2.4" fill="#d5e8b0"/><circle cx="204" cy="178" r="2.4" fill="#d5e8b0"/><circle cx="217" cy="178" r="2.4" fill="#d5e8b0"/><circle cx="230" cy="178" r="2.4" fill="#d5e8b0"/><circle cx="243" cy="178" r="2.4" fill="#f1a083"/><circle cx="256" cy="178" r="2.4" fill="#f1a083"/><circle cx="269" cy="178" r="2.4" fill="#f1a083"/><circle cx="282" cy="178" r="2.4" fill="#f1a083"/><circle cx="295" cy="178" r="2.4" fill="#f1a083"/><circle cx="308" cy="178" r="2.4" fill="#f1a083"/><circle cx="321" cy="178" r="2.4" fill="#f1a083"/><circle cx="334" cy="178" r="1.1" fill="#465954"/><circle cx="74" cy="191" r="1.1" fill="#465954"/><circle cx="152" cy="191" r="2.4" fill="#d5e8b0"/><circle cx="165" cy="191" r="2.4" fill="#d5e8b0"/><circle cx="178" cy="191" r="2.4" fill="#d5e8b0"/><circle cx="191" cy="191" r="2.4" fill="#d5e8b0"/><circle cx="204" cy="191" r="2.4" fill="#d5e8b0"/><circle cx="217" cy="191" r="2.4" fill="#d5e8b0"/><circle cx="230" cy="191" r="2.4" fill="#d5e8b0"/><circle cx="243" cy="191" r="2.4" fill="#f1a083"/><circle cx="256" cy="191" r="2.4" fill="#f1a083"/><circle cx="269" cy="191" r="2.4" fill="#f1a083"/><circle cx="282" cy="191" r="2.4" fill="#f1a083"/><circle cx="295" cy="191" r="2.4" fill="#f1a083"/><circle cx="308" cy="191" r="2.4" fill="#f1a083"/><circle cx="321" cy="191" r="2.4" fill="#f1a083"/><circle cx="360" cy="191" r="1.1" fill="#465954"/><circle cx="100" cy="204" r="1.1" fill="#465954"/><circle cx="152" cy="204" r="2.4" fill="#d5e8b0"/><circle cx="165" cy="204" r="2.4" fill="#d5e8b0"/><circle cx="178" cy="204" r="2.4" fill="#d5e8b0"/><circle cx="191" cy="204" r="2.4" fill="#d5e8b0"/><circle cx="204" cy="204" r="2.4" fill="#d5e8b0"/><circle cx="217" cy="204" r="2.4" fill="#d5e8b0"/><circle cx="230" cy="204" r="2.4" fill="#d5e8b0"/><circle cx="243" cy="204" r="2.4" fill="#f1a083"/><circle cx="256" cy="204" r="2.4" fill="#f1a083"/><circle cx="269" cy="204" r="2.4" fill="#f1a083"/><circle cx="282" cy="204" r="2.4" fill="#f1a083"/><circle cx="295" cy="204" r="2.4" fill="#f1a083"/><circle cx="308" cy="204" r="2.4" fill="#f1a083"/><circle cx="321" cy="204" r="2.4" fill="#f1a083"/><circle cx="386" cy="204" r="1.1" fill="#465954"/><circle cx="126" cy="217" r="1.1" fill="#465954"/><circle cx="165" cy="217" r="2.4" fill="#d5e8b0"/><circle cx="178" cy="217" r="2.4" fill="#d5e8b0"/><circle cx="191" cy="217" r="2.4" fill="#d5e8b0"/><circle cx="204" cy="217" r="2.4" fill="#d5e8b0"/><circle cx="217" cy="217" r="2.4" fill="#d5e8b0"/><circle cx="230" cy="217" r="2.4" fill="#d5e8b0"/><circle cx="243" cy="217" r="2.4" fill="#f1a083"/><circle cx="256" cy="217" r="2.4" fill="#f1a083"/><circle cx="269" cy="217" r="2.4" fill="#f1a083"/><circle cx="282" cy="217" r="2.4" fill="#f1a083"/><circle cx="295" cy="217" r="2.4" fill="#f1a083"/><circle cx="308" cy="217" r="2.4" fill="#f1a083"/><circle cx="321" cy="217" r="2.4" fill="#f1a083"/><circle cx="412" cy="217" r="1.1" fill="#465954"/><circle cx="152" cy="230" r="1.1" fill="#465954"/><circle cx="165" cy="230" r="2.4" fill="#d5e8b0"/><circle cx="178" cy="230" r="2.4" fill="#d5e8b0"/><circle cx="191" cy="230" r="2.4" fill="#d5e8b0"/><circle cx="204" cy="230" r="2.4" fill="#d5e8b0"/><circle cx="217" cy="230" r="2.4" fill="#d5e8b0"/><circle cx="230" cy="230" r="2.4" fill="#d5e8b0"/><circle cx="243" cy="230" r="2.4" fill="#f1a083"/><circle cx="256" cy="230" r="2.4" fill="#f1a083"/><circle cx="269" cy="230" r="2.4" fill="#f1a083"/><circle cx="282" cy="230" r="2.4" fill="#f1a083"/><circle cx="295" cy="230" r="2.4" fill="#f1a083"/><circle cx="308" cy="230" r="2.4" fill="#f1a083"/><circle cx="321" cy="230" r="2.4" fill="#f1a083"/><circle cx="438" cy="230" r="1.1" fill="#465954"/><circle cx="35" cy="243" r="1.1" fill="#465954"/><circle cx="178" cy="243" r="2.4" fill="#d5e8b0"/><circle cx="191" cy="243" r="2.4" fill="#d5e8b0"/><circle cx="204" cy="243" r="2.4" fill="#d5e8b0"/><circle cx="217" cy="243" r="2.4" fill="#d5e8b0"/><circle cx="230" cy="243" r="2.4" fill="#d5e8b0"/><circle cx="243" cy="243" r="2.4" fill="#f1a083"/><circle cx="256" cy="243" r="2.4" fill="#f1a083"/><circle cx="269" cy="243" r="2.4" fill="#f1a083"/><circle cx="282" cy="243" r="2.4" fill="#f1a083"/><circle cx="295" cy="243" r="2.4" fill="#f1a083"/><circle cx="308" cy="243" r="2.4" fill="#f1a083"/><circle cx="321" cy="243" r="1.1" fill="#465954"/><circle cx="464" cy="243" r="1.1" fill="#465954"/><circle cx="61" cy="256" r="1.1" fill="#465954"/><circle cx="178" cy="256" r="2.4" fill="#d5e8b0"/><circle cx="191" cy="256" r="2.4" fill="#d5e8b0"/><circle cx="204" cy="256" r="2.4" fill="#d5e8b0"/><circle cx="217" cy="256" r="2.4" fill="#d5e8b0"/><circle cx="230" cy="256" r="2.4" fill="#d5e8b0"/><circle cx="243" cy="256" r="2.4" fill="#f1a083"/><circle cx="256" cy="256" r="2.4" fill="#f1a083"/><circle cx="269" cy="256" r="2.4" fill="#f1a083"/><circle cx="282" cy="256" r="2.4" fill="#f1a083"/><circle cx="295" cy="256" r="2.4" fill="#f1a083"/><circle cx="308" cy="256" r="2.4" fill="#f1a083"/><circle cx="347" cy="256" r="1.1" fill="#465954"/><circle cx="87" cy="269" r="1.1" fill="#465954"/><circle cx="191" cy="269" r="2.4" fill="#d5e8b0"/><circle cx="204" cy="269" r="2.4" fill="#d5e8b0"/><circle cx="217" cy="269" r="2.4" fill="#d5e8b0"/><circle cx="230" cy="269" r="2.4" fill="#d5e8b0"/><circle cx="243" cy="269" r="2.4" fill="#f1a083"/><circle cx="256" cy="269" r="2.4" fill="#f1a083"/><circle cx="269" cy="269" r="2.4" fill="#f1a083"/><circle cx="282" cy="269" r="2.4" fill="#f1a083"/><circle cx="295" cy="269" r="2.4" fill="#f1a083"/><circle cx="373" cy="269" r="1.1" fill="#465954"/><circle cx="113" cy="282" r="1.1" fill="#465954"/><circle cx="204" cy="282" r="2.4" fill="#d5e8b0"/><circle cx="217" cy="282" r="2.4" fill="#d5e8b0"/><circle cx="230" cy="282" r="2.4" fill="#d5e8b0"/><circle cx="243" cy="282" r="2.4" fill="#f1a083"/><circle cx="256" cy="282" r="2.4" fill="#f1a083"/><circle cx="269" cy="282" r="2.4" fill="#f1a083"/><circle cx="399" cy="282" r="1.1" fill="#465954"/><circle cx="139" cy="295" r="1.1" fill="#465954"/><circle cx="217" cy="295" r="2.4" fill="#d5e8b0"/><circle cx="230" cy="295" r="2.4" fill="#d5e8b0"/><circle cx="243" cy="295" r="2.4" fill="#f1a083"/><circle cx="256" cy="295" r="2.4" fill="#f1a083"/><circle cx="269" cy="295" r="2.4" fill="#f1a083"/><circle cx="282" cy="295" r="1.1" fill="#465954"/><circle cx="425" cy="295" r="1.1" fill="#465954"/><circle cx="22" cy="308" r="1.1" fill="#465954"/><circle cx="165" cy="308" r="1.1" fill="#465954"/><circle cx="191" cy="308" r="2.4" fill="#d5e8b0"/><circle cx="204" cy="308" r="2.4" fill="#d5e8b0"/><circle cx="217" cy="308" r="2.4" fill="#d5e8b0"/><circle cx="230" cy="308" r="2.4" fill="#d5e8b0"/><circle cx="243" cy="308" r="2.4" fill="#f1a083"/><circle cx="256" cy="308" r="2.4" fill="#f1a083"/><circle cx="269" cy="308" r="2.4" fill="#f1a083"/><circle cx="282" cy="308" r="2.4" fill="#f1a083"/><circle cx="295" cy="308" r="2.4" fill="#f1a083"/><circle cx="308" cy="308" r="1.1" fill="#465954"/><circle cx="451" cy="308" r="1.1" fill="#465954"/><circle cx="48" cy="321" r="1.1" fill="#465954"/><circle cx="152" cy="321" r="2.4" fill="#d5e8b0"/><circle cx="165" cy="321" r="2.4" fill="#d5e8b0"/><circle cx="178" cy="321" r="2.4" fill="#d5e8b0"/><circle cx="191" cy="321" r="2.4" fill="#d5e8b0"/><circle cx="204" cy="321" r="2.4" fill="#d5e8b0"/><circle cx="217" cy="321" r="2.4" fill="#d5e8b0"/><circle cx="230" cy="321" r="2.4" fill="#d5e8b0"/><circle cx="243" cy="321" r="2.4" fill="#f1a083"/><circle cx="256" cy="321" r="2.4" fill="#f1a083"/><circle cx="269" cy="321" r="2.4" fill="#f1a083"/><circle cx="282" cy="321" r="2.4" fill="#f1a083"/><circle cx="295" cy="321" r="2.4" fill="#f1a083"/><circle cx="308" cy="321" r="2.4" fill="#f1a083"/><circle cx="321" cy="321" r="2.4" fill="#f1a083"/><circle cx="334" cy="321" r="1.1" fill="#465954"/><circle cx="74" cy="334" r="1.1" fill="#465954"/><circle cx="139" cy="334" r="2.4" fill="#d5e8b0"/><circle cx="152" cy="334" r="2.4" fill="#d5e8b0"/><circle cx="165" cy="334" r="2.4" fill="#d5e8b0"/><circle cx="178" cy="334" r="2.4" fill="#d5e8b0"/><circle cx="191" cy="334" r="2.4" fill="#d5e8b0"/><circle cx="204" cy="334" r="2.4" fill="#d5e8b0"/><circle cx="217" cy="334" r="2.4" fill="#d5e8b0"/><circle cx="230" cy="334" r="2.4" fill="#d5e8b0"/><circle cx="243" cy="334" r="2.4" fill="#f1a083"/><circle cx="256" cy="334" r="2.4" fill="#f1a083"/><circle cx="269" cy="334" r="2.4" fill="#f1a083"/><circle cx="282" cy="334" r="2.4" fill="#f1a083"/><circle cx="295" cy="334" r="2.4" fill="#f1a083"/><circle cx="308" cy="334" r="2.4" fill="#f1a083"/><circle cx="321" cy="334" r="2.4" fill="#f1a083"/><circle cx="334" cy="334" r="2.4" fill="#f1a083"/><circle cx="347" cy="334" r="2.4" fill="#f1a083"/><circle cx="360" cy="334" r="1.1" fill="#465954"/><circle cx="100" cy="347" r="1.1" fill="#465954"/><circle cx="113" cy="347" r="2.4" fill="#d5e8b0"/><circle cx="126" cy="347" r="2.4" fill="#d5e8b0"/><circle cx="139" cy="347" r="2.4" fill="#d5e8b0"/><circle cx="152" cy="347" r="2.4" fill="#d5e8b0"/><circle cx="165" cy="347" r="2.4" fill="#d5e8b0"/><circle cx="178" cy="347" r="2.4" fill="#d5e8b0"/><circle cx="191" cy="347" r="2.4" fill="#d5e8b0"/><circle cx="204" cy="347" r="2.4" fill="#d5e8b0"/><circle cx="217" cy="347" r="2.4" fill="#d5e8b0"/><circle cx="230" cy="347" r="2.4" fill="#d5e8b0"/><circle cx="243" cy="347" r="2.4" fill="#f1a083"/><circle cx="256" cy="347" r="2.4" fill="#f1a083"/><circle cx="269" cy="347" r="2.4" fill="#f1a083"/><circle cx="282" cy="347" r="2.4" fill="#f1a083"/><circle cx="295" cy="347" r="2.4" fill="#f1a083"/><circle cx="308" cy="347" r="2.4" fill="#f1a083"/><circle cx="321" cy="347" r="2.4" fill="#f1a083"/><circle cx="334" cy="347" r="2.4" fill="#f1a083"/><circle cx="347" cy="347" r="2.4" fill="#f1a083"/><circle cx="360" cy="347" r="2.4" fill="#f1a083"/><circle cx="386" cy="347" r="1.1" fill="#465954"/><circle cx="100" cy="360" r="2.4" fill="#d5e8b0"/><circle cx="113" cy="360" r="2.4" fill="#d5e8b0"/><circle cx="126" cy="360" r="2.4" fill="#d5e8b0"/><circle cx="139" cy="360" r="2.4" fill="#d5e8b0"/><circle cx="152" cy="360" r="2.4" fill="#d5e8b0"/><circle cx="165" cy="360" r="2.4" fill="#d5e8b0"/><circle cx="178" cy="360" r="2.4" fill="#d5e8b0"/><circle cx="191" cy="360" r="2.4" fill="#d5e8b0"/><circle cx="204" cy="360" r="2.4" fill="#d5e8b0"/><circle cx="217" cy="360" r="2.4" fill="#d5e8b0"/><circle cx="230" cy="360" r="2.4" fill="#d5e8b0"/><circle cx="243" cy="360" r="2.4" fill="#f1a083"/><circle cx="256" cy="360" r="2.4" fill="#f1a083"/><circle cx="269" cy="360" r="2.4" fill="#f1a083"/><circle cx="282" cy="360" r="2.4" fill="#f1a083"/><circle cx="295" cy="360" r="2.4" fill="#f1a083"/><circle cx="308" cy="360" r="2.4" fill="#f1a083"/><circle cx="321" cy="360" r="2.4" fill="#f1a083"/><circle cx="334" cy="360" r="2.4" fill="#f1a083"/><circle cx="347" cy="360" r="2.4" fill="#f1a083"/><circle cx="360" cy="360" r="2.4" fill="#f1a083"/><circle cx="373" cy="360" r="2.4" fill="#f1a083"/><circle cx="412" cy="360" r="1.1" fill="#465954"/><circle cx="100" cy="373" r="2.4" fill="#d5e8b0"/><circle cx="113" cy="373" r="2.4" fill="#d5e8b0"/><circle cx="126" cy="373" r="2.4" fill="#d5e8b0"/><circle cx="139" cy="373" r="2.4" fill="#d5e8b0"/><circle cx="152" cy="373" r="2.4" fill="#d5e8b0"/><circle cx="165" cy="373" r="2.4" fill="#d5e8b0"/><circle cx="178" cy="373" r="2.4" fill="#d5e8b0"/><circle cx="191" cy="373" r="2.4" fill="#d5e8b0"/><circle cx="204" cy="373" r="2.4" fill="#d5e8b0"/><circle cx="217" cy="373" r="2.4" fill="#d5e8b0"/><circle cx="230" cy="373" r="2.4" fill="#d5e8b0"/><circle cx="243" cy="373" r="2.4" fill="#f1a083"/><circle cx="256" cy="373" r="2.4" fill="#f1a083"/><circle cx="269" cy="373" r="2.4" fill="#f1a083"/><circle cx="282" cy="373" r="2.4" fill="#f1a083"/><circle cx="295" cy="373" r="2.4" fill="#f1a083"/><circle cx="308" cy="373" r="2.4" fill="#f1a083"/><circle cx="321" cy="373" r="2.4" fill="#f1a083"/><circle cx="334" cy="373" r="2.4" fill="#f1a083"/><circle cx="347" cy="373" r="2.4" fill="#f1a083"/><circle cx="360" cy="373" r="2.4" fill="#f1a083"/><circle cx="373" cy="373" r="2.4" fill="#f1a083"/><circle cx="386" cy="373" r="2.4" fill="#f1a083"/><circle cx="438" cy="373" r="1.1" fill="#465954"/><circle cx="35" cy="386" r="1.1" fill="#465954"/><circle cx="87" cy="386" r="2.4" fill="#d5e8b0"/><circle cx="100" cy="386" r="2.4" fill="#d5e8b0"/><circle cx="113" cy="386" r="2.4" fill="#d5e8b0"/><circle cx="126" cy="386" r="2.4" fill="#d5e8b0"/><circle cx="139" cy="386" r="2.4" fill="#d5e8b0"/><circle cx="152" cy="386" r="2.4" fill="#d5e8b0"/><circle cx="165" cy="386" r="2.4" fill="#d5e8b0"/><circle cx="178" cy="386" r="2.4" fill="#d5e8b0"/><circle cx="191" cy="386" r="2.4" fill="#d5e8b0"/><circle cx="204" cy="386" r="2.4" fill="#d5e8b0"/><circle cx="217" cy="386" r="2.4" fill="#d5e8b0"/><circle cx="230" cy="386" r="2.4" fill="#d5e8b0"/><circle cx="243" cy="386" r="2.4" fill="#f1a083"/><circle cx="256" cy="386" r="2.4" fill="#f1a083"/><circle cx="269" cy="386" r="2.4" fill="#f1a083"/><circle cx="282" cy="386" r="2.4" fill="#f1a083"/><circle cx="295" cy="386" r="2.4" fill="#f1a083"/><circle cx="308" cy="386" r="2.4" fill="#f1a083"/><circle cx="321" cy="386" r="2.4" fill="#f1a083"/><circle cx="334" cy="386" r="2.4" fill="#f1a083"/><circle cx="347" cy="386" r="2.4" fill="#f1a083"/><circle cx="360" cy="386" r="2.4" fill="#f1a083"/><circle cx="373" cy="386" r="2.4" fill="#f1a083"/><circle cx="386" cy="386" r="2.4" fill="#f1a083"/><circle cx="464" cy="386" r="1.1" fill="#465954"/><circle cx="61" cy="399" r="1.1" fill="#465954"/><circle cx="87" cy="399" r="2.4" fill="#d5e8b0"/><circle cx="100" cy="399" r="2.4" fill="#d5e8b0"/><circle cx="113" cy="399" r="2.4" fill="#d5e8b0"/><circle cx="126" cy="399" r="2.4" fill="#d5e8b0"/><circle cx="139" cy="399" r="2.4" fill="#d5e8b0"/><circle cx="152" cy="399" r="2.4" fill="#d5e8b0"/><circle cx="165" cy="399" r="2.4" fill="#d5e8b0"/><circle cx="178" cy="399" r="2.4" fill="#d5e8b0"/><circle cx="191" cy="399" r="2.4" fill="#d5e8b0"/><circle cx="204" cy="399" r="2.4" fill="#d5e8b0"/><circle cx="217" cy="399" r="2.4" fill="#d5e8b0"/><circle cx="230" cy="399" r="2.4" fill="#d5e8b0"/><circle cx="243" cy="399" r="2.4" fill="#f1a083"/><circle cx="256" cy="399" r="2.4" fill="#f1a083"/><circle cx="269" cy="399" r="2.4" fill="#f1a083"/><circle cx="282" cy="399" r="2.4" fill="#f1a083"/><circle cx="295" cy="399" r="2.4" fill="#f1a083"/><circle cx="308" cy="399" r="2.4" fill="#f1a083"/><circle cx="321" cy="399" r="2.4" fill="#f1a083"/><circle cx="334" cy="399" r="2.4" fill="#f1a083"/><circle cx="347" cy="399" r="2.4" fill="#f1a083"/><circle cx="360" cy="399" r="2.4" fill="#f1a083"/><circle cx="373" cy="399" r="2.4" fill="#f1a083"/><circle cx="386" cy="399" r="2.4" fill="#f1a083"/><circle cx="399" cy="399" r="2.4" fill="#f1a083"/><circle cx="74" cy="412" r="2.4" fill="#d5e8b0"/><circle cx="87" cy="412" r="2.4" fill="#d5e8b0"/><circle cx="100" cy="412" r="2.4" fill="#d5e8b0"/><circle cx="113" cy="412" r="2.4" fill="#d5e8b0"/><circle cx="126" cy="412" r="2.4" fill="#d5e8b0"/><circle cx="139" cy="412" r="2.4" fill="#d5e8b0"/><circle cx="152" cy="412" r="2.4" fill="#d5e8b0"/><circle cx="165" cy="412" r="2.4" fill="#d5e8b0"/><circle cx="178" cy="412" r="2.4" fill="#d5e8b0"/><circle cx="191" cy="412" r="2.4" fill="#d5e8b0"/><circle cx="204" cy="412" r="2.4" fill="#d5e8b0"/><circle cx="217" cy="412" r="2.4" fill="#d5e8b0"/><circle cx="230" cy="412" r="2.4" fill="#d5e8b0"/><circle cx="243" cy="412" r="2.4" fill="#f1a083"/><circle cx="256" cy="412" r="2.4" fill="#f1a083"/><circle cx="269" cy="412" r="2.4" fill="#f1a083"/><circle cx="282" cy="412" r="2.4" fill="#f1a083"/><circle cx="295" cy="412" r="2.4" fill="#f1a083"/><circle cx="308" cy="412" r="2.4" fill="#f1a083"/><circle cx="321" cy="412" r="2.4" fill="#f1a083"/><circle cx="334" cy="412" r="2.4" fill="#f1a083"/><circle cx="347" cy="412" r="2.4" fill="#f1a083"/><circle cx="360" cy="412" r="2.4" fill="#f1a083"/><circle cx="373" cy="412" r="2.4" fill="#f1a083"/><circle cx="386" cy="412" r="2.4" fill="#f1a083"/><circle cx="399" cy="412" r="2.4" fill="#f1a083"/><circle cx="74" cy="425" r="2.4" fill="#d5e8b0"/><circle cx="87" cy="425" r="2.4" fill="#d5e8b0"/><circle cx="100" cy="425" r="2.4" fill="#d5e8b0"/><circle cx="113" cy="425" r="2.4" fill="#d5e8b0"/><circle cx="126" cy="425" r="2.4" fill="#d5e8b0"/><circle cx="139" cy="425" r="2.4" fill="#d5e8b0"/><circle cx="152" cy="425" r="2.4" fill="#d5e8b0"/><circle cx="165" cy="425" r="2.4" fill="#d5e8b0"/><circle cx="178" cy="425" r="2.4" fill="#d5e8b0"/><circle cx="191" cy="425" r="2.4" fill="#d5e8b0"/><circle cx="204" cy="425" r="2.4" fill="#d5e8b0"/><circle cx="217" cy="425" r="2.4" fill="#d5e8b0"/><circle cx="230" cy="425" r="2.4" fill="#d5e8b0"/><circle cx="243" cy="425" r="2.4" fill="#f1a083"/><circle cx="256" cy="425" r="2.4" fill="#f1a083"/><circle cx="269" cy="425" r="2.4" fill="#f1a083"/><circle cx="282" cy="425" r="2.4" fill="#f1a083"/><circle cx="295" cy="425" r="2.4" fill="#f1a083"/><circle cx="308" cy="425" r="2.4" fill="#f1a083"/><circle cx="321" cy="425" r="2.4" fill="#f1a083"/><circle cx="334" cy="425" r="2.4" fill="#f1a083"/><circle cx="347" cy="425" r="2.4" fill="#f1a083"/><circle cx="360" cy="425" r="2.4" fill="#f1a083"/><circle cx="373" cy="425" r="2.4" fill="#f1a083"/><circle cx="386" cy="425" r="2.4" fill="#f1a083"/><circle cx="399" cy="425" r="2.4" fill="#f1a083"/><circle cx="74" cy="438" r="2.4" fill="#d5e8b0"/><circle cx="87" cy="438" r="2.4" fill="#d5e8b0"/><circle cx="100" cy="438" r="2.4" fill="#d5e8b0"/><circle cx="113" cy="438" r="2.4" fill="#d5e8b0"/><circle cx="126" cy="438" r="2.4" fill="#d5e8b0"/><circle cx="139" cy="438" r="2.4" fill="#d5e8b0"/><circle cx="152" cy="438" r="2.4" fill="#d5e8b0"/><circle cx="165" cy="438" r="2.4" fill="#d5e8b0"/><circle cx="178" cy="438" r="2.4" fill="#d5e8b0"/><circle cx="191" cy="438" r="2.4" fill="#d5e8b0"/><circle cx="204" cy="438" r="2.4" fill="#d5e8b0"/><circle cx="217" cy="438" r="2.4" fill="#d5e8b0"/><circle cx="230" cy="438" r="2.4" fill="#d5e8b0"/><circle cx="243" cy="438" r="2.4" fill="#f1a083"/><circle cx="256" cy="438" r="2.4" fill="#f1a083"/><circle cx="269" cy="438" r="2.4" fill="#f1a083"/><circle cx="282" cy="438" r="2.4" fill="#f1a083"/><circle cx="295" cy="438" r="2.4" fill="#f1a083"/><circle cx="308" cy="438" r="2.4" fill="#f1a083"/><circle cx="321" cy="438" r="2.4" fill="#f1a083"/><circle cx="334" cy="438" r="2.4" fill="#f1a083"/><circle cx="347" cy="438" r="2.4" fill="#f1a083"/><circle cx="360" cy="438" r="2.4" fill="#f1a083"/><circle cx="373" cy="438" r="2.4" fill="#f1a083"/><circle cx="386" cy="438" r="2.4" fill="#f1a083"/><circle cx="399" cy="438" r="2.4" fill="#f1a083"/><circle cx="425" cy="438" r="1.1" fill="#465954"/><circle cx="22" cy="451" r="1.1" fill="#465954"/><circle cx="74" cy="451" r="2.4" fill="#d5e8b0"/><circle cx="87" cy="451" r="2.4" fill="#d5e8b0"/><circle cx="100" cy="451" r="2.4" fill="#d5e8b0"/><circle cx="113" cy="451" r="2.4" fill="#d5e8b0"/><circle cx="126" cy="451" r="2.4" fill="#d5e8b0"/><circle cx="139" cy="451" r="2.4" fill="#d5e8b0"/><circle cx="152" cy="451" r="2.4" fill="#d5e8b0"/><circle cx="165" cy="451" r="2.4" fill="#d5e8b0"/><circle cx="178" cy="451" r="2.4" fill="#d5e8b0"/><circle cx="191" cy="451" r="2.4" fill="#d5e8b0"/><circle cx="204" cy="451" r="2.4" fill="#d5e8b0"/><circle cx="217" cy="451" r="2.4" fill="#d5e8b0"/><circle cx="230" cy="451" r="2.4" fill="#d5e8b0"/><circle cx="243" cy="451" r="2.4" fill="#f1a083"/><circle cx="256" cy="451" r="2.4" fill="#f1a083"/><circle cx="269" cy="451" r="2.4" fill="#f1a083"/><circle cx="282" cy="451" r="2.4" fill="#f1a083"/><circle cx="295" cy="451" r="2.4" fill="#f1a083"/><circle cx="308" cy="451" r="2.4" fill="#f1a083"/><circle cx="321" cy="451" r="2.4" fill="#f1a083"/><circle cx="334" cy="451" r="2.4" fill="#f1a083"/><circle cx="347" cy="451" r="2.4" fill="#f1a083"/><circle cx="360" cy="451" r="2.4" fill="#f1a083"/><circle cx="373" cy="451" r="2.4" fill="#f1a083"/><circle cx="386" cy="451" r="2.4" fill="#f1a083"/><circle cx="399" cy="451" r="2.4" fill="#f1a083"/><circle cx="451" cy="451" r="1.1" fill="#465954"/><circle cx="48" cy="464" r="1.1" fill="#465954"/><circle cx="74" cy="464" r="2.4" fill="#d5e8b0"/><circle cx="87" cy="464" r="2.4" fill="#d5e8b0"/><circle cx="100" cy="464" r="2.4" fill="#d5e8b0"/><circle cx="113" cy="464" r="2.4" fill="#d5e8b0"/><circle cx="126" cy="464" r="2.4" fill="#d5e8b0"/><circle cx="139" cy="464" r="2.4" fill="#d5e8b0"/><circle cx="152" cy="464" r="2.4" fill="#d5e8b0"/><circle cx="165" cy="464" r="2.4" fill="#d5e8b0"/><circle cx="178" cy="464" r="2.4" fill="#d5e8b0"/><circle cx="191" cy="464" r="2.4" fill="#d5e8b0"/><circle cx="204" cy="464" r="2.4" fill="#d5e8b0"/><circle cx="217" cy="464" r="2.4" fill="#d5e8b0"/><circle cx="230" cy="464" r="2.4" fill="#d5e8b0"/><circle cx="243" cy="464" r="2.4" fill="#f1a083"/><circle cx="256" cy="464" r="2.4" fill="#f1a083"/><circle cx="269" cy="464" r="2.4" fill="#f1a083"/><circle cx="282" cy="464" r="2.4" fill="#f1a083"/><circle cx="295" cy="464" r="2.4" fill="#f1a083"/><circle cx="308" cy="464" r="2.4" fill="#f1a083"/><circle cx="321" cy="464" r="2.4" fill="#f1a083"/><circle cx="334" cy="464" r="2.4" fill="#f1a083"/><circle cx="347" cy="464" r="2.4" fill="#f1a083"/><circle cx="360" cy="464" r="2.4" fill="#f1a083"/><circle cx="373" cy="464" r="2.4" fill="#f1a083"/><circle cx="386" cy="464" r="2.4" fill="#f1a083"/><circle cx="399" cy="464" r="2.4" fill="#f1a083"/></g><path class="portrait-scan" d="M75 150H414" stroke="#d5e8b0" stroke-opacity=".6" stroke-width=".8"/>
+<g fill="none" stroke="#aec18e"><path d="M22 53V22H53M435 22H466V53M22 435V466H53M435 466H466V435"/></g>
+</svg><div class="visual-foot"><span><i class="legend-human"></i>經驗與行為</span><span><i class="legend-model"></i>模型中的表徵</span><small>視覺示意，非個體資料</small></div></div>
+<div class="hero-foot"><p>THE HUMAN<br><em>VARIABLE.</em></p><div><span>25</span><small>Smallville 的生成式代理人</small></div><div><span>1,052</span><small>2024 年研究受試者</small></div><div><span>$2B</span><small>2026 年 7 月投後估值</small></div></div>
+</header>
+<main id="main"><article>
+<aside class="note"><p>本導讀的分析與撰稿由 AI 模型完成，不是人類分析，也沒有經過人工逐句校稿。</p></aside>
+
+<h2 id="sec-1">產品還沒上市，先問模擬顧客</h2>
+<p>Simile 的 Itaú 案例文章用一個示意情境，說明研究開始前就會發生的取捨：團隊提出二十個方向，最後只留下三個送測；剩下的十七個，可能只是沒有時間和預算研究。<a href="https://www.simile.com/blog/itau-at-esomar" target="_blank" rel="noopener noreferrer">案例原文</a>這正是人類行為模擬最值得追問的用途：如果試探一個構想變得便宜，企業是否能在承諾投入資源以前，多看幾條路？</p>
+<p>在 2026 年 10 月 26 日上架的訪談中，Sourcery 主持人 Molly O’Shea 訪問 Simile 共同創辦人暨執行長 Joon Sung Park。訪談從「我們是否活在模擬裡」聊起，逐步轉向一項具體生意：以真人資料建立模型，讓企業詢問不同族群，在不同情境下可能如何回應。Park 在 <a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=945s" target="_blank" rel="noopener noreferrer">15:45</a> 開始說明產品用途，包含問卷、概念測試、聯合分析與更複雜的情境模擬。</p>
+<p>這門生意已有資本支持。Simile 在 2026 年 7 月 30 日宣布 B 輪募資超過 2 億美元，投後估值 20 億美元；Index 也公布參與這輪投資。估值是融資條件，不能當成預測能力的驗證。<a href="https://www.simile.com/blog/series-b" target="_blank" rel="noopener noreferrer">公司募資公告</a>、<a href="https://www.indexventures.com/perspectives/simulating-society-at-scale-our-investment-in-similes-200m-series-b/" target="_blank" rel="noopener noreferrer">Index 投資說明</a></p>
+<p><strong>真正需要弄清楚的，是模擬答案能替哪一種決策增加證據。</strong> 一段像人的回答、一個準確的群體分布，以及一項能改善銷售的策略，彼此之間都有距離。</p>
+<section class="summary-card" aria-labelledby="sec-2">
+<h2 id="sec-2">先看重點：訪談說法與證據的距離</h2>
+<div class="table-scroll" tabindex="0" role="region" aria-label="表格（可左右捲動）"><table><thead><tr><th scope="col">訪談中的焦點</th><th scope="col">可以採取的解讀</th><th scope="col">必須保留的邊界</th></tr></thead><tbody><tr><td data-label="訪談中的焦點">Smallville 的 25 個代理人</td><td data-label="可以採取的解讀">記憶、反思與規劃可支持連貫互動</td><td data-label="必須保留的邊界">研究衡量可信感；派對有初始設定</td></tr><tr><td class="k" data-label="訪談中的焦點">85% 準確率</td><td data-label="可以採取的解讀">2024 年研究的 GSS 正規化指標</td><td data-label="必須保留的邊界">不是所有現實決策的命中率</td></tr><tr><td data-label="訪談中的焦點">4,000 萬真人</td><td data-label="可以採取的解讀">Park 自述合作樣本網路的觸及規模</td><td data-label="必須保留的邊界">不能寫成已完成 4,000 萬個分身</td></tr><tr><td class="k" data-label="訪談中的焦點">每題附信心訊號</td><td data-label="可以採取的解讀">公司描述用另一模型估計模擬誤差</td><td data-label="必須保留的邊界">不是 p 值，也不是個人一定會照做的機率</td></tr><tr><td data-label="訪談中的焦點">與 Gallup 合作</td><td data-label="可以採取的解讀">Gallup 正在獨立驗證方法</td><td data-label="必須保留的邊界">Gallup 明言不以模擬取代其追蹤研究真人量測</td></tr></tbody></table></div>
+<p>表中研究指標可回溯至下文論文；<strong>合作規模與產品功能則保留為當事方說法</strong>。</p>
+</section>
+<h2 id="sec-3">一座小鎮，先解決角色能不能記得昨天</h2>
+<p>Smallville 看起來像一個像素遊戲：二十五個角色起床、工作、聊天，也有人相約參加情人節派對。若把每個動作都交給遊戲編劇，這只是另一套預先寫好的劇情。研究團隊想試的是，能否只給角色背景與環境，再讓行為從互動中逐步生成。</p>
+<p>關鍵不只在語言模型會說話。模型周圍有一套管理經驗的架構：把發生過的事留下來，依當下問題找出相關記憶，從多次經驗形成較高層的判斷，再規劃下一步。新行動又成為後續的記憶。這讓「我昨天答應了某人」有機會約束今天的行為，而不是每次提問都重新扮演一個失憶角色。<a href="https://arxiv.org/html/2304.03442" target="_blank" rel="noopener noreferrer">2023 年 Smallville 論文</a></p>
+<p>例如，替朋友挑禮物不能只靠對方出現的次數。角色得記得對方談過什麼，判斷什麼對他重要，再把這個判斷用在新問題上。訪談 <a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=406s" target="_blank" rel="noopener noreferrer">06:46</a> 開始的評估討論，談的就是如何透過訪問代理人，觀察這些能力有沒有運作。</p>
+<p><strong>角色讓人覺得合理，還不足以證明它代表某個真實的人。</strong> 小鎮研究先跨過的是連貫性與可信感的門檻。原始論文也明說，派對源自一個角色想辦派對的初始設定；邀請如何傳開、誰一起出席，才是後續生成的互動。不能把「沒有逐一編寫所有行動」說成「整場活動沒有任何設定」。</p>
+<figure class="hero-figure"><picture><source media="(max-width: 640px)" srcset="images/hero-simulation-zh-mobile.svg"><img src="images/hero-simulation-zh.svg" alt="從真人資料建立模擬，再回到真人驗證的行為研究流程" width="1440" height="810" loading="eager" style="--ar-d:1440/810;--ar-m:720/1280" tabindex="0" role="button" aria-label="放大圖片：從真人資料建立模擬，再回到真人驗證的行為研究流程"></picture><figcaption>本文歸納：模擬可以把研究提早帶進決策，可信度仍須由真人資料檢驗。這是概念流程，不是 Simile 未公開的產品架構。</figcaption></figure>
+<h2 id="sec-4">從虛構角色到真人，85% 的分母變了</h2>
+<p>下一步的問題難得多：把某個真人的生活經驗交給模型，能不能預測那個人尚未回答的問題？這要求評估從「旁觀者覺得像不像」轉成「拿本人的答案來比較」。</p>
+<p>Park 等人在 2024 年發布的研究，對 1,052 名美國受試者進行約兩小時的質性訪談，建立代表他們的代理人，並以問卷與行為測試比較模擬和真人。本文討論訪談提及的 2024 年初版；同一篇 arXiv 紀錄後續已有修訂，引用時應保留版本。<a href="https://arxiv.org/abs/2411.10109v1" target="_blank" rel="noopener noreferrer">2024 年論文 v1</a></p>
+<p>為什麼需要問兩次真人？因為同一個人隔兩週填問卷，也不會每題都答得一樣。若要知道模型接近本人到什麼程度，研究者會把真人自己的重答一致性納入比較。</p>
+<figure class="section-figure"><picture><source media="(max-width: 640px)" srcset="images/fig-accuracy-zh-mobile.svg"><img src="images/fig-accuracy-zh.svg" alt="2024 年 GSS 研究指標的原始準確率、真人重測一致性與正規化結果" width="1440" height="810" loading="lazy" style="--ar-d:1440/810;--ar-m:720/1280" tabindex="0" role="button" aria-label="放大圖片：2024 年 GSS 研究指標的原始準確率、真人重測一致性與正規化結果"></picture><figcaption>2024 年論文 v1 的 GSS 結果。圖中以整體平均數相除幫助理解；論文報告的正規化指標以個別受試者計算後彙整。這些數字不代表通用的人生決策命中率。</figcaption></figure>
+<section class="denominator-lab" id="denominator-lab" aria-labelledby="lab-title">
+<div class="lab-header"><span class="micro-label">READ THE DENOMINATOR</span><span class="lab-index">研究指標 / 2024 v1</span></div>
+<h3 id="lab-title">同一個數字，<br>換了分母就換了意思。</h3>
+<div class="research-values"><div><span>模型原始準確率</span><strong>68.85<small>%</small></strong></div><div><span>真人兩週重測一致率</span><strong>81.25<small>%</small></strong></div><div><span>論文正規化平均</span><strong>≈ 0.85</strong></div></div>
+<div class="lab-exercise"><div class="exercise-intro"><span class="micro-label">分母練習</span><p>模型仍是 68.85%。如果真人重答的一致性改變，<br>相對比例會怎麼變？</p></div>
+<div class="lab-controls"><label for="consistency">假設真人重測一致率 <output id="consistency-value" for="consistency">81.25%</output></label><input type="range" id="consistency" min="70" max="100" step="0.25" value="81.25" aria-describedby="lab-note" disabled><div class="range-ends"><span>70%</span><button type="button" id="lab-reset" disabled>回到研究平均值 ↺</button><span>100%</span></div></div>
+<div class="ratio-readout" aria-live="polite"><span>68.85 ÷ <span id="denominator-value">81.25</span></span><strong id="ratio-value">≈ 84.74%</strong></div>
+<p id="lab-note" class="lab-note">滑桿是教學用的假設示例，不會改變研究結果。這裡用整體平均數相除幫助理解；論文先對個人正規化，再彙整，不能用這個商數取代論文的 0.85。</p><noscript><p class="lab-note">互動練習需要 JavaScript；上方研究數字與全文仍可閱讀。</p></noscript></div>
+<p class="lab-takeaway">讀成「所有決策都有 85% 命中率」，就把測量任務和分母一起省略了。</p>
+</section>
+<p>這組結果是有價值的研究證據，顯示訪談能為個體模擬提供資訊。但「達到真人重測表現的約 85%」若在標題裡被壓成「預測你的決策，準確率 85%」，<strong>測量任務與分母就一起消失了</strong>。<a href="https://arxiv.org/pdf/2411.10109v1" target="_blank" rel="noopener noreferrer">論文 v1 全文</a></p>
+<p><strong>85% 的結論要跟著測試任務走。</strong> 問卷上的態度答案、帶有金錢誘因的行為、明年買不買一輛車，是不同任務；研究本身納入多種測試，不能拿某一項成績套到所有場景。這個數字也不能直接當成 2026 年商業產品每次查詢的準確率。</p>
+<p>企業比較該追問的是：這次要研究的客群、問題和選項，跟驗證資料有多接近？如果測試來自美國成年人，換成臺灣的特定消費族群，就需要新的證據支持。這是本文從研究設計推得的使用條件，不是論文已完成的跨市場驗證。</p>
+<h2 id="sec-5">人的選擇，還取決於旁邊有哪些路</h2>
+<p>訪談 <a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=820s" target="_blank" rel="noopener noreferrer">13:40</a> 把問題拉回生活。一個人說本週願意去健身房，真正到了晚上，他還能多睡一小時、再開一場會，或留在家裡。選擇發生時，其他選項也在場。</p>
+<p>買水的例子更清楚。只問「你願意為水付多少錢」，會漏掉附近有沒有其他水源、替代商品的價格，以及當時有多渴。若模擬只抓住人的偏好，卻把替代選項拿掉，得到的價格反應可能根本不適用於現實市場。<a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=1042s" target="_blank" rel="noopener noreferrer">17:22</a></p>
+<p>換句話說，模型需要同時知道「這是誰」、「面對什麼情境」與「可以做什麼」。這和 Simile 技術文章對輸入的描述一致：族群、情境及有效行動集合，共同決定要模擬的問題。<a href="https://www.simile.com/blog/confidence" target="_blank" rel="noopener noreferrer">Simile 信心模型說明</a></p>
+<p><strong>情境設定錯了，更多模擬次數也救不了它。</strong> 假設研究的是漲價後的購買意願，卻沒放進競品價格或退出選項，結果可能在這個封閉設定裡很穩定，實際上回答的卻不是企業原本的問題。這是建模上的限制，不能靠讓模型回答得更流暢來消除。</p>
+<p>Park 也談到問卷自述與實際行動的差距。他用不同曲線形狀描述這種落差；本文把它當作他的解釋性比喻，不視為所有人類行為都遵循同一套數學定律。所謂風險偏好不變，也應保留為訪談中的概括說法，不當成對所有人的定論。</p>
+<h2 id="sec-6">4,000 萬真人背後，是一門持續取得資料的生意</h2>
+<p>如果模擬可以反覆提問，為什麼 Simile 還要持續找真人？因為模型不會憑空知道一群新客戶的生活。研究特定銀行的客戶、特定疾病的患者，與模擬一般人口，所需資訊可能不同。</p>
+<p>Park 在 <a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=1291s" target="_blank" rel="noopener noreferrer">21:31</a> 說明，公司先準備產業樣本庫，再依客戶需求補充資料；他提到透過合作樣本網路觸及超過 4,000 萬真人。這是講者對合作規模的自述，<strong>不等於公司已訪談每一個人，也不等於已建立 4,000 萬個經驗證的數位分身。</strong></p>
+<p>這裡的經營難題很具體：找得到人、取得同意、問對問題、辨識低品質回答，再把資料帶回模型。受訪者可能疲勞、敷衍，或為了報酬迎合篩選條件。訪談 <a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=1462s" target="_blank" rel="noopener noreferrer">24:22</a> 談到參與間隔與注意力檢查；這些方法能處理某些品質問題，卻不能自動保證所有族群都被適當代表。</p>
+<p>Park 表示，公司要求知情同意並允許退出，也不蒐集無法提供知情同意者的資料。這是公司的資料治理主張。對客戶而言，仍須核對其實際適用範圍：同意是否涵蓋建立分身、跨題目使用與後續更新？退出後哪些資料及其衍生物會被處理？本文提出這些檢視問題，不據此宣稱公司已完成或違反任何特定措施。</p>
+<p>所以 Simile 的商業價值不只在一個問答介面。從本文的商業分析看，持續取得適合的真人資料、知道哪些客群缺資料，以及協助企業把結果放進研究流程，都會影響產品能否長期被使用。Park 在 <a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=2825s" target="_blank" rel="noopener noreferrer">47:05</a> 強調深入客戶現場協作；這段自述解釋了為什麼賣出帳號以後，仍有大量導入工作。</p>
+<p>公司公布的 Itaú 案例是比較好懂的用法：<strong>先用模擬擴大構想探索，再把真人研究集中到不確定或判錯代價較大的問題</strong>。公司稱研究週期從五週縮至四個工作天。這是供應商發布的個案結果，不能外推為所有客戶都能得到相同效率，更不能直接當成營收成長的證明。<a href="https://www.simile.com/blog/itau-at-esomar" target="_blank" rel="noopener noreferrer">Itaú 案例</a></p>
+<h2 id="sec-7">信心分數，究竟在替什麼背書？</h2>
+<p>企業不只想收到答案，也想知道這題能不能信。Park 在 <a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=1966s" target="_blank" rel="noopener noreferrer">32:46</a> 把信心訊號類比為 p 值，並提到客戶使用高信心結果做決策。這個類比需要拆開，否則容易讓讀者以為兩者有相同的統計意義。</p>
+<p>依公司技術文章，模擬模型輸出的是一組行動的分布；信心模型則估計這個分布與真人結果之間的誤差，以總變異距離（TVD）衡量。例如模型預測 93% 的人會做某事、真人資料約為 87%，二選一情境的 TVD 約為 0.06。TVD 越小，兩組分布越接近。</p>
+<p>這不是模型看著自己的回答說「我很確定」。公司描述的做法，是拿模擬與真人的差異作訓練資料，讓另一模型學會預估哪些查詢容易出錯。它本身也得接受驗證。公司用約 8,600 題的內部評估集及交叉驗證報告成績，並把 TVD 0.16 設為當時的決策品質門檻；High 等級在該評估中有 95% 符合此門檻。這些都是公司自報、附有特定評估條件的結果。<a href="https://www.simile.com/blog/confidence" target="_blank" rel="noopener noreferrer">信心模型方法與評估</a></p>
+<p><strong>High 的意思，取決於它用什麼誤差與門檻定義。</strong> 它不能直接解讀成某個顧客有 95% 機率買單，也不保證兩個很接近的方案一定排對順序。即使整體分布誤差不大，少數重要族群或某個關鍵選項仍可能有偏差。</p>
+<p>p 值回答的則是另一個問題：在指定統計模型與虛無假設成立的前提下，觀察到目前這麼極端或更極端資料的機率。它不是假設為真的機率，也不是策略成功的機率；跨過 0.05 不能單獨決定是否應採取行動。<a href="https://www.amstat.org/asa/files/pdfs/p-valuestatement.pdf" target="_blank" rel="noopener noreferrer">美國統計學會對 p 值的說明</a></p>
+<p>實務上，應把公司的信心標記視為安排驗證工作的線索。若問題接近已有驗證的領域、兩個方案差異明顯，模擬可能幫助篩選方向；若結果將觸發昂貴且難逆轉的行動，就要看真人對照、誤差範圍及判錯代價，不能只看一個漂亮的百分比。</p>
+<h2 id="sec-8">改了模擬中的未來，現實會跟著改嗎？</h2>
+<p>Park 在 <a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=2652s" target="_blank" rel="noopener noreferrer">44:12</a> 附近談到，客戶收到預測後，往往接著問：現在應該怎麼做，才能改變那個結果？問題就從預測變成介入。<strong>知道誰可能買單，與知道改哪個因素能讓他買單，所需證據並不相同。</strong></p>
+<p>在模型裡改掉價格、訊息或產品功能，可以比較不同設定的輸出。但如果模型把現實中同時出現的因素，錯當成因果關係，模擬出的改善就可能只是延續錯誤。隨機對照資料能增加某些介入問題的依據；它對哪些族群、哪些介入及哪些時期適用，仍需另外檢驗。</p>
+<p>訪談中的電動車案例也要保留這層差別。Park 在 <a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=2033s" target="_blank" rel="noopener noreferrer">33:53</a> 明說，那是 Simile 成立前的研究。他描述一種看似有利於電動車的訊息，可能連帶影響非電動車及整體市場。本文將它視為他說明次級影響的案例自述；不能寫成 Simile 已替某車廠挽救了多少實際損失，訪談沒有提供這樣的量化證據。</p>
+<p>談到氣候政策、AGI 與全民基本收入時，Park 描述的是想探索的研究方向。<a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I&amp;t=2223s" target="_blank" rel="noopener noreferrer">37:03</a> 這些問題牽涉長期適應與多方互動。能模擬一次問卷反應，並不表示已驗證多年的制度變化；這種跨度值得研究，但得說清楚中間還差哪幾步。</p>
+<p>Gallup 的官方說明提供一個務實參照。它確認正在與 Simile 合作、獨立驗證模擬回答，同時明言：模擬不會用來產生其公開人口估計，也不取代追蹤研究對真人的直接量測。它特別關心問題離開原訪談主題、族群改變，以及資料隨時間老化時，表現如何變化。<a href="https://news.gallup.com/opinion/methodology/709373/gallup-begins-research-synthetic-responses.aspx" target="_blank" rel="noopener noreferrer">Gallup 方法說明，2026-05-11，頁面註明曾更新</a></p>
+<p>這讓模擬有一個可操作的位置：先協助找假設、修問題、排優先順序，再用真人資料確認重要判斷。每一輪現實回饋，也能揭露模型尚未看見的人與情境。</p>
+<h2 id="sec-9">讀完訪談，帶回決策桌上的三件事</h2>
+<p>採用這類工具時，先把決策寫清楚。要比較哪幾個可執行方案、針對哪一群人、觀察什麼結果？如果團隊連這些都沒對齊，再快的模擬也只會讓模糊問題產生更多答案。</p>
+<p>再來，要求一份與當前任務相近的驗證：真人資料從哪類族群而來、哪些資料保留作測試、以什麼指標衡量誤差。問卷一致性、群體分布與實際行動要分開看。判錯的成本越大，需要的現實證據就越多。</p>
+<p>也要預先安排回看結果的時間。模擬支持的假設如果在真實測試中失敗，團隊必須能更新判斷，也要知道哪些相關結論需要重驗。這是本文提出的導入建議，不是 Simile 已公開承諾的服務規格。</p>
+<p><strong>這項技術最有價值的時刻，可能是讓團隊在還來得及改變方向時，多提出一個值得去問真人的問題。</strong> 那個問題最後得由現實回答。</p>
+<h2 id="sec-10">讀這場訪談要記得的限制</h2>
+<p>本片是創辦人訪談，<strong>公司的能力、客戶回饋與發展速度主要由利害關係人描述</strong>。研究結果與產品說明各有適用範圍；本文以來源層級區分，沒有把合作關係視為對全部能力的背書。</p>
+<p>原始字幕含人名與公司名的機器辨識錯誤；本文以可確認來源統一名稱，未核實的片段不作直接引言。本文依主題重組訪談，未將開頭的模擬宇宙閒談或結尾的個人成就觀擴大成技術證據。影片中另有贊助及頻道宣傳，完整譯文保留，導讀不採為 Simile 的論據。</p>
+<h2 id="sec-11">製作說明：這篇導讀由 AI 模型完成</h2>
+<p>本導讀由 Codex 主控分析、研究與撰稿，Codex 子代理另負責獨立事實審查、逐章字幕精修、HTML 與驗收。字幕初譯由 agy 指定 Gemini 3.8 Flash Medium 完成；agy 指定 Gemini 4 Argon High 獨立讀取全片並查證。最後再由 agy 指定的一位 Claude Opus 5.5 High 依總編輯準則潤稿並標示重點，另作字幕跨章統一終審。圖解以 Python 產生 SVG。</p>
+<p>重要主張須與第一手來源核對，多方一致仍不取代證據判讀；只有單方依據者保留歸屬並降低結論強度。<strong>本文與譯文未經人工逐句校稿</strong>，字幕為機器產生，未逐句對照原音；字幕斷句後的時間為估計值，可能與發音略有落差。</p>
+<p>可閱讀<a href="translation-zh.html">完整繁中譯文</a>，或開啟<a href="player.html">中英雙語同步播放器</a>對照原片；影片與原始內容版權歸原權利人，本文為非官方導讀。</p>
+<h2 id="sec-12">來源清單</h2>
+<ul class="sources"><li><a href="https://www.youtube.com/watch?v=-6Kg5N7JL7I" target="_blank" rel="noopener noreferrer">Sourcery：Joon Sung Park 訪談</a>，2026-10-26；本篇主要來源。</li><li><a href="https://arxiv.org/html/2304.03442" target="_blank" rel="noopener noreferrer">Generative Agents: Interactive Simulacra of Human Behavior</a>，Park 等，2023；Smallville 架構與評估。</li><li><a href="https://arxiv.org/abs/2411.10109v1" target="_blank" rel="noopener noreferrer">Generative Agent Simulations of 1,000 People，v1</a>，Park 等，2024-11-15；<a href="https://arxiv.org/pdf/2411.10109v1" target="_blank" rel="noopener noreferrer">全文 PDF</a>。</li><li><a href="https://www.simile.com/blog/series-b" target="_blank" rel="noopener noreferrer">Simile：Announcing Simile’s Series B</a>，2026-07-30；公司募資公告。</li><li><a href="https://www.indexventures.com/perspectives/simulating-society-at-scale-our-investment-in-similes-200m-series-b/" target="_blank" rel="noopener noreferrer">Index：Simile 的 2 億美元 B 輪投資說明</a>，2026-07-30；投資方說明。</li><li><a href="https://www.simile.com/blog/confidence" target="_blank" rel="noopener noreferrer">Simile：Building confidence in Simile</a>，官方部落格列日 2026-08-25；信心模型方法與公司自報評估。</li><li><a href="https://www.simile.com/blog/itau-at-esomar" target="_blank" rel="noopener noreferrer">Simile：How Itaú turned five weeks of research into four days</a>，官方部落格列日 2026-09-11；供應商發布的客戶案例。</li><li><a href="https://news.gallup.com/opinion/methodology/709373/gallup-begins-research-synthetic-responses.aspx" target="_blank" rel="noopener noreferrer">Gallup Begins Research on Simulated Responses</a>，2026-05-11，頁面註明曾更新；合作方的方法與適用範圍說明。</li><li><a href="https://www.amstat.org/asa/files/pdfs/p-valuestatement.pdf" target="_blank" rel="noopener noreferrer">美國統計學會：Statement on Statistical Significance and P-Values</a>，2016；p 值定義及使用限制。</li></ul>
+</article></main><div class="onward"><p class="micro-label">繼續探索這場訪談</p><div><a href="translation-zh.html"><small>02</small><span>對照完整譯文</span><b aria-hidden="true">↗</b></a><a href="player.html"><small>03</small><span>觀看雙語訪談</span><b aria-hidden="true">↗</b></a></div></div>
+<footer>
+<p>本頁為非官方導讀。分析與撰稿由 AI 模型完成，主控為 Codex，並非人類分析；未經人工逐句校稿。模型分工與限制見文末製作說明。影片與原始內容版權歸原權利人。</p>
+</footer>
+</div>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="圖片放大檢視"><button type="button" aria-label="關閉放大檢視">關閉（Esc）</button><img alt=""></div>
+<script>
+(function(){
+  var box=document.getElementById('lightbox'), big=box.querySelector('img'), btn=box.querySelector('button'), last=null;
+  function open(img){last=img;big.src=img.currentSrc||img.src;big.alt=img.alt;box.classList.add('is-open');btn.focus();}
+  function close(){box.classList.remove('is-open');big.removeAttribute('src');if(last){last.focus();}}
+  document.querySelectorAll('figure img').forEach(function(img){
+    img.addEventListener('click',function(){open(img);});
+    img.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();open(img);}});
+  });
+  box.addEventListener('click',function(e){if(e.target===box||e.target===btn){close();}});
+  document.addEventListener('keydown',function(e){
+    if(!box.classList.contains('is-open'))return;
+    if(e.key==='Escape'){close();}
+    if(e.key==='Tab'){e.preventDefault();btn.focus();}
+  });
+})();
+</script>
+<script>(function(){
+ 'use strict';
+ const body=document.body;
+ body.classList.add('enhanced');
+ const toc=document.querySelector('nav.toc'),toggle=document.getElementById('toc-toggle');
+ const closeToc=()=>{if(toc){toc.classList.remove('is-open');toggle?.setAttribute('aria-expanded','false')}};
+ toggle?.addEventListener('click',()=>{const on=toc.classList.toggle('is-open');toggle.setAttribute('aria-expanded',String(on))});
+ toc?.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeToc));
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&toc?.classList.contains('is-open')){closeToc();toggle.focus()}});
+ document.addEventListener('click',e=>{if(toc&&!toc.contains(e.target))closeToc()});
+ const bar=document.querySelector('.read-progress span'),heading=document.getElementById('current-section'),sections=[...document.querySelectorAll('article h2[id]')];
+ let queued=false;
+ function update(){queued=false;const max=document.documentElement.scrollHeight-innerHeight;const pct=max>0?Math.min(100,Math.max(0,scrollY/max*100)):0;if(bar)bar.style.width=pct+'%';const visible=sections.filter(s=>!s.hidden);let current=visible[0];for(const s of visible){if(s.getBoundingClientRect().top<=160)current=s;else break}if(current){if(heading)heading.textContent=String(sections.indexOf(current)+1).padStart(2,'0')+' / '+current.textContent;toc?.querySelectorAll('a').forEach(a=>{if(a.hash==='#'+current.id)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current')})}}
+ addEventListener('scroll',()=>{if(!queued){queued=true;requestAnimationFrame(update)}},{passive:true});addEventListener('resize',update);update();
+ const slider=document.getElementById('consistency');
+ if(slider){slider.disabled=false;document.getElementById('lab-reset').disabled=false;const original=81.25;function calculate(){const denominator=Number(slider.value),ratio=68.85/denominator*100;document.getElementById('consistency-value').textContent=denominator.toFixed(2)+'%';document.getElementById('denominator-value').textContent=denominator.toFixed(2);document.getElementById('ratio-value').textContent='≈ '+ratio.toFixed(2)+'%';slider.setAttribute('aria-valuetext','假設重測一致率'+denominator.toFixed(2)+'%，平均數的相對比例約'+ratio.toFixed(2)+'%')}slider.addEventListener('input',calculate);document.getElementById('lab-reset').addEventListener('click',()=>{slider.value=original;calculate()});calculate()}
+ const search=document.getElementById('transcript-search');
+ if(search){const article=document.querySelector('article'),paras=[...article.querySelectorAll('p')],originals=paras.map(p=>p.innerHTML),texts=paras.map(p=>p.textContent),status=document.getElementById('search-status'),navigation=document.getElementById('search-navigation'),position=document.getElementById('search-position');let timer,matched=[],matchIndex=-1;
+ function moveMatch(direction){if(!matched.length)return;matchIndex=matchIndex<0?(direction>0?0:matched.length-1):(matchIndex+direction+matched.length)%matched.length;const target=matched[matchIndex];position.textContent=(matchIndex+1)+' / '+matched.length;target.setAttribute('tabindex','-1');target.focus({preventScroll:true});target.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'center'})}
+ document.getElementById('search-previous').addEventListener('click',()=>moveMatch(-1));document.getElementById('search-next').addEventListener('click',()=>moveMatch(1));
+ function filter(){const q=search.value.trim().toLocaleLowerCase();let matches=0;matched=[];matchIndex=-1;paras.forEach((p,i)=>{p.innerHTML=originals[i];p.removeAttribute('tabindex');const hit=!q||texts[i].toLocaleLowerCase().includes(q);p.hidden=!hit;if(q&&hit){matches++;matched.push(p);const walker=document.createTreeWalker(p,NodeFilter.SHOW_TEXT),nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);for(const n of nodes){if(n.parentElement.closest('a'))continue;const t=n.textContent,index=t.toLocaleLowerCase().indexOf(q);if(index>=0){const fragment=document.createDocumentFragment();fragment.append(document.createTextNode(t.slice(0,index)));const mark=document.createElement('mark');mark.textContent=t.slice(index,index+q.length);fragment.append(mark,document.createTextNode(t.slice(index+q.length)));n.replaceWith(fragment)}}}});sections.forEach(s=>{let next=s.nextElementSibling,hasMatch=false;while(next&&next.tagName!=='H2'){if(next.matches('p')&&!next.hidden)hasMatch=true;next=next.nextElementSibling}s.hidden=!!q&&!hasMatch;const item=toc?.querySelector('a[href="#'+s.id+'"]')?.closest('li');if(item)item.hidden=s.hidden});navigation.hidden=!q||!matches;position.textContent=matches+' 段結果';status.textContent=q?(matches?'找到 '+matches+' 段相關內容；清除搜尋可恢復全文。':'沒有符合的段落，試試其他詞。'):'搜尋全文，點擊時間即可在雙語播放器對照。';update()}
+ search.addEventListener('input',()=>{clearTimeout(timer);timer=setTimeout(filter,100)});document.getElementById('search-clear').addEventListener('click',()=>{clearTimeout(timer);search.value='';filter();search.focus()});document.getElementById('search-exit').addEventListener('click',()=>document.getElementById('search-clear').click());
+ }
+})();
+</script>
+</body>
+</html>
